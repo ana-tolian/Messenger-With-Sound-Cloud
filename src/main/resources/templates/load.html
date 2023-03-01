@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{main.css}">
+    <title>load</title>
+</head>
+    <div class="whole">
+        <div class="header">
+            <div class="logo">  Logo </div>
+        </div>
+
+        <div class="upperPanel">
+            <div class="button"> <a th:href="@{/}"> Главная </a></div>
+            <div class="button"> <a th:href="@{/albums}"> Альбомы </a> </div>
+            <div class="button"> <a th:href="@{/load}"> Загрузить </a> </div>
+            <div class="button"> <a th:href="@{/creation}"> Создать </a> </div>
+        </div>
+
+        <div class="main">
+            <h2> Загрузить музыку </h2>
+
+            <form enctype="multipart/form-data" method="post">
+                <p> Загрузите ваши треки на сервер</p>
+                <p> <input type="file" name="soundtrack" multiple accept="audio/*">
+                    <input type="submit" value="Загрузить"></p>
+            </form>
+
+            <br>
+            <br>
+
+            <div>
+                <div th:if="${message}">
+                    <h3 th:text="${message}"/>
+                </div>
+
+                <ul>
+                    <li th:each="file : ${files}">
+                        <div class="completed" th:text="${file}" />
+                    </li>
+                </ul>
+            </div>
+
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+        </div>
+
+        <div class="footer">
+                <br>
+                <br>
+                <br>
+                <br>
+        </div>
+
+    </div>
+</html>
