@@ -58,6 +58,19 @@
     display: none;
 }
 
+.seekbar {
+    background-color: #b72b67;
+    height: 2px;
+    overflow:hidden;
+    border-radius: 1px;
+}
+
+.progress {
+    background-color: #7e639f;
+    height: 100%;
+    width: 0%;
+}
+
 
 input[type="range"] {
     -webkit-appearance: none;
