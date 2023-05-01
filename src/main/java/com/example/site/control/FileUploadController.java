@@ -31,7 +31,6 @@ public class FileUploadController {
     @PostMapping("/load")
     public String handleFileUpload(Model model, @RequestParam("soundtrack") MultipartFile[] files) {
         ArrayList<String> fileList = new ArrayList<>();
-        System.out.println("sasaasasassa");
         musicService.store(files, fileList);
 
         model.addAttribute("message", "Вы успешно загрузили следующие файлы:");

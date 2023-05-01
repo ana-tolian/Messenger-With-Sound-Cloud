@@ -35,6 +35,10 @@
     background-color: #f3e9ff;
 }
 
+.time {
+    font-size: smaller;
+}
+
 
 #play {
     background-position: 6px 5px;
@@ -63,14 +67,14 @@
 }
 
 .seekbar {
-    background-color: #ff007b;
-    height: 2px;
+    background-color: #ebe5f3;
+    height: 4px;
     overflow:hidden;
     border-radius: 1px;
 }
 
 .progress {
-    background-color: #7e639f;
+    background-color: #ff007b;
     height: 100%;
     width: 0%;
 }

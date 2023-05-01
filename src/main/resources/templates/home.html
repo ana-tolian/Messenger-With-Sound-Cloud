@@ -8,7 +8,8 @@
     <link rel="stylesheet" th:href="@{main.css}">
     <link rel="stylesheet" th:href="@{soundtrack.css}">
     <link rel="stylesheet" th:href="@{player.css}">
-    <script th:src="@{player.js}"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" th:src="@{player.js}"></script>
 </head>
 
     <div class="whole">
@@ -18,10 +19,15 @@
         </div>
 
         <div class="upperPanel">
-            <div class="button"> <a th:href="@{/}"> Главная </a></div>
-            <div class="button"> <a th:href="@{/albums}"> Альбомы </a> </div>
-            <div class="button"> <a th:href="@{/load}"> Загрузить </a> </div>
-            <div class="button"> <a th:href="@{/creation}"> Создать </a> </div>
+            <div class="buttons">
+                <div class="button"> <a th:href="@{/}"> Главная </a></div>
+                <div class="button"> | </div>
+                <div class="button"> <a th:href="@{/albums}"> Альбомы </a> </div>
+                <div class="button"> | </div>
+                <div class="button"> <a th:href="@{/load}"> Загрузить </a> </div>
+                <div class="button"> | </div>
+                <div class="button"> <a th:href="@{/creation}"> Создать </a> </div>
+            </div>
         </div>
 
         <div class="main" id="main">
@@ -40,18 +46,21 @@
                 </div>
 
                 <div class="player">
-                    <audio th:id="${soundtrack.getId()}" preload="metadata">
-                        <source id="source" th:src="@{|~${soundtrack.trackHref}|}" type="audio/mpeg">
+                    <audio  th:id="${soundtrack.getId()}" preload="auto">
+                        <source th:src="@{|~${soundtrack.trackHref}|}" type="audio/mpeg">
                     </audio>
 
-                    <div class="controls">
+                    <div class="controls" ondragover="move(event)">
                         <button class="buttonp" th:id="'play_' + ${soundtrack.getId()}" style="background-position: 6px 5px" onclick="play(event)" type="button"> </button>
                         <button class="buttonp" th:id="'mute_' + ${soundtrack.getId()}" style="background-position: -58px 5px" onclick="mute(event)" type="button"> </button>
 
-                        <div class="wrap">
-                            <div class="seekbar" th:id="'seek_' + ${soundtrack.getId()}" onclick="move()">
+                        <div class="wrap" ondragover="move(event)">
+                            <div class="seekbar" th:id="'seek_' + ${soundtrack.getId()}" onclick="move(event)">
                                 <div class="progress" th:id="'progress_' + ${soundtrack.getId()}"> </div>
                             </div>
+
+                            <div th:id="'dur_' + ${soundtrack.getId()}" class="time" th:value="${soundtrack.getDuration()}" th:text="${soundtrack.getTime()}"> </div>
+
                         </div>
 
                     </div>

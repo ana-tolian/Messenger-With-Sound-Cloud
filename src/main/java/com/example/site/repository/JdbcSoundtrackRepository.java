@@ -24,7 +24,7 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
     @Override
     public List<Soundtrack> findAll() {
         return jdbcTemplate.query(
-                "SELECT id, name, artist, trackHref, playlistId, imgHref FROM Soundtrack",
+                "SELECT id, name, artist, trackHref, duration, playlistId, imgHref FROM Soundtrack",
                 this::mapRowToSoundtrack);
     }
 
@@ -50,7 +50,7 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
     @Override
     public Optional<Soundtrack> findByPlaylistId(String id) {
         List<Soundtrack> soundtrackList = jdbcTemplate.query(
-                "SELECT name, artist, trackHref, playlistId, imgHref FROM Soundtrack WHERE playlistId=?",
+                "SELECT name, artist, trackHref, duration, playlistId, imgHref FROM Soundtrack WHERE playlistId=?",
                 this::mapRowToSoundtrack, id);
         if (soundtrackList.isEmpty())
             return Optional.empty();
@@ -59,9 +59,9 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
 
     @Override
     public Soundtrack save(Soundtrack soundtrack) {
-        jdbcTemplate.update("INSERT INTO Soundtrack(name, artist, trackHref, playlistId) VALUE (?,?,?,?)",
-                        soundtrack.getName(), soundtrack.getArtist(),
-                        soundtrack.getTrackHref(), soundtrack.getPlaylistId());
+        jdbcTemplate.update("INSERT INTO Soundtrack(name, artist, trackHref, duration, playlistId) VALUE (?,?,?,?,?)",
+                        soundtrack.getName(), soundtrack.getArtist(), soundtrack.getTrackHref(),
+                        soundtrack.getDuration(), soundtrack.getPlaylistId());
         return soundtrack;
     }
 
@@ -71,6 +71,7 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
                 row.getString("name"),
                 row.getString("artist"),
                 row.getString("trackHref"),
+                row.getInt("duration"),
                 row.getString("playlistId"),
                 row.getString("imgHref"));
     }

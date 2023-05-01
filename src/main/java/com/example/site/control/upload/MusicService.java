@@ -3,10 +3,10 @@ package com.example.site.control.upload;
 import com.example.site.entity.Playlist;
 import com.example.site.entity.Soundtrack;
 import com.example.site.repository.JdbcSoundtrackRepository;
+import it.sauronsoftware.jave.Encoder;
+import it.sauronsoftware.jave.MultimediaInfo;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,13 +42,13 @@ public class MusicService {
                 Files.write(fileNameAndPath, file.getBytes());
 
                 String soundtrackName = prepareToSave(fileNameAndPath.getFileName().toString());
-
+                int duration = getAudioDuration(new File(fileNameAndPath.toUri()));
 
                 soundtrackRepository.save(new Soundtrack(
-                        getName(soundtrackName),
+                        0, getName(soundtrackName),
                         getArtist(soundtrackName),
                         uploadDirectory + "/" + fileNameAndPath.getFileName().toString(),
-                        null, null));
+                        duration, null, null));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -87,6 +87,20 @@ public class MusicService {
                 count++;
 
         return count;
+    }
+
+    private int getAudioDuration (File file) {
+        Encoder encoder = new Encoder();
+        double durationInSeconds = 0.0;
+
+        try {
+            MultimediaInfo info = encoder.getInfo(file);
+            durationInSeconds = info.getDuration() / 1000;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return (int) (Math.floor(durationInSeconds));
     }
 
     private String getName (String fileName) {

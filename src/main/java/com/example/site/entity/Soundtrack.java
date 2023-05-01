@@ -7,25 +7,21 @@ public class Soundtrack {
     private String name;
     private String artist;
     private String trackHref;
+    private int duration;
     private String playlistId;
     private String imgHref;
+    private String time;
 
 
-    public Soundtrack(String name, String artist, String trackHref, String playlistId, String imgHref) {
-        this.name = name;
-        this.artist = artist;
-        this.trackHref = trackHref;
-        this.playlistId = playlistId;
-        this.imgHref = imgHref;
-    }
-
-    public Soundtrack(int id, String name, String artist, String trackHref, String playlistId, String imgHref) {
+    public Soundtrack(int id, String name, String artist, String trackHref, int duration, String playlistId, String imgHref) {
         this.id = id;
         this.name = name;
         this.artist = artist;
         this.trackHref = trackHref;
+        this.duration = duration;
         this.playlistId = playlistId;
         this.imgHref = imgHref;
+        this.time = (duration / 60) + ":" + ((duration % 60 >= 10) ? duration % 60 : "0" + duration % 60);
     }
 
 
@@ -61,6 +57,14 @@ public class Soundtrack {
         this.trackHref = trackHref;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     public String getPlaylistId() {
         return playlistId;
     }
@@ -75,5 +79,9 @@ public class Soundtrack {
 
     public void setImgHref(String imgHref) {
         this.imgHref = imgHref;
+    }
+
+    public String getTime() {
+        return time;
     }
 }
