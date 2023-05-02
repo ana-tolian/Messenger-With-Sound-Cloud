@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+
+<html>
+	<meta charset="utf-8">
+	<title> Регистрация </title>
+	<link rel="icon" th:href="@{/images/favicon.png}">
+	<link rel="stylesheet" href="messenger_main.css">
+
+	<body>
+		<header> <...> </header>
+		
+		<div class="register">
+			<h3 class="head3log"> Регистрация </h3>
+			
+			<form class="input_form" th:action="@{/register}"  method="post">
+				<h4> </h4> <br>
+				
+				<input class="input_field" type="text" required name="username" placeholder="Имя" />
+				<input class="input_field description" type="text" name="description" placeholder="Расскажи о себе" />
+				
+				<p> </p>
+				<hr>
+				<p> </p>
+
+				<h4>Введите логин и пароль</h4> <br>
+
+				<input class="input_field" type="password" required name="password" placeholder="Пароль" />
+							
+				<br>
+
+				<input class="input_field" type="password" required name="passwordAgain" placeholder="Пароль ещё раз" />
+
+				<br>
+
+				
+				<button>Регистрация</button>
+				
+				<a  class="a_red" th:href="@{/login}">Уже есть аккаунт</a>
+			
+			</form>
+
+			
+		</div>
+		
+		<footer> <span> <a class="a_white" href="">  </a> | <a class="a_white"  href="">  </a> | <a class="a_white"  href="">  </a> </span> </footer>
+
+	</body>
+
+
+
+</html>

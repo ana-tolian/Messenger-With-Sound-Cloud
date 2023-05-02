@@ -1,6 +1,7 @@
 package com.example.site.control;
 
 import com.example.site.control.upload.MusicService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ public class FileDownloadController {
 
     private MusicService musicService;
 
+    @Autowired
     public FileDownloadController (MusicService musicService) {
         this.musicService = musicService;
     }

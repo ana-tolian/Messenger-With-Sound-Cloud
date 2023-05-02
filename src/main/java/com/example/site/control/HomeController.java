@@ -1,15 +1,10 @@
 package com.example.site.control;
 
 import com.example.site.control.upload.MusicService;
-import com.example.site.entity.Soundtrack;
-import com.example.site.repository.JdbcSoundtrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
-import java.util.ArrayList;
 
 
 @Controller

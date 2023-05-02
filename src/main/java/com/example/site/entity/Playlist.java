@@ -2,8 +2,8 @@ package com.example.site.entity;
 
 import java.util.List;
 
-public class Playlist {
 
+public class Playlist {
     private int id;
     private String name;
     private String imgHref;

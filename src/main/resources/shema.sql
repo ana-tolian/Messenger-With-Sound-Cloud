@@ -16,3 +16,11 @@ CREATE TABLE IF NOT EXISTS Soundtrack (
     PRIMARY KEY(id),
     FOREIGN KEY(playlistId) REFERENCES Playlist(id)
 );
+
+CREATE TABLE IF NOT EXISTS User (
+    id INT AUTO_INCREMENT NOT NULL,
+    username VARCHAR(20) NOT NULL,
+    password VARCHAR(2048) NOT NULL,
+    description VARCHAR(100),
+    PRIMARY KEY(id)
+);

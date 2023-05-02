@@ -16,7 +16,7 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
      private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public JdbcSoundtrackRepository (JdbcTemplate jdbcTemplate) {
+    public JdbcSoundtrackRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

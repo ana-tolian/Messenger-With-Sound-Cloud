@@ -16,12 +16,10 @@ public class FileUploadController {
 
     private final MusicService musicService;
 
-
     @Autowired
     public FileUploadController (MusicService musicService) {
         this.musicService = musicService;
     }
-
 
     @GetMapping("/load")
     public String sendLoadPage () {
