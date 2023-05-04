@@ -5,7 +5,8 @@
 	<meta charset="utf-8">
 	<title> Авторизация </title>
 	<link rel="icon" th:href="@{/images/favicon.png}">
-	<link rel="stylesheet" href="messenger_main.css">
+	<link rel="icon" th:href="@{/images/favicon.png}">
+	<link rel="stylesheet" th:href="@{messenger_main.css}">
 
 	<body>
 		<header> <...> </header>
@@ -14,7 +15,7 @@
 			<h3 class="head3log"> Авторизация </h3>
 
 			<form class="input_form" th:action="@{/login}"  method="post">
-				<div th:if="${message}"> <h5 th:text="${message}"/> </div>
+				<span th:if="${param.error}"> <h5>Неправильное имя пользователя или пароль</h5> </span>
 
 				<input class="input_field" type="text" required name="username" placeholder="Логин" />
 				<input class="input_field" type="password" required name="password" placeholder="Пароль" />

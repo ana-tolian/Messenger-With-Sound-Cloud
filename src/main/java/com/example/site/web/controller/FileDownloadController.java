@@ -1,6 +1,6 @@
-package com.example.site.control;
+package com.example.site.web.controller;
 
-import com.example.site.control.upload.MusicService;
+import com.example.site.data.upload.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

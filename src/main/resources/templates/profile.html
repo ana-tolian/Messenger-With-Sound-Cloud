@@ -1,9 +1,11 @@
 <!DOCTYPE HTML>
 
-<html>	
+<html>
+	<meta charset="utf-8">
 	<title> Чаты </title>
-	<link rel="stylesheet" href="messenger_main.css">
-	<link rel="stylesheet" href="messenger_profile.css">
+	<link rel="icon" th:href="@{/images/favicon.png}">
+	<link rel="stylesheet" th:href="@{messenger_main.css}">
+	<link rel="stylesheet" th:href="@{messenger_profile.css}">
 
 	<body>
 		<div class="all">
@@ -16,7 +18,7 @@
 						<img class="profile_photo" src="">
 					</div>
 					
-					<ul type="none">
+					<ul>
 						<hr class="hr_main">
 					
 						<li> <a class="sidebar_link" href=""> Чаты </a> </li>
@@ -27,11 +29,11 @@
 						
 						<hr class="hr_main">
 						
-						<li> <a class="sidebar_link" href=""> Настройки </a> </li>
+						<li> <a class="sidebar_link" th:href="@{/home}"> Музыка </a> </li>
 						
 						<hr class="hr_main">
 						
-						<li>  <a class="sidebar_link" href=""> Выход </a> </li>
+						<li>  <a class="sidebar_link" th:href="@{/logout}"> Выход </a> </li>
 						
 						<hr class="hr_main">
 					</ul>
@@ -43,8 +45,8 @@
 						<li class="chat"> 
 							<div> <img class="chat_photo" src=""> </div>
 							<div class="text">
-								<span class="chat_name"> Аааа Ббббб </span>
-								<span class="chat_preview"> ... </span>
+								<span class="chat_name"> Антон Борисов </span>
+								<span class="chat_preview"> Привет! </span>
 							</div>
 						</li>
 						<hr class="hr_chat">

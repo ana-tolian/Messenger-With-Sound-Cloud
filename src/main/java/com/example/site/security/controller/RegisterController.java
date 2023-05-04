@@ -1,6 +1,6 @@
-package com.example.site.control;
+package com.example.site.security.controller;
 
-import com.example.site.repository.UserRepository;
+import com.example.site.data.UserRepository;
 import com.example.site.security.RegistrationForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,6 +31,6 @@ public class RegisterController {
     @PostMapping
     public String processRegistration (RegistrationForm registrationForm) {
         userRepository.save(registrationForm.toUser(passwordEncoder));
-        return "redirect:login";
+        return "redirect:/login";
     }
 }

@@ -94,7 +94,7 @@
 }
 
 .sidebar ul {
-
+	list-style-type:none;
 }
 
 .sidebar_link {

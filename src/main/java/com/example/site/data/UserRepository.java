@@ -1,4 +1,4 @@
-package com.example.site.repository;
+package com.example.site.data;
 
 import com.example.site.entity.User;
 

@@ -1,8 +1,8 @@
-package com.example.site.control.upload;
+package com.example.site.data.upload;
 
 import com.example.site.entity.Playlist;
 import com.example.site.entity.Soundtrack;
-import com.example.site.repository.JdbcSoundtrackRepository;
+import com.example.site.data.JdbcSoundtrackRepository;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.MultimediaInfo;
 import org.springframework.core.io.InputStreamResource;
