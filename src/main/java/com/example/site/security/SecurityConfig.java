@@ -1,5 +1,6 @@
 package com.example.site.security;
 
+import com.example.site.security.controller.LogoutController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +31,7 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests()
-                    .requestMatchers("/", "/home", "/albums", "/load", "/profile").hasRole("USER")
+                    .requestMatchers("/", "/home", "/albums", "/load", "/profile", "/creation").hasRole("USER")
                     .requestMatchers("/register", "/login", "/**").permitAll()
 
                 .and()

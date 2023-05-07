@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 public class User implements UserDetails {
 
@@ -13,16 +14,18 @@ public class User implements UserDetails {
     private final String username;
     private final String password;
     private final String description;
+    private final String imgHref;
 
-    public User (String username, String password, String description) {
-        this(0, username, password, description);
+    public User (String username, String password, String description, String imgHref) {
+        this(0, username, password, description, imgHref);
     }
 
-    public User (long id, String username, String password, String description) {
+    public User (long id, String username, String password, String description, String imgHref) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.description = description;
+        this.imgHref = imgHref;
     }
 
     public long getId() {
@@ -31,6 +34,10 @@ public class User implements UserDetails {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getImgHref() {
+        return imgHref;
     }
 
     @Override
@@ -67,4 +74,13 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(username, user.username) && Objects.equals(description, user.description) && Objects.equals(imgHref, user.imgHref);
+    }
+
 }

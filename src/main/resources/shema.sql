@@ -22,5 +22,25 @@ CREATE TABLE IF NOT EXISTS User (
     username VARCHAR(20) NOT NULL,
     password VARCHAR(2048) NOT NULL,
     description VARCHAR(100),
+    imgHref VARCHAR(100) DEFAULT "/images/usernoimage.jpeg",
     PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS Dialog (
+    id INT AUTO_INCREMENT NOT NULL,
+    user1Id INT NOT NULL,
+    user2Id INT NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(user1Id) REFERENCES User(id),
+    FOREIGN KEY(user2Id) REFERENCES User(id)
+);
+
+CREATE TABLE IF NOT EXISTS Message (
+    id INT AUTO_INCREMENT NOT NULL,
+    content VARCHAR(1000) NOT NULL,
+    imgHref VARCHAR(200) DEFAULT "",
+    dialogId INT NOT NULL,
+    date DATETIME NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(dialogId) REFERENCES Dialog(id)
 );

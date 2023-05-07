@@ -22,12 +22,17 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public User findByUsername(String username) {
         List<User> user = jdbcTemplate.query(
-                "SELECT id, username, password, description FROM User WHERE username='" + username + "';",
+                "SELECT id, username, password, description, imgHref FROM User WHERE username='" + username + "';",
                 this::mapRowToUser);
-        if (user.isEmpty())
-            return null;
-        else
-            return user.remove(0);
+        return (user.isEmpty() ? null : user.remove(0));
+    }
+
+    @Override
+    public User findById(int id) {
+            List<User> user = jdbcTemplate.query(
+                    "SELECT id, username, password, description, imgHref FROM User WHERE id='" + id + "';",
+                    this::mapRowToUser);
+        return (user.isEmpty() ? null : user.remove(0));
     }
 
     @Override
@@ -42,6 +47,7 @@ public class JdbcUserRepository implements UserRepository {
                 Integer.parseInt(row.getString("id")),
                 row.getString("username"),
                 row.getString("password"),
-                row.getString("description"));
+                row.getString("description"),
+                row.getString("imgHref"));
     }
 }

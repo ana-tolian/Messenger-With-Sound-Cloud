@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <meta charset="UTF-8">
+      <title>Debug</title>
+      <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>"></script>
+  </head>
+
+  <body>
+      <script type="text/javascript">
+        console.log("s");
+        let start = setInterval(myfn, 1000);
+
+        function myfn(){
+          var audio;
+          var rangeplay;
+
+          $(document).ready(function(){
+              audio = document.getElementById('muz1');
+              console.log(audio.duration);
+
+              audio = document.getElementById('muz2');
+              console.log(audio.duration);
+
+              clearInterval(start);
+
+              function timeplay () {
+                  rangeplay.value = audio.currentTime;
+              }
+          });
+        }
+
+
+      </script>
+
+      <div>
+        <audio id="muz1" controls>
+          <source src="e1.mp3" type="audio/mpeg">
+          Тег audio не поддерживается вашим браузером.
+        </audio>
+
+        <input type="range" id="range1">
+        <input type="button" id="start_pauze1" onclick="" title="start" value="start">
+      </div>
+
+      <div>
+          <audio id="muz2" controls>
+              <source src="e2.mp3" type="audio/mpeg">
+              Тег audio не поддерживается вашим браузером.
+          </audio>
+
+          <input type="range2" id="range2">
+          <input type="button" id="start_pauze2" onclick="" title="start" value="start">
+      </div>
+
+  </body>
+</html>

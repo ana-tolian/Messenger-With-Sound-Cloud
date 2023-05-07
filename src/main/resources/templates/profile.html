@@ -15,7 +15,8 @@
 				<div class="sidebar"> 
 					
 					<div class="profile_photo_panel">
-						<img class="profile_photo" src="">
+						<!--	Stored on server somewhere on disk (not in project directory):	-->
+						<img class="profile_photo" th:src="@{|~${imgHref}|}">
 					</div>
 					
 					<ul>
@@ -38,19 +39,21 @@
 						<hr class="hr_main">
 					</ul>
 				</div>
-				
+
 				<div class="content">
-					<ul class="ul_chats" type="none">
+					<ul class="ul_chats">
+						<div th:each="lastMessage : ${lastMessages}">
+							<hr class="hr_chat">
+							<li class="chat">
+								<div> <img class="chat_photo" th:if="${lastMessage.getDialog().getUser2().getImgHref()}" src=""> </div>
+								<div class="text">
+									<span class="chat_name" th:text="${lastMessage.getDialog().getUser2().getUsername()}"> </span>
+									<span class="chat_preview" th:text="${lastMessage.getContent()}"> </span>
+								</div>
+							</li>
+						</div>
+
 						<hr class="hr_chat">
-						<li class="chat"> 
-							<div> <img class="chat_photo" src=""> </div>
-							<div class="text">
-								<span class="chat_name"> Антон Борисов </span>
-								<span class="chat_preview"> Привет! </span>
-							</div>
-						</li>
-						<hr class="hr_chat">
-						
 					</ul>
 						
 					
