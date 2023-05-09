@@ -1,31 +1,38 @@
 <!DOCTYPE HTML>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+	  			xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta id="csrf" name="_csrf" th:content="${_csrf.token}"/>
+		<meta id="csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+		<link rel="icon" th:href="@{/images/favicon.png}">
+		<link rel="stylesheet" th:href="@{messenger_main.css}">
+		<link rel="stylesheet" th:href="@{messenger_profile.css}">
+		<link rel="stylesheet" th:href="@{message.css}">
+		<script type="text/javascript" th:src="@{menuHandler.js}"></script>
+	</head>
 
-<html>
-	<meta charset="utf-8">
-	<title> Чаты </title>
-	<link rel="icon" th:href="@{/images/favicon.png}">
-	<link rel="stylesheet" th:href="@{messenger_main.css}">
-	<link rel="stylesheet" th:href="@{messenger_profile.css}">
 
 	<body>
-		<div class="all">
+	<title> Чаты </title>
+	<div class="all">
 			<header> <...> </header>
 			
 			<div class="main">
 				<div class="sidebar"> 
 					
-					<div class="profile_photo_panel">
+					<div id="profilePhoto" class="profile_photo_panel">
 						<!--	Stored on server somewhere on disk (not in project directory):	-->
 						<img class="profile_photo" th:src="@{|~${imgHref}|}">
 					</div>
 					
 					<ul>
 						<hr class="hr_main">
-					
-						<li> <a class="sidebar_link" href=""> Чаты </a> </li>
+
+						<li> <a class="sidebar_link" onclick="chats()" th:href="@{/profile}"> Чаты </a> </li>
 						
 						<hr class="hr_main">
-						
+
 						<li> <a class="sidebar_link" href=""> Контакты </a> </li>
 						
 						<hr class="hr_main">
@@ -34,17 +41,17 @@
 						
 						<hr class="hr_main">
 						
-						<li> <a class="sidebar_link" th:href="@{/logout}"> Выход </a> </li>
+						<li> <a class="sidebar_link" onclick="logout()" th:href="@{/login}"> Выход </a> </li>
 
 						<hr class="hr_main">
 					</ul>
 				</div>
 
 				<div class="content">
-					<ul class="ul_chats">
+					<ul class="ul_chats" id="allChats">
 						<div th:each="lastMessage : ${lastMessages}">
 							<hr class="hr_chat">
-							<li class="chat">
+							<li th:id="${lastMessage.getDialog().getId()}" class="chat" onclick="setChat(event)">
 								<div> <img class="chat_photo" th:if="${lastMessage.getDialog().getUser2().getImgHref()}" src=""> </div>
 								<div class="text">
 									<span class="chat_name" th:text="${lastMessage.getDialog().getUser2().getUsername()}"> </span>
@@ -55,6 +62,16 @@
 
 						<hr class="hr_chat">
 					</ul>
+
+					<div id="dialog" style="display:none;">
+						<div id="mes" class="dialogWindow">
+						</div>
+
+						<div class="userInput">
+							<input id="text" class="user_text_input" type="text" placeholder="Введите сообщение">
+							<input class="user_button_send" type="button" value="Отправить" onclick="send()">
+						</div>
+					</div>
 						
 					
 				</div>

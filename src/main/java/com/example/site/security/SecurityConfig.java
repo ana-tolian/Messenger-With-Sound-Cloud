@@ -31,17 +31,20 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests()
-                    .requestMatchers("/", "/home", "/albums", "/load", "/profile", "/creation").hasRole("USER")
+                    .requestMatchers("/", "/home", "/albums", "/load", "/profile", "/creation").authenticated()
                     .requestMatchers("/register", "/login", "/**").permitAll()
+                    .requestMatchers("/debug").hasRole("ADMIN")
+                    .anyRequest().authenticated()
 
                 .and()
                     .formLogin()
                     .loginPage("/login")
+                    .defaultSuccessUrl("/profile")
                     .successForwardUrl("/profile")
 
                 .and()
                     .logout()
-                    .logoutSuccessUrl("/")
+                    .logoutSuccessUrl("/login")
 
                 .and()
                     .build();

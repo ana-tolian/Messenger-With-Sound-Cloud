@@ -1,3 +1,5 @@
+USE `root`.`music`;
+
 CREATE TABLE IF NOT EXISTS Playlist (
     id INT AUTO_INCREMENT NOT NULL,
     name VARCHAR(50) NOT NULL,
@@ -40,7 +42,9 @@ CREATE TABLE IF NOT EXISTS Message (
     content VARCHAR(1000) NOT NULL,
     imgHref VARCHAR(200) DEFAULT "",
     dialogId INT NOT NULL,
+    userId INT NOT NULL,
     date DATETIME NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY(dialogId) REFERENCES Dialog(id)
+    FOREIGN KEY(dialogId) REFERENCES Dialog(id),
+    FOREIGN KEY(userId) REFERENCES User(id)
 );

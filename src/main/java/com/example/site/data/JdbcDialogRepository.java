@@ -26,14 +26,22 @@ public class JdbcDialogRepository implements DialogRepository {
     @Override
     public List<Message> loadMessages(Dialog dialog) {
         return jdbcTemplate.query(
-                "SELECT id, content, imgHref, dialogId, date FROM Message WHERE dialogId=" + dialog.getId() + ";",
+                "SELECT id, content, imgHref, dialogId, userId, date FROM Message WHERE dialogId=" + dialog.getId() + ";",
                 this::mapRowToMessage);
+    }
+
+    public Message saveMessage (Message message) {
+        jdbcTemplate.update(
+                "INSERT INTO Message(content, imgHref, dialogId, userId, date) VALUES(?, ?, ?, ?, ?)",
+                    message.getContent(), message.getImgHref(), message.getDialog().getId(),
+                        message.getUser().getId(), message.getDate());
+        return message;
     }
 
     @Override
     public Message loadLastMessage(Dialog dialog) {
         List<Message> resultSet =  jdbcTemplate.query(
-                "SELECT id, content, imgHref, dialogId, date FROM Message WHERE dialogId=" + dialog.getId() + " ORDER BY id DESC LIMIT 1;",
+                "SELECT id, content, imgHref, dialogId, userId, date FROM Message WHERE dialogId=" + dialog.getId() + " ORDER BY id DESC LIMIT 1;",
                 this::mapRowToMessage);
         return (resultSet.isEmpty() ? new Message(dialog) : resultSet.remove(0));
     }
@@ -59,6 +67,7 @@ public class JdbcDialogRepository implements DialogRepository {
                            row.getString("content"),
                            row.getString("imgHref"),
                            getDialogById(row.getInt("dialogId")),
+                           userRepository.findById(row.getInt("userId")),
                            null);//new Date(row.getString("date")));        //TODO
     }
 

@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class User implements UserDetails {
 
-    private final long id;
+    private final int id;
     private final String username;
     private final String password;
     private final String description;
@@ -20,7 +20,7 @@ public class User implements UserDetails {
         this(0, username, password, description, imgHref);
     }
 
-    public User (long id, String username, String password, String description, String imgHref) {
+    public User (int id, String username, String password, String description, String imgHref) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -28,7 +28,7 @@ public class User implements UserDetails {
         this.imgHref = imgHref;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
