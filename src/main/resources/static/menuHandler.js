@@ -22,6 +22,7 @@ function send () {
 function setChat(event) {
     document.getElementById("allChats").style.display = "none";
     document.getElementById("dialog").style.display = "block";
+    document.getElementById("dialog_controls").style.display = "none";
 
     let xhr = new XMLHttpRequest();
     id = event.target.id;
@@ -34,7 +35,6 @@ function setChat(event) {
         if(this.readyState === 4) {
             document.getElementById("mes").innerHTML = this.responseText;
             document.getElementById("mes").scrollTo(0, document.getElementById("mes").scrollHeight);
-            document.getElementById("mes").focus();
         }
     });
 
@@ -44,6 +44,8 @@ function setChat(event) {
 function chats () {
     document.getElementById("allChats").style.visibility = "block";
     document.getElementById("dialog").style.visibility = "none";
+    document.getElementById("dialog_controls").style.display = "flex";
+
 }
 
 function profileImageClick () {

@@ -1,5 +1,5 @@
 <div class="messages">
-    <div class="bubble" th:each="message : ${allMessages}">
+    <div th:class="(${message.getUser().getId()} == ${thisUser.getId()}) ? 'bubble_right' : 'bubble'" th:each="message : ${allMessages}">
         <div class="currentUser" th:if="${message.getUser().getId()} == ${thisUser.getId()}" th:text="${message.getContent()}">
             <svg viewBox="0 0 11 20" width="11" height="20" class="bubble-tail"></svg>
         </div>

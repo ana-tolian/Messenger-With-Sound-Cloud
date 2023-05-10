@@ -8,13 +8,15 @@
 		<link rel="icon" th:href="@{/images/favicon.png}">
 		<link rel="stylesheet" th:href="@{messenger_main.css}">
 		<link rel="stylesheet" th:href="@{messenger_profile.css}">
+		<link rel="stylesheet" th:href="@{messenger_additional.css}">
 		<link rel="stylesheet" th:href="@{message.css}">
 		<script type="text/javascript" th:src="@{menuHandler.js}"></script>
+		<script type="text/javascript" th:src="@{subPanelHandler.js}"></script>
 	</head>
 
 
 	<body>
-	<title> Чаты </title>
+		<title> Чаты </title>
 	<div class="all">
 			<header> <...> </header>
 			
@@ -33,7 +35,7 @@
 						
 						<hr class="hr_main">
 
-						<li> <a class="sidebar_link" href=""> Контакты </a> </li>
+						<li> <a class="sidebar_link" th:href="@{/contacts}"> Контакты </a> </li>
 						
 						<hr class="hr_main">
 						
@@ -48,11 +50,44 @@
 				</div>
 
 				<div class="content">
+					<div id="dialog_controls" class="chatControlPanel">
+						<div class="searchFieldContainer">
+							<input id="search" class="userSearchInput" type="text" placeholder="Поиск">
+						</div>
+
+						<div class="createChatButtonContainer">
+							<input class="searchButton" type="button" onclick="searchDialog()" value="Поиск">
+							<input class="createChatButton" type="button" onclick="openZpane()" value="Новый диалог">
+						</div>
+					</div>
+
+					<div id="zpane" class="z-panel" style="display: none;">
+						<div class="wnd">
+							<div class="contact_content">
+								<div th:if="${Contacts.isEmpty()}"> Вы не добавили ни одного контакта. </div>
+
+								<div th:each="contact : ${Contacts}" th:if="${!Contacts.isEmpty()}">
+									<hr class="hr_chat">
+									<li th:id="${contact.getReferer().getId()}" class="chat">
+										<div> <img class="chat_photo" th:src="@{|~${contact.getReferer().getImgHref()}|}"> </div>
+										<div class="text">
+											<span class="contact_name" th:text="${contact.getReferer().getUsername()}"> </span>
+										</div>
+									</li>
+								</div>
+							</div>
+
+							<div class="button_pane_z">
+								<input class="createChatButton" type="button" onclick="closeZpane()" value="Закрыть">
+							</div>
+						</div>
+					</div>
+
 					<ul class="ul_chats" id="allChats">
 						<div th:each="lastMessage : ${lastMessages}">
 							<hr class="hr_chat">
 							<li th:id="${lastMessage.getDialog().getId()}" class="chat" onclick="setChat(event)">
-								<div> <img class="chat_photo" th:if="${lastMessage.getDialog().getUser2().getImgHref()}" src=""> </div>
+								<div> <img class="chat_photo" th:src="@{|~${lastMessage.getDialog().getUser2().getImgHref()}|}"> </div>
 								<div class="text">
 									<span class="chat_name" th:text="${lastMessage.getDialog().getUser2().getUsername()}"> </span>
 									<span class="chat_preview" th:text="${lastMessage.getContent()}"> </span>

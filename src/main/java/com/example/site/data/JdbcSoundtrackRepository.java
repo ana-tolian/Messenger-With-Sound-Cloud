@@ -14,10 +14,12 @@ import java.util.Optional;
 @Repository
 public class JdbcSoundtrackRepository implements SoundtrackRepository {
      private final JdbcTemplate jdbcTemplate;
+     private final UserRepository userRepository;
 
     @Autowired
-    public JdbcSoundtrackRepository(JdbcTemplate jdbcTemplate) {
+    public JdbcSoundtrackRepository(JdbcTemplate jdbcTemplate, UserRepository userRepository) {
         this.jdbcTemplate = jdbcTemplate;
+        this.userRepository = userRepository;
     }
 
 
@@ -43,7 +45,7 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
 
     private List<Playlist> findAllPlaylist () {
         return jdbcTemplate.query(
-                "SELECT id, name, imgHref FROM Playlist",
+                "SELECT id, name, imgHref, userOwnerId FROM Playlist",
                 this::mapRowToPlaylist);
     }
 
@@ -80,7 +82,8 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
         return new Playlist(
                 Integer.parseInt(row.getString("id")),
                 row.getString("name"),
-                row.getString("imgHref"));
+                row.getString("imgHref"),
+                userRepository.findById(row.getInt("userOwnerId")));
     }
 
     private int mapRowToInteger(ResultSet row, int rowNum) throws SQLException {

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta id="csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="icon" th:href="@{/images/favicon.png}">
+    <link rel="stylesheet" th:href="@{messenger_main.css}">
+    <link rel="stylesheet" th:href="@{messenger_profile.css}">
+    <link rel="stylesheet" th:href="@{messenger_additional.css}">
+    <script type="text/javascript" th:src="@{menuHandler.js}"></script>
+    <script type="text/javascript" th:src="@{subPanelHandler.js}"></script>
+</head>
+
+
+    <body>
+        <title> Контакты </title>
+        <div class="all">
+            <header> <...> </header>
+
+            <div class="main">
+                <div class="sidebar">
+
+                    <div id="profilePhoto" class="profile_photo_panel">
+                        <img class="profile_photo" th:src="@{|~${imgHref}|}">
+                    </div>
+
+                    <ul>
+                        <hr class="hr_main">
+
+                        <li> <a class="sidebar_link" onclick="chats()" th:href="@{/profile}"> Чаты </a> </li>
+
+                        <hr class="hr_main">
+
+                        <li> <a class="sidebar_link" th:href="@{/contacts}"> Контакты </a> </li>
+
+                        <hr class="hr_main">
+
+                        <li> <a class="sidebar_link" th:href="@{/home}"> Музыка </a> </li>
+
+                        <hr class="hr_main">
+
+                        <li> <a class="sidebar_link" onclick="logout()" th:href="@{/login}"> Выход </a> </li>
+
+                        <hr class="hr_main">
+                    </ul>
+                </div>
+
+                <div class="content">
+                    <div class="chatControlPanel">
+                        <div class="searchFieldContainer">
+                            <input id="search" class="userSearchInput" type="text" placeholder="Введите имя пользователя для поиска">
+                        </div>
+
+                        <div class="createChatButtonContainer">
+                            <input class="searchButton" type="button" value="Искать">
+                        </div>
+                    </div>
+
+                    <div id="zpane" class="z-panel" style="display: none;">
+                        <div class="wnd">
+                            <div class="contact_content">
+
+                            </div>
+
+                            <div class="button_pane_z">
+                                <input class="createChatButton" type="button" onclick="closeZpane()" value="Закрыть">
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="ul_chats" id="allChats">
+                        <div th:if="${Contacts.isEmpty()}"> Вы не добавили ни одного контакта. </div>
+
+                        <div th:each="contact : ${Contacts}" th:if="${!Contacts.isEmpty()}">
+                            <hr class="hr_chat">
+                            <li th:id="${contact.getReferer().getId()}" class="chat">
+                                <div> <img class="chat_photo" th:src="@{|~${contact.getReferer().getImgHref()}|}"> </div>
+                                <div class="text">
+                                    <span class="contact_name" th:text="${contact.getReferer().getUsername()}"> </span>
+                                </div>
+                            </li>
+                        </div>
+
+                        <hr class="hr_chat">
+                    </ul>
+                </div>
+
+            </div>
+
+            <footer> <span> <a class="a_white" href="">  </a> | <a class="a_white"  href="">  </a> | <a class="a_white"  href="">  </a> </span> </footer>
+
+        </div>
+    </body>
+</html>

@@ -1,5 +1,6 @@
 package com.example.site.web.controller;
 
+import com.example.site.data.ContactRepository;
 import com.example.site.data.DialogRepository;
 import com.example.site.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProfileController {
 
     private final DialogRepository dialogRepository;
+    private final ContactRepository contactRepository;
 
     @Autowired
-    public  ProfileController (DialogRepository dialogRepository) {
+    public  ProfileController (DialogRepository dialogRepository, ContactRepository contactRepository) {
         this.dialogRepository = dialogRepository;
+        this.contactRepository = contactRepository;
     }
 
     @GetMapping
@@ -33,6 +36,7 @@ public class ProfileController {
         model.addAttribute("imgHref", user.getImgHref());
 
         model.addAttribute("lastMessages", dialogRepository.getDialogsForModel(user));
+        model.addAttribute("Contacts", contactRepository.getUserContacts(user));
 
         return "profile";
     }

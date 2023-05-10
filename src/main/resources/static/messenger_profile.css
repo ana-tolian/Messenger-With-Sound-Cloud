@@ -59,14 +59,12 @@
 	height:1rem;
 	width:30rem;
 	padding:0.7rem;
-	font-family:tahoma;
+	font-family:"Calibri Light";
 	font-weight:lighter;
-	font-size:1.1rem;
+	font-size:1.3rem;
 	margin:0.7rem;
 	margin-left:0;
-	background-color:#fff7f9;
-	border-radius:1rem;
-	
+	background-color: #fff8f8;
 }
 
 .text {
@@ -102,6 +100,10 @@
 	color:black;
 }
 
+.sidebar_link:hover {
+	color: #e33434;
+}
+
 
 .sidebar li {
 	text-align:center;
@@ -115,9 +117,9 @@
 	background-color:#f4f7f9;
 }
 
-.sidebar li:hover {
-	background-color:#ffa2a2;
-}
+/*.sidebar li:hover {*/
+/*	background-color:#ffa2a2;*/
+/*}*/
 
 .content {
 	min-width:80rem;
@@ -143,6 +145,5 @@
 .all {
 	display:flex;
 	flex-direction:column;
-	
 }
 

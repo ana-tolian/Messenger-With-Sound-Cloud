@@ -4,23 +4,27 @@ import java.util.List;
 
 
 public class Playlist {
-    private int id;
-    private String name;
-    private String imgHref;
+    private final int id;
+    private final String name;
+    private final String imgHref;
+    private final User user;
     private int count = 0;
     private List<Soundtrack> soundtracks;
 
-    public Playlist(int id, String name, String imgHref) {
-        this.id = id;
-        this.name = name;
-        this.imgHref = imgHref;
-        this.soundtracks = null;
+
+    public Playlist(String name, String imgHref, User user) {
+       this(0, name, imgHref, user, null);
     }
 
-    public Playlist(int id, String name, String imgHref, List<Soundtrack> soundtracks) {
+    public Playlist(int id, String name, String imgHref, User user) {
+        this(id, name, imgHref, user, null);
+    }
+
+    public Playlist(int id, String name, String imgHref, User user, List<Soundtrack> soundtracks) {
         this.id = id;
         this.name = name;
         this.imgHref = imgHref;
+        this.user = user;
         this.soundtracks = soundtracks;
     }
 
@@ -28,36 +32,24 @@ public class Playlist {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getImgHref() {
         return imgHref;
     }
 
-    public void setImgHref(String imgHref) {
-        this.imgHref = imgHref;
-    }
-
     public int getCount() {
         return count;
     }
 
-    public void setCount(int count) {
-        this.count = count;
-    }
-
     public List<Soundtrack> getSoundtracks() {
         return soundtracks;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public void setSoundtracks(List<Soundtrack> soundtracks) {

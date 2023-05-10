@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Основной плейлист</title>
+    <meta id="csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="icon" th:href="@{/images/favicon.png}">
     <link rel="stylesheet" th:href="@{main.css}">
     <link rel="stylesheet" th:href="@{soundtrack.css}">

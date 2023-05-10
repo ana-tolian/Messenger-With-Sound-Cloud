@@ -48,3 +48,13 @@ CREATE TABLE IF NOT EXISTS Message (
     FOREIGN KEY(dialogId) REFERENCES Dialog(id),
     FOREIGN KEY(userId) REFERENCES User(id)
 );
+
+CREATE TABLE IF NOT EXISTS Contact (
+    id INT AUTO_INCREMENT NOT NULL,
+    userOwnerId INT NOT NULL,
+    userRefererId INT NOT NULL,
+    status VARCHAR(20),
+    PRIMARY KEY(id),
+    FOREIGN KEY(userOwnerId) REFERENCES User(id),
+    FOREIGN KEY(userRefererId) REFERENCES User(id)
+);
