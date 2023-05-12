@@ -1,11 +1,14 @@
-let id;
+let dialogId;
 
 function send () {
     let xhr = new XMLHttpRequest();
     let body = document.getElementById("text").value;
+    let url = "http://localhost:8080/messages/post?dl=" + dialogId;
     xhr.withCredentials = true;
 
-    xhr.open("POST", "http://localhost:8080/messages/post?dl=1");// + id);
+    console.log(url)
+
+    xhr.open("POST", url);
     xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
 
     xhr.addEventListener("readystatechange", function() {
@@ -19,16 +22,18 @@ function send () {
     xhr.send(body);
 }
 
-function setChat(event) {
+function setChat(tempId) {
     document.getElementById("allChats").style.display = "none";
     document.getElementById("dialog").style.display = "block";
     document.getElementById("dialog_controls").style.display = "none";
 
     let xhr = new XMLHttpRequest();
-    id = event.target.id;
+    let id = getId(tempId);
+    let url = "http://localhost:8080/messages?dl=" + id;
     xhr.withCredentials = true;
+    dialogId = id;
 
-    xhr.open("POST", "http://localhost:8080/messages?dl=1");// + id);
+    xhr.open("POST", url);
     xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
 
     xhr.addEventListener("readystatechange", function() {
@@ -45,7 +50,6 @@ function chats () {
     document.getElementById("allChats").style.visibility = "block";
     document.getElementById("dialog").style.visibility = "none";
     document.getElementById("dialog_controls").style.display = "flex";
-
 }
 
 function profileImageClick () {
@@ -74,4 +78,8 @@ function getCsrfToken () {
 
 function getCsrfHeader () {
     return document.getElementById("csrf_header").content;
+}
+
+function getId(id) {
+    return Number(id.substring(id.lastIndexOf('_') + 1));
 }

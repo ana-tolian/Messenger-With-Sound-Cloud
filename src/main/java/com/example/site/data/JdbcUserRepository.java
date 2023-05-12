@@ -28,6 +28,14 @@ public class JdbcUserRepository implements UserRepository {
     }
 
     @Override
+    public List<User> findByUsernameStartsWith(String username) {
+        return jdbcTemplate.query(
+                "SELECT id, username, password, description, imgHref FROM User " +
+                        "WHERE (lower(username) LIKE '%" + username + "%');",
+                this::mapRowToUser);
+    }
+
+    @Override
     public User findById(int id) {
             List<User> user = jdbcTemplate.query(
                     "SELECT id, username, password, description, imgHref FROM User WHERE id='" + id + "';",

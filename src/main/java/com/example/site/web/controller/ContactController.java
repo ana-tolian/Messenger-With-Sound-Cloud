@@ -26,6 +26,9 @@ public class ContactController {
 
     @GetMapping
     public String getContactsPage (Authentication authentication, Model model) {
+        if (authentication == null || !authentication.isAuthenticated())
+            return "redirect:login";
+
         User user = (User) authentication.getPrincipal();
 
         model.addAttribute("Contacts", contactRepository.getUserContacts(user));

@@ -10,7 +10,7 @@
     <link rel="stylesheet" th:href="@{messenger_profile.css}">
     <link rel="stylesheet" th:href="@{messenger_additional.css}">
     <script type="text/javascript" th:src="@{menuHandler.js}"></script>
-    <script type="text/javascript" th:src="@{subPanelHandler.js}"></script>
+    <script type="text/javascript" th:src="@{buttonHandler.js}"></script>
 </head>
 
 
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="createChatButtonContainer">
-                            <input class="searchButton" type="button" value="Искать">
+                            <input class="searchButton" type="button" value="Искать" onclick="searchForUsers()">
                         </div>
                     </div>
 
@@ -70,7 +70,7 @@
                         </div>
                     </div>
 
-                    <ul class="ul_chats" id="allChats">
+                    <ul class="ul_chats" id="allContacts">
                         <div th:if="${Contacts.isEmpty()}"> Вы не добавили ни одного контакта. </div>
 
                         <div th:each="contact : ${Contacts}" th:if="${!Contacts.isEmpty()}">

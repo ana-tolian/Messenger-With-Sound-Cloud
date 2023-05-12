@@ -11,7 +11,7 @@
 		<link rel="stylesheet" th:href="@{messenger_additional.css}">
 		<link rel="stylesheet" th:href="@{message.css}">
 		<script type="text/javascript" th:src="@{menuHandler.js}"></script>
-		<script type="text/javascript" th:src="@{subPanelHandler.js}"></script>
+		<script type="text/javascript" th:src="@{buttonHandler.js}"></script>
 	</head>
 
 
@@ -86,7 +86,7 @@
 					<ul class="ul_chats" id="allChats">
 						<div th:each="lastMessage : ${lastMessages}">
 							<hr class="hr_chat">
-							<li th:id="${lastMessage.getDialog().getId()}" class="chat" onclick="setChat(event)">
+							<li th:id="'dialog_' + ${lastMessage.getDialog().getId()}" class="chat" onclick="setChat(this.id)">
 								<div> <img class="chat_photo" th:src="@{|~${lastMessage.getDialog().getUser2().getImgHref()}|}"> </div>
 								<div class="text">
 									<span class="chat_name" th:text="${lastMessage.getDialog().getUser2().getUsername()}"> </span>

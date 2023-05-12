@@ -33,7 +33,7 @@ public class JdbcContactRepository implements ContactRepository {
     public Contact saveContact(Contact contact) {
         jdbcTemplate
                 .update("INSERT INTO Contact(userOwnerId, userRefererId, status) VALUES(?,?,?)",
-                contact.getOwner(), contact.getReferer(), contact.getStatus());
+                contact.getOwner().getId(), contact.getReferer().getId(), contact.getStatus());
         return contact;
     }
 

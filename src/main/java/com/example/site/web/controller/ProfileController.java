@@ -25,19 +25,27 @@ public class ProfileController {
     }
 
     @GetMapping
-    public void get (Model model, Authentication authentication) {
-        post(model, authentication);
+    public String get (Model model, Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            getUserPage(model, authentication);
+            return "profile";
+        } else
+            return "redirect:/login";
     }
 
     @PostMapping
     public String post (Model model, Authentication authentication) {
+        getUserPage(model, authentication);
+
+        return "profile";
+    }
+
+    private void getUserPage (Model model, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         model.addAttribute("username", user.getUsername());
         model.addAttribute("imgHref", user.getImgHref());
 
         model.addAttribute("lastMessages", dialogRepository.getDialogsForModel(user));
         model.addAttribute("Contacts", contactRepository.getUserContacts(user));
-
-        return "profile";
     }
 }
