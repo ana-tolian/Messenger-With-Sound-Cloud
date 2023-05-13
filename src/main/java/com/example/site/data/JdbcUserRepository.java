@@ -22,7 +22,7 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public User findByUsername(String username) {
         List<User> user = jdbcTemplate.query(
-                "SELECT id, username, password, description, imgHref FROM User WHERE username='" + username + "';",
+                "SELECT id, username, password, description, imgHref FROM User WHERE username=lower('" + username + "');",
                 this::mapRowToUser);
         return (user.isEmpty() ? null : user.remove(0));
     }

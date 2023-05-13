@@ -10,8 +10,7 @@ function closeZpane () {
 function searchDialog () {
     let xhr = new XMLHttpRequest();
     let dialogName = document.getElementById("search").value;
-    let url = "http://localhost:8080/search/contact?dl=" + dialogName;
-    xhr.withCredentials = true;
+    let url = "http://localhost:8080/search/dialog?dl=" + dialogName;
 
     xhr.open("GET", url);
     xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
@@ -22,16 +21,18 @@ function searchDialog () {
         }
     });
 
-    xhr.send(body);
+    xhr.send();
 }
 
 function searchForUsers () {
     let xhr = new XMLHttpRequest();
     let username = document.getElementById("search").value;
     let url = "http://localhost:8080/search/contact?user=" + username;
-    xhr.withCredentials = true;
 
-    xhr.open("GET", url);
+    if (username === "")
+        return;
+
+        xhr.open("GET", url);
     xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
 
     xhr.addEventListener("readystatechange", function() {
@@ -43,11 +44,28 @@ function searchForUsers () {
     xhr.send();
 }
 
+function createDialog (id) {
+    let username = id;
+    let url = "http://localhost:8080/profile/dialogs/create?user=" + username;
+    let xhr = new XMLHttpRequest();
+
+    xhr.open("POST", url);
+    xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
+
+    xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            closeZpane();
+            setChat(Number(this.responseText));
+        }
+    });
+
+    xhr.send();
+}
+
 function addNewContact (event) {
     let username = event.target.id;
     let url = "http://localhost:8080/contacts?user=" + username + "&status=friend";
     let xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
 
     xhr.open("POST", url);
     xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
@@ -60,12 +78,4 @@ function addNewContact (event) {
     });
 
     xhr.send();
-}
-
-function getCsrfToken () {
-    return document.getElementById("csrf").content;
-}
-
-function getCsrfHeader () {
-    return document.getElementById("csrf_header").content;
 }

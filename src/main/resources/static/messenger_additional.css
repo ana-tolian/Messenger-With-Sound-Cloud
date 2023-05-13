@@ -55,12 +55,20 @@
 }
 
 .user_line_container {
+    min-width: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: row;
+    align-content: flex-end;
 }
 
 .right {
     align-self: flex-end;
+}
+
+.align {
+    margin-top: 2.5rem;
+    margin-bottom: 3rem;
 }
 
 .z-panel {

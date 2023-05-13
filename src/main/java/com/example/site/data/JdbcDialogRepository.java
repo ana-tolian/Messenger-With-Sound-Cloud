@@ -3,11 +3,17 @@ package com.example.site.data;
 import com.example.site.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.awt.event.MouseWheelEvent;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Repository
@@ -41,7 +47,9 @@ public class JdbcDialogRepository implements DialogRepository {
     @Override
     public Message loadLastMessage(Dialog dialog) {
         List<Message> resultSet =  jdbcTemplate.query(
-                "SELECT id, content, imgHref, dialogId, userId, date FROM Message WHERE dialogId=" + dialog.getId() + " ORDER BY id DESC LIMIT 1;",
+                "SELECT id, content, imgHref, dialogId, userId, date " +
+                        "FROM Message " +
+                        "WHERE dialogId=" + dialog.getId() + " ORDER BY id DESC LIMIT 1;",
                 this::mapRowToMessage);
         return (resultSet.isEmpty() ? new Message(dialog) : resultSet.remove(0));
     }
@@ -50,16 +58,49 @@ public class JdbcDialogRepository implements DialogRepository {
     public List<Dialog> getDialogs(User user) {
         this.tmpUser = user;
         return jdbcTemplate.query(
-                "SELECT id, user1Id, user2Id FROM Dialog WHERE user1Id=" + user.getId() + " OR user2Id=" + user.getId() + ";",
+                "SELECT id, title, user1Id, user2Id " +
+                        "FROM Dialog " +
+                        "WHERE user1Id=" + user.getId() + " OR user2Id=" + user.getId() + ";",
                 (row, rowNum) -> mapRowToDialog(row, rowNum));
+    }
+
+    @Override
+    public List<Dialog> getDialogsByTitle(User user, String title) {
+        return jdbcTemplate.query(
+                "SELECT id, title, user1Id, user2Id " +
+                        "FROM Dialog " +
+                        "WHERE ((user1Id=" + user.getId() + " " +
+                             "OR user2Id=" + user.getId() + ") " +
+                             "AND (lower(title) LIKE '%" + title + "%'));",
+                                (row, rowNum) -> mapRowToDialog(row, rowNum));
     }
 
     @Override
     public Dialog getDialogById(int id) {
         List<Dialog> resultSet = jdbcTemplate.query(
-                            "SELECT id, user1Id, user2Id FROM Dialog WHERE id=" + id + ";",
+                            "SELECT id, title, user1Id, user2Id FROM Dialog WHERE id=" + id + ";",
                                 this::mapRowToDialog);
         return (resultSet.isEmpty() ? null : resultSet.remove(0));
+    }
+
+    @Override
+    public int saveDialog(Dialog dialog) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection
+                    .prepareStatement(
+                            "INSERT INTO Dialog(title, user1Id, user2Id) VALUES(?,?,?)",
+                                 Statement.RETURN_GENERATED_KEYS);
+
+            ps.setString(1, dialog.getTitle());
+            ps.setInt(2, dialog.getUser1().getId());
+            ps.setInt(3, dialog.getUser2().getId());
+
+            return ps;
+        }, keyHolder);
+
+        return keyHolder.getKey().intValue();
     }
 
     public Message mapRowToMessage (ResultSet row, int rowNum) throws SQLException {
@@ -68,7 +109,7 @@ public class JdbcDialogRepository implements DialogRepository {
                            row.getString("imgHref"),
                            getDialogById(row.getInt("dialogId")),
                            userRepository.findById(row.getInt("userId")),
-                           null);//new Date(row.getString("date")));        //TODO
+                           LocalDateTime.parse(row.getString("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 
     public Dialog mapRowToDialog (ResultSet row, int rowNum) throws SQLException {
@@ -80,11 +121,12 @@ public class JdbcDialogRepository implements DialogRepository {
             user1 = tmpUser;
         }
 
-        return new Dialog(row.getInt("id"), user1, user2);
+        return new Dialog(row.getInt("id"),
+                          row.getString("title"),
+                          user1, user2);
     }
 
-    public List<Message> getDialogsForModel (User user) {
-        List<Dialog> dialogs = getDialogs(user);
+    public List<Message> getDialogsForModel (List<Dialog> dialogs) {
         List<Message> messages = new ArrayList<>();
 
         for (Dialog d : dialogs) {
@@ -92,21 +134,22 @@ public class JdbcDialogRepository implements DialogRepository {
         }
 
 //        Comparator<Message> comparator = (o1, o2) -> {
-//            if (o1 == null || !(o1 instanceof Message) || o2 == null || !(o2 instanceof Message)) //TODO
+//            if (o1 == null || o2 == null )
 //                return -1;
 //
 //            Message m1 = (Message) o1;
 //            Message m2 = (Message) o2;
 //
-//            if (m1.getDate().compareTo(m2.getDate()) == 1)
-//                return 1;
-//            else if (m1.getDate().compareTo(m2.getDate()) == -1)
+//            if (m1.getDate().compareTo(m2.getDate()) < 0)
 //                return -1;
+//            else if (m1.getDate().compareTo(m2.getDate()) > 0)
+//                return 1;
 //            else
 //                return 0;
 //        };
 //
-//        Collections.sort(messages, comparator);
+//        messages.sort(comparator);
+
         return messages;
     }
 }

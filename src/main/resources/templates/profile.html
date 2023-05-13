@@ -11,7 +11,10 @@
 		<link rel="stylesheet" th:href="@{messenger_additional.css}">
 		<link rel="stylesheet" th:href="@{message.css}">
 		<script type="text/javascript" th:src="@{menuHandler.js}"></script>
+		<script type="text/javascript" th:src="@{chat.js}"></script>
 		<script type="text/javascript" th:src="@{buttonHandler.js}"></script>
+		<script type="text/javascript" th:src="@{autorefresh.js}"></script>
+		<script type="text/javascript" th:src="@{funcs.js}"></script>
 	</head>
 
 
@@ -68,10 +71,13 @@
 
 								<div th:each="contact : ${Contacts}" th:if="${!Contacts.isEmpty()}">
 									<hr class="hr_chat">
-									<li th:id="${contact.getReferer().getId()}" class="chat">
+									<li th:id="'contact_' + ${contact.getReferer().getId()}" class="chat">
 										<div> <img class="chat_photo" th:src="@{|~${contact.getReferer().getImgHref()}|}"> </div>
 										<div class="text">
 											<span class="contact_name" th:text="${contact.getReferer().getUsername()}"> </span>
+										</div>
+										<div class="createChatButtonContainer">
+											<input class="createChatButton" th:id="${contact.getReferer().getUsername()}" type="button" value="Выбрать" onclick="createDialog(this.id)">
 										</div>
 									</li>
 								</div>
@@ -89,13 +95,11 @@
 							<li th:id="'dialog_' + ${lastMessage.getDialog().getId()}" class="chat" onclick="setChat(this.id)">
 								<div> <img class="chat_photo" th:src="@{|~${lastMessage.getDialog().getUser2().getImgHref()}|}"> </div>
 								<div class="text">
-									<span class="chat_name" th:text="${lastMessage.getDialog().getUser2().getUsername()}"> </span>
+									<span class="chat_name" th:text="${lastMessage.getDialog().getTitle()}"> </span>
 									<span class="chat_preview" th:text="${lastMessage.getContent()}"> </span>
 								</div>
 							</li>
 						</div>
-
-						<hr class="hr_chat">
 					</ul>
 
 					<div id="dialog" style="display:none;">

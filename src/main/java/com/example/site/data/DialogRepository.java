@@ -11,6 +11,8 @@ public interface DialogRepository {
     List<Message> loadMessages(Dialog dialog);
     Message loadLastMessage(Dialog dialog);
     List<Dialog> getDialogs(User user);
+    List<Dialog> getDialogsByTitle(User user, String title);
     Dialog getDialogById(int id);
-    public List<Message> getDialogsForModel(User user);
+    int saveDialog(Dialog dialog);
+    List<Message> getDialogsForModel(List<Dialog> dialogs);
 }

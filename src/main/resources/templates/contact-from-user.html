@@ -4,11 +4,11 @@
         <div> <img class="chat_photo" th:src="@{|~${user.getImgHref()}|}"> </div>
 
         <div class="user_line_container">
-            <div class="text">
+            <div class="text align">
                 <span class="contact_name" th:text="${user.getUsername()}"> </span>
             </div>
 
-            <div class="createChatButtonContainer">
+            <div class="createChatButtonContainer align">
                 <input class="createChatButton" th:id="${user.getUsername()}" type="button" value="Добавить" onclick="addNewContact(event)">
             </div>
         </div>
