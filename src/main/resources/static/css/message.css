@@ -31,12 +31,11 @@
 }
 
 .user_button_send {
-    width: 15%;
     height: 4.3rem;
     padding: 0px;
     margin-left: 2px;
     appearance: auto;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     background-color: var(--border-color-me);
     color: white;
     border: solid 2px var(--border-color-me);

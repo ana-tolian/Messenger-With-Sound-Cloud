@@ -4,6 +4,7 @@
     box-sizing: border-box;
 
     margin: 8px;
+    min-width: fit-content;
     width: 100%;
 
     background-color: white;

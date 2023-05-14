@@ -29,7 +29,7 @@ function setChat(tempId) {
     document.getElementById("allChats").style.display = "none";
     document.getElementById("dialog").style.display = "block";
     document.getElementById("dialog_controls").style.display = "none";
-    document.getElementById("mes").scrollTo(0, document.getElementById("mes").scrollHeight);
+    document.getElementById("dialog").scrollTo(0, document.getElementById("dialog").scrollHeight);
 
     dialogId = getId(tempId);
 

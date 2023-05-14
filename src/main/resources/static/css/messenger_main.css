@@ -7,8 +7,7 @@ body {
 
 footer {
 	background-color: var(--footer-bg-color-me);
-	min-height:10vh;
-	max-height:100rem;
+	min-height:15vh;
 	padding:1rem;
 	color:#ffffff;
 	font-size:0.9rem;
