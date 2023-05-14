@@ -1,6 +1,6 @@
 
 .hr_main, .hr_chat {
-	color:#dddddd;
+	color: #c2c2c2;
 	margin-top:1rem;
 	margin-bottom:1rem;
 	opacity:0.4;
@@ -8,13 +8,16 @@
 
 .hr_chat {
 	margin:0;
+}
 
+.hr_bolder {
+	border: 0 none;
+	height: 4px;
 }
 
 .ul_chats {
 	margin-top:3.5rem;
 }
-
 
 .profile_photo_panel {
 	width:100%;
@@ -62,8 +65,7 @@
 	font-family:"Calibri Light";
 	font-weight:lighter;
 	font-size:1.3rem;
-	margin:0.7rem;
-	margin-left:0;
+	margin: 0.7rem 0.7rem 0.7rem 0;
 	background-color: #fff8f8;
 }
 
@@ -84,8 +86,7 @@
 	height:50%;
 	margin-bottom:2rem;
 	margin-left:3rem;
-	padding:1rem;
-	padding-right:3rem;
+	padding: 1rem 3rem 1rem 1rem;
 	background-color:#f4f7f9;
 	border-radius:1.6rem;
 	border: solid 1px #e33434;
@@ -116,10 +117,6 @@
 .whiter {
 	background-color:#f4f7f9;
 }
-
-/*.sidebar li:hover {*/
-/*	background-color:#ffa2a2;*/
-/*}*/
 
 .content {
 	min-width:80rem;

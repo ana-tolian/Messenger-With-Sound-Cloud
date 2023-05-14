@@ -39,12 +39,12 @@
                 <h3> Вы не загрузили ни одного трека</h3>
             </div>
 
-            <div class="soundtrackPanel" th:each="soundtrack : ${soundtracks}">
+            <div class="soundtrack_panel" th:each="soundtrack : ${soundtracks}">
                 <div class="sndImg"> <img th:src="${soundtrack.getImgHref()}"> </div>
 
-                <div class="sndTextContainer">
-                    <div class="sndName" th:id="'name_' + ${soundtrack.getId()}" th:text="${soundtrack.getName()}"> </div>
-                    <div class="sndArtist" th:id="'artist_' + ${soundtrack.getId()}" th:text="${soundtrack.getArtist()}"> </div>
+                <div class="snd_text_container">
+                    <div class="snd_name" th:id="'name_' + ${soundtrack.getId()}" th:text="${soundtrack.getName()}"> </div>
+                    <div class="snd_artist" th:id="'artist_' + ${soundtrack.getId()}" th:text="${soundtrack.getArtist()}"> </div>
                 </div>
 
                 <div class="player">

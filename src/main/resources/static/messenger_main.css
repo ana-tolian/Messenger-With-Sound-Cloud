@@ -21,8 +21,7 @@ header {
 	font-style:oblique;
 	font-weight:bolder;
 	color:#ffffff;
-	padding:1rem;
-	padding-left:7rem;
+	padding: 1rem 1rem 1rem 7rem;
 	border: solid 2px black;
 }
 
@@ -65,8 +64,7 @@ hr {
 	border-color:#e33434;
 	border-style:solid;
 	border-width:0.1rem;
-	margin:10%;
-	margin-bottom:16%;
+	margin: 10% 10% 16%;
 	padding:1rem;
 	
 }
@@ -79,8 +77,7 @@ hr {
 	border-color:#e33434;
 	border-style:solid;
 	border-width:0.1rem;
-	margin:5%;
-	margin-bottom:16%;
+	margin: 5% 5% 16%;
 	padding:1rem;
 	
 }
@@ -103,15 +100,12 @@ hr {
 
 .input_form {
 	padding:2rem;
-	
 }
 
 .input_form button {
 	font-size:1.2rem;
 	color:#e33434;
-	margin:2rem;
-	margin-left:1rem;
-	margin-bottom:0.5rem;
+	margin: 2rem 2rem 0.5rem 1rem;
 	border-radius:0.3rem;
 	border-style:solid;
 	border-width:0.1rem;
@@ -124,7 +118,6 @@ hr {
 	color:#ffffff;
 	background-color:#e33434;
 }
-
 
 .a_red:link {
 	color:#e33434;

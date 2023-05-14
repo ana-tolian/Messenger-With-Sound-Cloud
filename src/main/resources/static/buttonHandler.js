@@ -74,6 +74,7 @@ function addNewContact (event) {
         if(this.readyState === 4) {
             event.target.value = "Добавлен";
             event.target.disabled = true;
+            event.target.className = "create_chat_button bhover_disabled";
         }
     });
 

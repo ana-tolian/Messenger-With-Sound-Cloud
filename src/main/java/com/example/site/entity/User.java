@@ -83,4 +83,14 @@ public class User implements UserDetails {
         return id == user.id && Objects.equals(username, user.username) && Objects.equals(description, user.description) && Objects.equals(imgHref, user.imgHref);
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", description='" + description + '\'' +
+                ", imgHref='" + imgHref + '\'' +
+                '}';
+    }
 }

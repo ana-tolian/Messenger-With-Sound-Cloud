@@ -1,5 +1,6 @@
 package com.example.site.web.controller;
 
+import com.example.site.data.ContactRepository;
 import com.example.site.data.DialogRepository;
 import com.example.site.data.UserRepository;
 import com.example.site.entity.User;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/search")
 public class SearchEngineController {
@@ -18,8 +22,10 @@ public class SearchEngineController {
     private final DialogRepository dialogRepository;
     private final UserRepository userRepository;
 
+
     @Autowired
-    public SearchEngineController (DialogRepository dialogRepository, UserRepository userRepository) {
+    public SearchEngineController (DialogRepository dialogRepository,
+                                   UserRepository userRepository) {
         this.dialogRepository = dialogRepository;
         this.userRepository = userRepository;
     }
@@ -34,12 +40,17 @@ public class SearchEngineController {
     }
 
     @GetMapping("/contact")
-    public String findContact (@RequestParam(value = "user", required = true) String contactName, Model model) {
+    public String findContact (@RequestParam(value = "user", required = true) String contactName,
+                               Authentication authentication, Model model) {
         if (contactName.equals(""))
             return "redirect:/contacts";
 
+        User user = (User) authentication.getPrincipal();
+
         model.addAttribute("users", userRepository.findByUsernameStartsWith(contactName));
+        model.addAttribute("addedContacts", userRepository.findByUsernameStartsWithFromContacts(contactName));
 
         return "contact-from-user";
     }
+
 }

@@ -53,14 +53,14 @@
 				</div>
 
 				<div class="content">
-					<div id="dialog_controls" class="chatControlPanel">
-						<div class="searchFieldContainer">
-							<input id="search" class="userSearchInput" type="text" placeholder="Поиск">
+					<div id="dialog_controls" class="chat_control_panel">
+						<div class="search_field_container">
+							<input id="search" class="user_search_input" type="text" placeholder="Поиск">
 						</div>
 
-						<div class="createChatButtonContainer">
-							<input class="searchButton" type="button" onclick="searchDialog()" value="Поиск">
-							<input class="createChatButton" type="button" onclick="openZpane()" value="Новый диалог">
+						<div class="create_chat_button_container">
+							<input class="search_button bhover" type="button" onclick="searchDialog()" value="Поиск">
+							<input class="create_chat_button bhover" type="button" onclick="openZpane()" value="Новый диалог">
 						</div>
 					</div>
 
@@ -73,18 +73,21 @@
 									<hr class="hr_chat">
 									<li th:id="'contact_' + ${contact.getReferer().getId()}" class="chat">
 										<div> <img class="chat_photo" th:src="@{|~${contact.getReferer().getImgHref()}|}"> </div>
-										<div class="text">
-											<span class="contact_name" th:text="${contact.getReferer().getUsername()}"> </span>
-										</div>
-										<div class="createChatButtonContainer">
-											<input class="createChatButton" th:id="${contact.getReferer().getUsername()}" type="button" value="Выбрать" onclick="createDialog(this.id)">
+
+										<div class="user_line_container">
+											<div class="text">
+												<span class="contact_name" th:text="${contact.getReferer().getUsername()}"> </span>
+											</div>
+											<div class="create_chat_button_container">
+												<input class="create_chat_button bhover" th:id="${contact.getReferer().getUsername()}" type="button" value="Выбрать" onclick="createDialog(this.id)">
+											</div>
 										</div>
 									</li>
 								</div>
 							</div>
 
 							<div class="button_pane_z">
-								<input class="createChatButton" type="button" onclick="closeZpane()" value="Закрыть">
+								<input class="create_chat_button bhover" type="button" onclick="closeZpane()" value="Закрыть">
 							</div>
 						</div>
 					</div>
@@ -106,7 +109,7 @@
 						<div id="mes" class="dialogWindow">
 						</div>
 
-						<div class="userInput">
+						<div class="user_input">
 							<input id="text" class="user_text_input" type="text" placeholder="Введите сообщение">
 							<input class="user_button_send" type="button" value="Отправить" onclick="send()">
 						</div>

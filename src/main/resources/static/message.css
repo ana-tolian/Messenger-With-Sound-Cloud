@@ -3,20 +3,19 @@
     margin: 2rem;
     font-size: 1.3rem;
     background-color: #fffdfd;
-    border-radius: 0.8rem;
     font-family: verdana;
     display: flex;
     flex-direction: column;
     height: 75vh;
+    overflow-y:scroll;
 }
 
 #mes {
     height: 70vh;
     max-width: 57vw;
-    overflow-y:scroll;
 }
 
-.userInput {
+.user_input {
     height: auto;
     width: auto;
     font-size: 1.5rem;
@@ -87,7 +86,7 @@
     word-break: break-word;
 }
 
-.currentUser {
+.current_user {
     margin: inherit;
     padding: inherit;
     width: inherit;
@@ -99,7 +98,7 @@
     position: sticky;
 }
 
-.anotherUser {
+.another_user {
     margin: inherit;
     padding: inherit;
     width: inherit;
