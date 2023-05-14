@@ -16,7 +16,7 @@
     height: 3rem;
     min-width: 100%;
     font-size: 1.2rem;
-    border: solid 2px #f56060;
+    border: solid 2px var(--border-color-2-me);
 }
 
 .create_chat_button_container {
@@ -30,7 +30,7 @@
 .create_chat_button {
      height: 3.3rem;
      min-width: 50%;
-     background-color: #f56060;
+     background-color: var(--border-color-me);
      color: white;
      font-size: 1rem;
      margin-left: 3px;
@@ -39,22 +39,22 @@
 .search_button {
     height: 3.3rem;
     min-width: 30%;
-    background-color: #f56060;
+    background-color: var(--border-color-me);
     color: white;
     font-size: 1rem;
 }
 
 .bhover:hover {
-    background-color: #b1d9e1;
-    color: #f56060;
+    background-color: var(--button-hover-color-me);
+    color: var(--border-color-me);
 }
 
 .bhover_disabled {
-    background-color: #e5afaf;
+    background-color: var(--button-disabled-bg-color-me);
 }
 
 .bhover_disabled:hover {
-    background-color: #e5afaf;
+    background-color: var(--button-disabled-bg-color-me);
 }
 
 .user_line_container {
@@ -80,7 +80,7 @@
 
     background-color: #fafafa;
     border-radius:1.5rem;
-    border-color:#e33434;
+    border-color: var(--border-color-2-me);
     border-style:solid;
     border-width:0.2rem;
 

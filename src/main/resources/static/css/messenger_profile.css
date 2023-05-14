@@ -1,6 +1,6 @@
 
 .hr_main, .hr_chat {
-	color: #c2c2c2;
+	color: var(--hr-color-me);
 	margin-top:1rem;
 	margin-bottom:1rem;
 	opacity:0.4;
@@ -29,7 +29,7 @@
 	height:8rem;
 	border-radius:3rem;
 	margin-left:2.5rem;
-	border: solid 1px #e33434;
+	border: solid 1px var(--border-color-2-me);
 }
 
 .profile_photo:hover, .chat_photo:hover {
@@ -41,21 +41,18 @@
 	height:6.5rem;
 	display:flex;
 	flex-direction:row;
-	background-color:#fbecec;
+	background-color: var(--chat-bg-color-me);
 }
 
 .chat:hover {
-	background-color:#f3e6e6;
+	background-color: var(--chat-bg-color-hover-me);;
 }
 
 .chat_photo {
 	width:5rem;
 	height:5rem;
 	border-radius:1rem;
-	margin:2rem;
-	margin-top:0.5rem;
-	margin-bottom:0.4rem;
-	
+	margin: 0.5rem 2rem 0.4rem;
 }
 
 .chat_name {
@@ -66,7 +63,7 @@
 	font-weight:lighter;
 	font-size:1.3rem;
 	margin: 0.7rem 0.7rem 0.7rem 0;
-	background-color: #fff8f8;
+	background-color: var(--chat-info-bg-color-me);
 }
 
 .text {
@@ -87,9 +84,9 @@
 	margin-bottom:2rem;
 	margin-left:3rem;
 	padding: 1rem 3rem 1rem 1rem;
-	background-color:#f4f7f9;
+	background-color:var(--content-bg-color-me);
 	border-radius:1.6rem;
-	border: solid 1px #e33434;
+	border: solid 1px var(--border-color-2-me);
 }
 
 .sidebar ul {
@@ -102,7 +99,7 @@
 }
 
 .sidebar_link:hover {
-	color: #e33434;
+	color: var(--border-color-2-me);
 }
 
 
@@ -121,13 +118,13 @@
 .content {
 	min-width:80rem;
 	min-height:50rem;
-	background-color:#f4f7f9;
+	background-color: var(--content-bg-color-me);
 	margin-left:7rem;
 	margin-right:7rem;
 	margin-bottom:3rem;
 	padding-left:1rem;
 	padding-right:3rem;
-	border: solid 1px #e33434;
+	border: solid 1px var(--border-color-2-me);
 	border-radius:1.6rem;
 }
 

@@ -29,9 +29,9 @@
 
 .albumInfo {
     margin: 2px;
-    color: gray;
+    color: var(--album-info-font_color-mu);
 }
 
 .albumPanel:hover {
-    background-color: #f3e9ff;
+    background-color: var(--soundtrack-bg-hover-color-mu);
 }

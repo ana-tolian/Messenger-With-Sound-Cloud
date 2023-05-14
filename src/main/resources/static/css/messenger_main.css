@@ -1,12 +1,12 @@
 
 body {
-	background-color:#dfe3e6;
+	background-color: var(--body-bg-color-me);
 	font-family:"Verdana";
 	margin:0;
 }
 
 footer {
-	background-color:#867575;
+	background-color: var(--footer-bg-color-me);
 	min-height:10vh;
 	max-height:100rem;
 	padding:1rem;
@@ -15,7 +15,7 @@ footer {
 }
 
 header {
-	background-color:#b42b2b;
+	background-color:var(--a-link-visited-color-me);
 	letter-spacing:0.3rem;
 	font-size:2.7rem;
 	font-style:oblique;
@@ -27,7 +27,7 @@ header {
 
 h4 {
 	font-size:1.5rem;
-	color:#e33434;
+	color:var(--border-color-2-me);
 	font-weight:lighter;
 	margin:0.5rem;
 	letter-spacing:0.1rem;
@@ -35,14 +35,14 @@ h4 {
 
 h5 {
 	font-size:1.0rem;
-	color:#e33434;
+	color:var(--border-color-2-me);
 	font-weight:lighter;
 	margin:0.5rem;
 	letter-spacing:0.1rem;
 }
 
 hr {
-	color:#e33434;
+	color:var(--border-color-2-me);
 	margin-top:2rem;
 	margin-bottom:2rem;
 	opacity:0.4;
@@ -50,18 +50,18 @@ hr {
 
 .head3log {
 	font-size:1.8rem;
-	color:#e33434;
+	color:var(--border-color-2-me);
 
 	margin:0.5rem;
 	letter-spacing:0.15rem;
 }
 
 .login {
-	background-color:#f4f7f9;
+	background-color:var(--content-bg-color-me);
 	width:35rem;
 	height:auto;
 	border-radius:1.5rem;
-	border-color:#e33434;
+	border-color:var(--border-color-2-me);
 	border-style:solid;
 	border-width:0.1rem;
 	margin: 10% 10% 16%;
@@ -70,11 +70,11 @@ hr {
 }
 
 .register {
-	background-color:#f4f7f9;
+	background-color: var(--content-bg-color-me);
 	width:60rem;
 	height:auto;
 	border-radius:1.5rem;
-	border-color:#e33434;
+	border-color: var(--border-color-2-me);
 	border-style:solid;
 	border-width:0.1rem;
 	margin: 5% 5% 16%;
@@ -91,7 +91,7 @@ hr {
 }
 
 .input_field:focus {
-	background-color:#fff6c4;
+	background-color: var(--text-input-focus-bg-color-me);
 }
 
 .input_field.description {
@@ -104,27 +104,27 @@ hr {
 
 .input_form button {
 	font-size:1.2rem;
-	color:#e33434;
+	color: var(--border-color-2-me);
 	margin: 2rem 2rem 0.5rem 1rem;
 	border-radius:0.3rem;
 	border-style:solid;
 	border-width:0.1rem;
-	border-color:#e33434;
+	border-color: var(--border-color-2-me);
 	width:10rem;
 	height:2rem
 }
 
 .input_form button:hover {
 	color:#ffffff;
-	background-color:#e33434;
+	background-color:var(--border-color-2-me);
 }
 
 .a_red:link {
-	color:#e33434;
+	color:var(--border-color-2-me);
 }
 
 .a_red:visited {
-	color:#b42b2b;
+	color: var(--a-link-visited-color-me);
 }
 
 .a_white {

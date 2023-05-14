@@ -74,7 +74,7 @@
 }
 
 .progress {
-    background-color: #ff007b;
+    background-color: var(--a-link-color);
     height: 100%;
     width: 0%;
 }

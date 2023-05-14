@@ -1,0 +1,35 @@
+:root {
+    --album-info-font_color-mu: #808080;
+    --soundtrack-bg-hover-color-mu: #f3e9ff;
+    --body-bg-color-mu: #7e639f;
+    --button-a-link-hover-color-mu: #5e3274;
+    --header-bg-color-mu: #4a2b59;
+    --upper-panel-bg-color-mu: #3e1e4e;
+    --footer-bg-color-mu: #333636;
+    --a-link-color: #ff007b;
+    --success-font-color: #34d06f;
+
+
+    --a-link-visited-color-me: #b42b2b;
+
+    --border-color-me: #f56060;
+    --border-color-2-me: #e33434;
+
+    --button-hover-color-me: #b1d9e1;
+    --button-disabled-bg-color-me: #e5afaf;
+
+    --dialog-bg-color-me: #fffdfd;
+    --user-bubble-bg-color-me: #ffbebe;
+    --an-user-bubble-bg-color-me: #eae9e9;
+
+    --chat-bg-color-me: #fbecec;
+    --chat-bg-color-hover-me: #f3e6e6;
+    --chat-info-bg-color-me: #fff8f8;
+
+    --text-input-focus-bg-color-me: #fff6c4;
+    --hr-color-me: #c2c2c2;
+    --content-bg-color-me: #f4f7f9;
+    --body-bg-color-me: #dfe3e6;
+    /*--footer-bg-color-me: #867575;*/
+    --footer-bg-color-me: var(--footer-bg-color-mu);
+}

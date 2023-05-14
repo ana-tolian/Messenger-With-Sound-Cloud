@@ -38,5 +38,5 @@
 }
 
 .soundtrack_panel:hover {
-    background-color: #f3e9ff;
+    background-color: var(--soundtrack-bg-hover-color-mu);
 }

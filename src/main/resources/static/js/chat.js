@@ -8,6 +8,9 @@ function send () {
     let url = "http://localhost:8080/messages/post?dl=" + dialogId;
     xhr.withCredentials = true;
 
+    if (body === "")
+        return;
+
     xhr.open("POST", url);
     xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
 
@@ -26,6 +29,7 @@ function setChat(tempId) {
     document.getElementById("allChats").style.display = "none";
     document.getElementById("dialog").style.display = "block";
     document.getElementById("dialog_controls").style.display = "none";
+    document.getElementById("mes").scrollTo(0, document.getElementById("mes").scrollHeight);
 
     dialogId = getId(tempId);
 

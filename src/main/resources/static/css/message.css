@@ -2,7 +2,7 @@
 #dialog {
     margin: 2rem;
     font-size: 1.3rem;
-    background-color: #fffdfd;
+    background-color: var(--dialog-bg-color-me);
     font-family: verdana;
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@
     width: 85%;
     height: 4rem;
     font-size: 1.5rem;
-    border: solid 2px #f56060;
+    border: solid 2px var(--border-color-me);
 }
 
 .user_button_send {
@@ -37,14 +37,9 @@
     margin-left: 2px;
     appearance: auto;
     font-size: 1.5rem;
-    background-color: #f56060;
+    background-color: var(--border-color-me);
     color: white;
-    border: solid 2px #f56060;
-}
-
-.user_button_send:hover {
-    background-color: white;
-    color: black;
+    border: solid 2px var(--border-color-me);
 }
 
 .messages {
@@ -60,7 +55,6 @@
     height: fit-content;
     display: flex;
     border-radius: 1rem;
-    /*flex-wrap: wrap;*/
     overflow-wrap: break-word;
     word-wrap: break-word;
     -ms-word-break: break-word;
@@ -94,7 +88,7 @@
     display: inherit;
     border-radius: inherit;
     flex-wrap: inherit;
-    background-color: #ffbebe;
+    background-color: var(--user-bubble-bg-color-me);
     position: sticky;
 }
 
@@ -106,6 +100,6 @@
     display: inherit;
     border-radius: inherit;
     flex-wrap: inherit;
-    background-color: #eae9e9;
+    background-color: var(--an-user-bubble-bg-color-me);
     justify-content: flex-start;
 }

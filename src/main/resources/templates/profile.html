@@ -6,20 +6,20 @@
 		<meta id="csrf" name="_csrf" th:content="${_csrf.token}"/>
 		<meta id="csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 		<link rel="icon" th:href="@{/images/favicon.png}">
-		<link rel="stylesheet" th:href="@{messenger_main.css}">
-		<link rel="stylesheet" th:href="@{messenger_profile.css}">
-		<link rel="stylesheet" th:href="@{messenger_additional.css}">
-		<link rel="stylesheet" th:href="@{message.css}">
-		<script type="text/javascript" th:src="@{menuHandler.js}"></script>
-		<script type="text/javascript" th:src="@{chat.js}"></script>
-		<script type="text/javascript" th:src="@{buttonHandler.js}"></script>
-		<script type="text/javascript" th:src="@{autorefresh.js}"></script>
-		<script type="text/javascript" th:src="@{funcs.js}"></script>
+		<link rel="stylesheet" th:href="@{/css/const.css}">
+		<link rel="stylesheet" th:href="@{/css/messenger_main.css}">
+		<link rel="stylesheet" th:href="@{/css/messenger_profile.css}">
+		<link rel="stylesheet" th:href="@{/css/messenger_additional.css}">
+		<link rel="stylesheet" th:href="@{/css/message.css}">
+		<script type="text/javascript" th:src="@{/js/menuHandler.js}"></script>
+		<script type="text/javascript" th:src="@{/js/chat.js}"></script>
+		<script type="text/javascript" th:src="@{/js/buttonHandler.js}"></script>
+		<script type="text/javascript" th:src="@{/js/autorefresh.js}"></script>
+		<script type="text/javascript" th:src="@{/js/funcs.js}"></script>
+		<title> Чаты </title>
 	</head>
 
-
 	<body>
-		<title> Чаты </title>
 	<div class="all">
 			<header> <...> </header>
 			
@@ -111,7 +111,7 @@
 
 						<div class="user_input">
 							<input id="text" class="user_text_input" type="text" placeholder="Введите сообщение">
-							<input class="user_button_send" type="button" value="Отправить" onclick="send()">
+							<input class="user_button_send bhover" type="button" value="Отправить" onclick="send()">
 						</div>
 					</div>
 						
