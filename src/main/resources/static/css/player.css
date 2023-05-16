@@ -33,13 +33,12 @@
 }
 
 .buttonp:hover {
-    background-color: #f3e9ff;
+    background-color: var(--user-bubble-bg-color-me);
 }
 
 .time {
     font-size: smaller;
 }
-
 
 #play {
     background-position: 6px 5px;
@@ -75,7 +74,7 @@
 }
 
 .progress {
-    background-color: var(--a-link-color);
+    background-color: var(--header-bg-color-mu);
     height: 100%;
     width: 0%;
 }

@@ -3,6 +3,7 @@ package com.example.site.data.upload;
 import com.example.site.entity.Playlist;
 import com.example.site.entity.Soundtrack;
 import com.example.site.data.JdbcSoundtrackRepository;
+import com.example.site.entity.User;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.MultimediaInfo;
 import org.springframework.core.io.InputStreamResource;
@@ -30,7 +31,7 @@ public class MusicService {
         this.soundtrackRepository = soundtrackRepository;
     }
 
-    public void store(MultipartFile [] files, List<String> list) {
+    public void store(MultipartFile [] files, List<String> list, User user) {
         for (MultipartFile file : files) {
             Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
             list.add(fileNameAndPath.getFileName().toString());
@@ -45,10 +46,12 @@ public class MusicService {
                 int duration = getAudioDuration(new File(fileNameAndPath.toUri()));
 
                 soundtrackRepository.save(new Soundtrack(
-                        0, getName(soundtrackName),
+                        getName(soundtrackName),
                         getArtist(soundtrackName),
                         uploadDirectory + "/" + fileNameAndPath.getFileName().toString(),
-                        duration, null, null));
+                        duration,
+                        null,
+                        null));
 
             } catch (IOException e) {
                 e.printStackTrace();

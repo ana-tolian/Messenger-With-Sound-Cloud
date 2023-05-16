@@ -1,7 +1,9 @@
 package com.example.site.web.controller;
 
 import com.example.site.data.upload.MusicService;
+import com.example.site.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,15 +24,23 @@ public class FileUploadController {
     }
 
     @GetMapping("/load")
-    public String sendLoadPage () {
+    public String sendLoadPage (Authentication authentication, Model model) {
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("imgHref", user.getImgHref());
+        model.addAttribute("username", user.getUsername());
         return "load";
     }
 
     @PostMapping("/load")
-    public String handleFileUpload(Model model, @RequestParam("soundtrack") MultipartFile[] files) {
+    public String handleFileUpload(@RequestParam("soundtrack") MultipartFile[] files,
+                                   Authentication authentication, Model model) {
+        User user = (User) authentication.getPrincipal();
         ArrayList<String> fileList = new ArrayList<>();
-        musicService.store(files, fileList);
 
+        musicService.store(files, fileList, user);
+
+        model.addAttribute("imgHref", user.getImgHref());
+        model.addAttribute("username", user.getUsername());
         model.addAttribute("message", "Вы успешно загрузили следующие файлы:");
         model.addAttribute("files", fileList);
 

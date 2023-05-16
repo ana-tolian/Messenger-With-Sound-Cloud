@@ -11,6 +11,7 @@ footer {
 	padding:1rem;
 	color:#ffffff;
 	font-size:0.9rem;
+	margin-top: 5%;
 }
 
 header {
@@ -41,12 +42,15 @@ h5 {
 }
 
 hr {
-	color:var(--border-color-2-me);
-	margin-top:2rem;
-	margin-bottom:2rem;
-	opacity:0.4;
+	border-top: 1px solid var(--border-color-2-me);
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	opacity: 0.5;
 }
 
+.hr_margin_bottom {
+	margin-bottom: 3rem;
+}
 .head3log {
 	font-size:1.8rem;
 	color:var(--border-color-2-me);

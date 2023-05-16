@@ -1,0 +1,61 @@
+
+.a_upper_panel {
+    text-decoration: none;
+}
+
+a_upper_panel:hover {
+    color: var(--a-link-visited-color-me);
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    font-weight: bold;
+}
+
+.button {
+    font-size: 1.5rem;
+}
+
+.button a:hover {
+    background-color: var(--button-a-link-hover-color-mu);
+}
+
+.a-style {
+    color: var(--border-color-2-me);
+    padding: 0.5rem;
+}
+
+.upperPanel {
+    height: 2%;
+    min-width: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    font-family: "Calibri Light";
+    margin-bottom: 1.5rem;
+}
+
+.completed:after {
+    content: " ✔";
+    color: var(--success-font-color);
+}
+
+.bolder {
+    font-weight: bold;
+}
+
+.soundtrack_main {
+    min-height: 80vh;
+    background-color: white;
+    padding: 2% 5% 5%;
+    align-content: center;
+    font-family: "Calibri Light";
+}
+
+@media only screen and (max-width: 1000px) {
+   .main {
+       min-width: 70vw;
+   }
+}

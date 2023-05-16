@@ -27,13 +27,14 @@
 }
 
 .snd_name {
-    font-size: 125%;
+    font-size: 150%;
     margin: 2px;
     width:auto;
     flex-wrap: nowrap;
 }
 
 .snd_artist {
+    font-size: 125%;
     margin: 2px;
     color: gray;
     width:auto;

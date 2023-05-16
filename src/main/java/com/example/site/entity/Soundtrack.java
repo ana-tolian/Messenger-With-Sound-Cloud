@@ -12,6 +12,9 @@ public class Soundtrack {
     private String imgHref;
     private String time;
 
+    public Soundtrack(String name, String artist, String trackHref, int duration, String playlistId, String imgHref) {
+        this(0, name, artist, trackHref, duration, playlistId, imgHref);
+    }
 
     public Soundtrack(int id, String name, String artist, String trackHref, int duration, String playlistId, String imgHref) {
         this.id = id;

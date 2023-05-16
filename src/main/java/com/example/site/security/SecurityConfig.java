@@ -1,6 +1,5 @@
 package com.example.site.security;
 
-import com.example.site.security.controller.LogoutController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +21,11 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
+//    @Bean(name = "filterMultipartResolver")
+//    public MultipartResolver multipartResolver() {
+//        return new CommonsMultipartResolver();
+//    }
+
     @Bean
     public PasswordEncoder passwordEncoder () {
         return new BCryptPasswordEncoder();
@@ -32,6 +36,7 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
         return http
                 .authorizeHttpRequests()
                     .requestMatchers("/debug").hasRole("ADMIN")
+                    .requestMatchers("/upload", "/uploads/*").permitAll()
                     .requestMatchers("/", "/home", "/albums", "/load", "/uploads/*", "/profile/*",
                             "/creation", "/messages/*", "/contacts/*", "/search/*").authenticated()
                     .requestMatchers("/register", "/login", "/**").permitAll()

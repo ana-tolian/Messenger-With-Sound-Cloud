@@ -1,8 +1,8 @@
 package com.example.site.data;
 
 import com.example.site.entity.Playlist;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.example.site.entity.Soundtrack;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,13 +23,6 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
     }
 
 
-    @Override
-    public List<Soundtrack> findAll() {
-        return jdbcTemplate.query(
-                "SELECT id, name, artist, trackHref, duration, playlistId, imgHref FROM Soundtrack",
-                this::mapRowToSoundtrack);
-    }
-
     public List<Playlist> findAllPlaylists () {
         List<Playlist> playlists = findAllPlaylist();
 
@@ -47,6 +40,13 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
         return jdbcTemplate.query(
                 "SELECT id, name, imgHref, userOwnerId FROM Playlist",
                 this::mapRowToPlaylist);
+    }
+
+    @Override
+    public List<Soundtrack> findAll() {
+        return jdbcTemplate.query(
+                "SELECT id, name, artist, trackHref, duration, playlistId, imgHref FROM Soundtrack",
+                this::mapRowToSoundtrack);
     }
 
     @Override

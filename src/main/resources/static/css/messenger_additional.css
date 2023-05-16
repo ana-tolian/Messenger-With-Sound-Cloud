@@ -40,7 +40,6 @@
 
 .search_button {
     height: 3.4rem;
-    min-width: 30%;
     background-color: var(--border-color-me);
     color: white;
     font-size: 1rem;

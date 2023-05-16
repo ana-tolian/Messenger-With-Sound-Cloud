@@ -1,15 +1,4 @@
 :root {
-    --album-info-font_color-mu: #808080;
-    --soundtrack-bg-hover-color-mu: #f3e9ff;
-    --body-bg-color-mu: #7e639f;
-    --button-a-link-hover-color-mu: #5e3274;
-    --header-bg-color-mu: #4a2b59;
-    --upper-panel-bg-color-mu: #3e1e4e;
-    --footer-bg-color-mu: #333636;
-    --a-link-color: #ff007b;
-    --success-font-color: #34d06f;
-
-
     --a-link-visited-color-me: #b42b2b;
 
     --border-color-me: #f56060;
@@ -28,8 +17,17 @@
 
     --text-input-focus-bg-color-me: #fff6c4;
     --hr-color-me: #c2c2c2;
-    --content-bg-color-me: #f4f7f9;
-    --body-bg-color-me: #dfe3e6;
-    /*--footer-bg-color-me: #867575;*/
-    --footer-bg-color-me: var(--footer-bg-color-mu);
+    --content-bg-color-me: #ffffff;
+    --body-bg-color-me: #ecf0f3;
+    --footer-bg-color-me: #333636;
+
+    --album-info-font_color-mu: #808080;
+    --soundtrack-bg-hover-color-mu: var(--user-bubble-bg-color-me);
+    --body-bg-color-mu: var(--body-bg-color-me);
+    --button-a-link-hover-color-mu: var(--button-hover-color-me);
+    --header-bg-color-mu: var(--border-color-2-me);
+    --upper-panel-bg-color-mu: var(--a-link-visited-color-me);
+    --footer-bg-color-mu: var(--footer-bg-color-me);
+    --a-link-color: white;
+    --success-font-color: #34d06f;
 }
