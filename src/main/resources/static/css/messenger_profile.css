@@ -127,7 +127,7 @@
 }
 
 .main {
-	height: 90vh;
+	min-height: 90vh;
 	display:flex;
 	flex-direction: row;
 	flex-grow:1;

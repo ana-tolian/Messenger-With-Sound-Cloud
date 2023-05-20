@@ -48,6 +48,7 @@ a_upper_panel:hover {
 
 .soundtrack_main {
     min-height: 70vh;
+    height: fit-content;
     min-width: 50vw;
     background-color: white;
     padding: 2% 5% 5%;

@@ -1,6 +1,8 @@
 package com.example.site.security;
 
+import jakarta.servlet.MultipartConfigElement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.util.unit.DataSize;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
@@ -24,43 +27,21 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-    @Bean(name = "multipartresolver")
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        factory.setMaxFileSize(DataSize.ofMegabytes(500));
+        factory.setMaxRequestSize(DataSize.ofMegabytes(500));
+        factory.setLocation("/tmp");
+        return factory.createMultipartConfig();
+    }
+
+
+    @Bean(name = "filterMultipartResolver ")
     public MultipartResolver multipartResolver() {
         StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
         return multipartResolver;
     }
-//        return new MultipartResolver() {
-//            @Override
-//            public boolean isMultipart(HttpServletRequest request) {
-//                System.out.println("========================================== Multipart true");
-//                System.out.println("========================================== ===============");
-//                Iterator<String> iterator = request.getHeaderNames().asIterator();
-//                for (Iterator<String> it = iterator; it.hasNext(); ) {
-//                    String s = it.next();
-//                    System.out.println(s + " : " + request.getHeader(s));
-//
-//                }
-//
-//                return  request.isUserInRole("USER") &&
-//                        request.getMethod().equals("POST") &&
-//                        request.getHeader("Content-Type") != null &&
-//                        request.getHeader("Content-Type").contains("multipart");
-//            }
-//
-//            @Override
-//            public MultipartHttpServletRequest resolveMultipart(HttpServletRequest request) throws MultipartException {
-//                MultipartRequest multipartRequest = (MultipartRequest) request;
-//                System.out.println("********Multipart");
-//                return (MultipartHttpServletRequest) request;
-//            }
-
-//            @Override
-//            public void cleanupMultipart(MultipartHttpServletRequest request) {
-////                request.
-//                System.out.println("Multipart clean");
-//            }
-//        };
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder () {
@@ -114,6 +95,4 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
 //        return new InMemoryUserDetailsManager(userDetailsList);
 //    }
 //
-
-
 }
