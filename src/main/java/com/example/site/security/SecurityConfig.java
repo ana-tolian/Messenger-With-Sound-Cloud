@@ -10,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+
 
 @Configuration
 public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
@@ -21,9 +24,42 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-//    @Bean(name = "filterMultipartResolver")
-//    public MultipartResolver multipartResolver() {
-//        return new CommonsMultipartResolver();
+    @Bean(name = "multipartresolver")
+    public MultipartResolver multipartResolver() {
+        StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
+        return multipartResolver;
+    }
+//        return new MultipartResolver() {
+//            @Override
+//            public boolean isMultipart(HttpServletRequest request) {
+//                System.out.println("========================================== Multipart true");
+//                System.out.println("========================================== ===============");
+//                Iterator<String> iterator = request.getHeaderNames().asIterator();
+//                for (Iterator<String> it = iterator; it.hasNext(); ) {
+//                    String s = it.next();
+//                    System.out.println(s + " : " + request.getHeader(s));
+//
+//                }
+//
+//                return  request.isUserInRole("USER") &&
+//                        request.getMethod().equals("POST") &&
+//                        request.getHeader("Content-Type") != null &&
+//                        request.getHeader("Content-Type").contains("multipart");
+//            }
+//
+//            @Override
+//            public MultipartHttpServletRequest resolveMultipart(HttpServletRequest request) throws MultipartException {
+//                MultipartRequest multipartRequest = (MultipartRequest) request;
+//                System.out.println("********Multipart");
+//                return (MultipartHttpServletRequest) request;
+//            }
+
+//            @Override
+//            public void cleanupMultipart(MultipartHttpServletRequest request) {
+////                request.
+//                System.out.println("Multipart clean");
+//            }
+//        };
 //    }
 
     @Bean

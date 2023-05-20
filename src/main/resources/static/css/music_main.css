@@ -47,7 +47,8 @@ a_upper_panel:hover {
 }
 
 .soundtrack_main {
-    min-height: 80vh;
+    min-height: 70vh;
+    min-width: 50vw;
     background-color: white;
     padding: 2% 5% 5%;
     align-content: center;

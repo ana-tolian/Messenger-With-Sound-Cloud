@@ -7,7 +7,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.awt.event.MouseWheelEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,7 +60,7 @@ public class JdbcDialogRepository implements DialogRepository {
                 "SELECT id, title, user1Id, user2Id " +
                         "FROM Dialog " +
                         "WHERE user1Id=" + user.getId() + " OR user2Id=" + user.getId() + ";",
-                (row, rowNum) -> mapRowToDialog(row, rowNum));
+                this::mapRowToDialog);
     }
 
     @Override
@@ -72,7 +71,7 @@ public class JdbcDialogRepository implements DialogRepository {
                         "WHERE ((user1Id=" + user.getId() + " " +
                              "OR user2Id=" + user.getId() + ") " +
                              "AND (lower(title) LIKE '%" + title + "%'));",
-                                (row, rowNum) -> mapRowToDialog(row, rowNum));
+                this::mapRowToDialog);
     }
 
     @Override
