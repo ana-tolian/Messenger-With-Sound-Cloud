@@ -2,7 +2,7 @@
 function openAlbum (tempId) {
     let id = getId(tempId);
     let xhr = new XMLHttpRequest();
-    let url = "http://localhost:8080/home/playlist?id=" + id;
+    let url = "http://localhost:8080/soundtracks/playlist?id=" + id;
 
     xhr.open("GET", url);
     xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());

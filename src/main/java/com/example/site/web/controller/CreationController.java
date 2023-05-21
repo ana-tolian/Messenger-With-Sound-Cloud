@@ -25,6 +25,7 @@ public class CreationController {
         User user = (User) authentication.getPrincipal();
         model.addAttribute("imgHref", user.getImgHref());
         model.addAttribute("username", user.getUsername());
+        model.addAttribute("playlistDefaultHref", "/images/noimage.png");
         model.addAttribute("soundtracks", musicService.loadAllSoundtracks());
         return "create-album";
     }

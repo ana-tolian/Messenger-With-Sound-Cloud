@@ -3,7 +3,7 @@
                 xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <link rel="icon" th:href="@{image/favicon.png}">
+        <link rel="icon" th:href="@{/images/favicon.png}">
         <link rel="stylesheet" th:href="@{/css/const.css}">
         <link rel="stylesheet" th:href="@{/css/messenger_main.css}">
         <link rel="stylesheet" th:href="@{/css/messenger_profile.css}">
@@ -56,7 +56,7 @@
                 <hr class="hr_margin_bottom">
 
                 <div class="albumPanel">
-                    <div class="albumImg"> <img th:src="@{|~'/images/noimage.png'|}"/> </div>
+                    <div class="albumImg"> <img th:src="@{|~${playlistDefaultHref}|}"/> </div>
 
                     <div class="albumTextContainer">
                         <div id="alb_name" class="albumName"> </div>
