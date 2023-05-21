@@ -175,8 +175,8 @@ let initialisation = window.setInterval(init, 1000);
     }
 
 
-    function play(event) {
-        let id = getId(event.target.id);
+    function play(tempId) {
+        let id = getId(tempId);
         let soundtrack = playlist.list[id - 1];
         let isJustStopped = 0;
         let prevId = playlist.getCurrent().id;
@@ -196,17 +196,17 @@ let initialisation = window.setInterval(init, 1000);
 
     }
 
-    function mute(event) {
-        let id = getId(event.target.id);
+    function mute(tempId) {
+        let id = getId(tempId);
         let soundtrack = playlist.list[id - 1];
 
         soundtrack.switchMute();
     }
 
-    function move (event) {
-        let id = getId(event.target.id);
+    function move (tempId) {
+        let id = getId(tempId);
         let rect = document.getElementById('seek_' + id).getBoundingClientRect();
-        let seek = (event.clientX - rect.x) / rect.width;
+        let seek = (document.getElementById("tempId").clientX - rect.x) / rect.width;
 
         playlist.list[id - 1].currentTime = playlist.list[id - 1].duration * seek;
         console.log("change " + playlist.list[id - 1].duration * seek);

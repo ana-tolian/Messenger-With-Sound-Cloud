@@ -26,7 +26,7 @@
     height: 34px;
 
     background-color: white;
-    background-image: url(../images/sprite.png);
+    background-image: url(../image/sprite.png);
     background-repeat: no-repeat;
     float: left;
     margin-right: 5px;
@@ -76,5 +76,5 @@
 .progress {
     background-color: var(--header-bg-color-mu);
     height: 100%;
-    width: 0%;
+    width: 0;
 }

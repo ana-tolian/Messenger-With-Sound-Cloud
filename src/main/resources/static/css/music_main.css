@@ -18,13 +18,24 @@ a_upper_panel:hover {
     font-size: 1.5rem;
 }
 
-.button a:hover {
+.a_button {
+    background: 0;
+    border: none;
+    font-family: "Calibri Light";
+    font-weight: bolder;
+}
+
+.a_button:hover, .button a:hover {
     background-color: var(--button-a-link-hover-color-mu);
 }
 
+
+
+
 .a-style {
     color: var(--border-color-2-me);
-    padding: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 .upperPanel {

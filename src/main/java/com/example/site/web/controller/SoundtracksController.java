@@ -8,16 +8,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping("/home")
-public class HomeController {
+@RequestMapping("/soundtracks")
+public class SoundtracksController {
 
     private final MusicService musicService;
 
     @Autowired
-    public HomeController (MusicService musicService) {
+    public SoundtracksController(MusicService musicService) {
         this.musicService = musicService;
     }
 
@@ -26,8 +27,21 @@ public class HomeController {
         User user = (User) authentication.getPrincipal();
         model.addAttribute("imgHref", user.getImgHref());
         model.addAttribute("username", user.getUsername());
+        model.addAttribute("playlist", false);
         model.addAttribute("soundtracks", musicService.loadAllSoundtracks());
-        return "home";
+        return "soundtracks";
+    }
+
+    @GetMapping("/playlist")
+    public String getAlbum (@RequestParam(value = "id", required = true) Integer id,
+                            Authentication authentication, Model model) {
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("imgHref", user.getImgHref());
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("playlist", true);
+        model.addAttribute("soundtracks", musicService.loadSoundtrack(id));
+
+        return "soundtracks";
     }
 
 }

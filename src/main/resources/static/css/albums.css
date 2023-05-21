@@ -16,19 +16,21 @@
 }
 
 .albumTextContainer {
-    margin: 3rem;
     display: flex;
     flex-direction: column;
-    justify-content: left;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    margin-left: 1%;
 }
 
 .albumName {
-    font-size: 125%;
-    margin: 2px;
+    font-size: 150%;
+    margin: 2px 2px 2px 2px;
 }
 
 .albumInfo {
-    margin: 2px;
+    margin: 2px 2px 2px 2px;
     color: var(--album-info-font_color-mu);
 }
 

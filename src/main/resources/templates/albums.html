@@ -5,12 +5,17 @@
     <meta charset="UTF-8">
     <meta id="csrf" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <link rel="icon" th:href="@{/images/favicon.png}">
+    <link rel="icon" th:href="@{image/favicon.png}">
     <link rel="stylesheet" th:href="@{/css/const.css}">
     <link rel="stylesheet" th:href="@{/css/messenger_main.css}">
     <link rel="stylesheet" th:href="@{/css/messenger_profile.css}">
+    <link rel="stylesheet" th:href="@{/css/albums.css}">
     <link rel="stylesheet" th:href="@{/css/music_main.css}">
-    <script th:src="@{/js/album.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/soundtrack.css}">
+    <script type="text/javascript" th:src="@{/js/menuHandler.js}"></script>
+    <script type="text/javascript" th:src="@{/js/buttonHandler.js}"></script>
+    <script type="text/javascript" th:src="@{/js/album.js}"></script>
+    <script type="text/javascript" th:src="@{/js/funcs.js}"></script>
     <title>Альбомы</title>
 </head>
 
@@ -30,7 +35,7 @@
                 <hr class="hr_main">
                 <li> <a class="sidebar_link" th:href="@{/contacts}"> Контакты </a> </li>
                 <hr class="hr_main">
-                <li> <a class="sidebar_link" th:href="@{/home}"> Музыка </a> </li>
+                <li> <a class="sidebar_link" th:href="@{/soundtracks}"> Музыка </a> </li>
                 <hr class="hr_main">
                 <li> <a class="sidebar_link" onclick="logout()" th:href="@{/login}"> Выход </a> </li>
                 <hr class="hr_main">
@@ -40,30 +45,30 @@
         <div class="content soundtrack_main" id="main">
             <div class="upperPanel">
                 <div class="buttons">
-                    <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/home}"> Главная </a></div>
+                    <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/soundtracks}"> Главная </a></div>
                     <div class="button a-style"> | </div>
                     <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/albums}"> Альбомы </a> </div>
                     <div class="button a-style"> | </div>
                     <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/load}"> Загрузить </a> </div>
                     <div class="button a-style"> | </div>
-                    <div class="button a-style"> <a class="a_upper_panel a-style" href=""> Создать </a> </div>
+                    <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/creation}"> Создать </a> </div>
                 </div>
             </div>
 
             <hr class="hr_margin_bottom">
-            <h2> Альбомы </h2>
+            <h4 class="bolder"> Основной плейлист </h4>
 
             <div th:if="${playlists.isEmpty()}">
-                <h3> Вы не создали ни одного альбома</h3>
+                <h5> Вы не создали ни одного альбома</h5>
             </div>
 
-            <div class="albumPanel" th:each="playlist : ${playlists}" th:id="${playlist.getId()}" onclick="openAlbum(event)">
-                <div class="albumImg"> <img th:src="${playlist.getImgHref()}"/> </div>
+            <div class="albumPanel" th:each="playlist : ${playlists}" th:id="${'playlist_' + playlist.getId()}" onclick="openAlbum(this.id)">
+                    <div class="albumImg"> <img th:src="@{|~${playlist.getImgHref()}|}"/> </div>
 
-                <div class="albumTextContainer">
-                    <div class="albumName" th:text="${playlist.getName()}"> </div>
-                   <div class="albumInfo" th:text="${playlist.getCount()} + ' треков'" > </div>
-                </div>
+                    <div class="albumTextContainer">
+                        <div class="albumName" th:text="${playlist.getName()}"> </div>
+                        <div class="albumInfo" th:text="${playlist.getCount()} + ' треков'" > </div>
+                    </div>
             </div>
 
         </div>

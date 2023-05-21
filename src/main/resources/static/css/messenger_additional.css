@@ -23,6 +23,8 @@
 .create_chat_button_container {
     min-width: fit-content;
     margin-left: 3px;
+    display: flex;
+    align-items: center;
 }
 
 .autofit_width {
@@ -37,6 +39,11 @@
      font-size: 1rem;
      margin-left: 3px;
  }
+
+.shorter {
+    min-width: 20%;
+    margin-right: 2%;
+}
 
 .search_button {
     height: 3.4rem;
@@ -60,7 +67,7 @@
 }
 
 .user_line_container {
-    min-width: 75%;
+    min-width: 70%;
     min-height: 100%;
     display: flex;
     flex-direction: row;
@@ -86,7 +93,7 @@
     border-style:solid;
     border-width:0.2rem;
 
-    min-width: 40vw;
+    min-width: 45vw;
     min-height: 40vh;
 
     display: flex;
@@ -110,4 +117,9 @@
 
 .button_pane_z {
     min-height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2% 2%;
 }
+

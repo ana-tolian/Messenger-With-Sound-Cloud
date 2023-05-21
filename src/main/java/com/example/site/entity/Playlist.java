@@ -40,6 +40,10 @@ public class Playlist {
         return imgHref;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public int getCount() {
         return count;
     }

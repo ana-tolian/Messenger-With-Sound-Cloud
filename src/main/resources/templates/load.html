@@ -5,11 +5,16 @@
     <meta charset="UTF-8">
     <meta id="csrf" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <link rel="icon" th:href="@{/images/favicon.png}">
+    <link rel="icon" th:href="@{image/favicon.png}">
     <link rel="stylesheet" th:href="@{/css/const.css}">
     <link rel="stylesheet" th:href="@{/css/messenger_main.css}">
     <link rel="stylesheet" th:href="@{/css/messenger_profile.css}">
     <link rel="stylesheet" th:href="@{/css/music_main.css}">
+    <link rel="stylesheet" th:href="@{/css/soundtrack.css}">
+    <link rel="stylesheet" th:href="@{/css/messenger_additional.css}">
+    <script type="text/javascript" th:src="@{/js/menuHandler.js}"></script>
+    <script type="text/javascript" th:src="@{/js/buttonHandler.js}"></script>
+    <script type="text/javascript" th:src="@{/js/funcs.js}"></script>
     <title>Загрузка</title>
 </head>
 <div class="all">
@@ -28,7 +33,7 @@
                 <hr class="hr_main">
                 <li> <a class="sidebar_link" th:href="@{/contacts}"> Контакты </a> </li>
                 <hr class="hr_main">
-                <li> <a class="sidebar_link" th:href="@{/home}"> Музыка </a> </li>
+                <li> <a class="sidebar_link" th:href="@{/soundtracks}"> Музыка </a> </li>
                 <hr class="hr_main">
                 <li> <a class="sidebar_link" onclick="logout()" th:href="@{/login}"> Выход </a> </li>
                 <hr class="hr_main">
@@ -38,13 +43,13 @@
         <div class="content soundtrack_main" id="main">
             <div class="upperPanel">
                 <div class="buttons">
-                    <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/home}"> Главная </a></div>
+                    <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/soundtracks}"> Главная </a></div>
                     <div class="button a-style"> | </div>
                     <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/albums}"> Альбомы </a> </div>
                     <div class="button a-style"> | </div>
                     <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/load}"> Загрузить </a> </div>
                     <div class="button a-style"> | </div>
-                    <div class="button a-style"> <a class="a_upper_panel a-style" href=""> Создать </a> </div>
+                    <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/creation}"> Создать </a> </div>
                 </div>
             </div>
 
@@ -52,11 +57,13 @@
 
             <h2> Загрузить музыку </h2>
 
-            <form method="post" th:action="@{/load(${_csrf.parameterName}=${_csrf.token})}" enctype="multipart/form-data">
-<!--                -->
+            <form method="post"  enctype="multipart/form-data">
                 <p style="font-size: 1.2rem;"> Загрузите ваши треки на сервер</p>
-                <p> <input type="file" name="soundtrack" multiple accept="audio/*">
-                    <input type="submit" value="Загрузить"></p>
+                <p>
+                    <input type="file" name="soundtrack" multiple accept="audio/*">
+                    <input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden>
+                    <input type="submit" value="Загрузить">
+                </p>
             </form>
 
             <br>

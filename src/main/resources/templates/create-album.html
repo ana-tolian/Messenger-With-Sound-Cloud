@@ -1,36 +1,95 @@
 <!DOCTYPE HTML>
 <html lang="ru" xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" th:href="@{/images/favicon.png}">
-    <link rel="stylesheet" th:href="@{/css/const.css}">
-    <link rel="stylesheet" th:href="@{/css/music_main.css}">
-    <title>creation</title>
-</head>
-    <div class="whole">
-        <div class="header">
-            <div class="logo">  </div>
-        </div>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" th:href="@{image/favicon.png}">
+        <link rel="stylesheet" th:href="@{/css/const.css}">
+        <link rel="stylesheet" th:href="@{/css/messenger_main.css}">
+        <link rel="stylesheet" th:href="@{/css/messenger_profile.css}">
+        <link rel="stylesheet" th:href="@{/css/music_main.css}">
+        <link rel="stylesheet" th:href="@{/css/soundtrack.css}">
+        <link rel="stylesheet" th:href="@{/css/messenger_additional.css}">
+        <script type="text/javascript" th:src="@{/js/menuHandler.js}"></script>
+        <script type="text/javascript" th:src="@{/js/buttonHandler.js}"></script>
+        <script type="text/javascript" th:src="@{/js/album.js}"></script>
+        <script type="text/javascript" th:src="@{/js/funcs.js}"></script>
+        <title>creation</title>
+    </head>
 
-        <div class="upperPanel">
-            <div class="button"> <a th:href="@{/}"> Главная </a></div>
-            <div class="button"> <a th:href="@{/albums}"> Альбомы </a> </div>
-            <div class="button"> <a th:href="@{/load}"> Загрузить </a> </div>
-            <div class="button"> <a th:href="@{/creation}"> Создать </a> </div>
-        </div>
+    <div class="all">
+        <header> <...> </header>
 
         <div class="main">
-            <h2> Создать новый альбом </h2>
+            <div class="sidebar">
+
+                <div id="profilePhoto" class="profile_photo_panel">
+                    <img class="profile_photo" th:src="${imgHref}">
+                </div>
+
+                <ul>
+                    <hr class="hr_main">
+                    <li> <a class="sidebar_link" onclick="chats()" th:href="@{/profile}"> Чаты </a> </li>
+                    <hr class="hr_main">
+                    <li> <a class="sidebar_link" th:href="@{/contacts}"> Контакты </a> </li>
+                    <hr class="hr_main">
+                    <li> <a class="sidebar_link" th:href="@{/soundtracks}"> Музыка </a> </li>
+                    <hr class="hr_main">
+                    <li> <a class="sidebar_link" onclick="logout()" th:href="@{/login}"> Выход </a> </li>
+                    <hr class="hr_main">
+                </ul>
+            </div>
+
+            <div class="content soundtrack_main" id="main">
+                <div class="upperPanel">
+                    <div class="buttons">
+                        <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/soundtracks}"> Главная </a></div>
+                        <div class="button a-style"> | </div>
+                        <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/albums}"> Альбомы </a> </div>
+                        <div class="button a-style"> | </div>
+                        <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/load}"> Загрузить </a> </div>
+                        <div class="button a-style"> | </div>
+                        <div class="button a-style"> <a class="a_upper_panel a-style" th:href="@{/creation}"> Создать </a> </div>
+                    </div>
+                </div>
+
+                <hr class="hr_margin_bottom">
+
+                <div class="albumPanel">
+                    <div class="albumImg"> <img th:src="@{|~'/images/noimage.png'|}"/> </div>
+
+                    <div class="albumTextContainer">
+                        <div id="alb_name" class="albumName"> </div>
+                        <div  id="alb_info" class="albumInfo"> </div>
+                    </div>
+
+                    <div class="button_pane_z">
+                        <input class="create_chat_button bhover shorter" type="button" onclick="createPlaylist()" value="Создать">
+                        <input class="create_chat_button bhover shorter" type="button" onclick="cancelCreation()" value="Отмена">
+                    </div>
+
+                </div>
+
+                <div th:if="${soundtracks.isEmpty()}"> Вы не добавили ни одного трека. </div>
+
+                <div class="soundtrack_panel" th:each="soundtrack : ${soundtracks}" th:if="${!soundtracks.isEmpty()}">
+                    <div class="sndImg"> <img th:src="${soundtrack.getImgHref()}"> </div>
+
+                    <div class="snd_text_container">
+                        <div class="snd_name" th:text="${soundtrack.getName()}"> </div>
+                        <div class="snd_artist" th:text="${soundtrack.getArtist()}"> </div>
+                    </div>
+                    <div class="create_chat_button_container">
+                        <input class="create_chat_button bhover" th:id="'track_' + ${soundtrack.getId()}" type="button" value="Выбрать" onclick="addSoundtrackIntoStack(this.id)">
+                    </div>
+                </div>
+
+            </div>
 
         </div>
 
-        <div class="footer">
-            <br>
-            <br>
-            <br>
-            <br>
-        </div>
+
+            <footer> <span> <a class="a_white" href="">  </a> | <a class="a_white"  href="">  </a> | <a class="a_white"  href="">  </a> </span> </footer>
 
     </div>
 </html>

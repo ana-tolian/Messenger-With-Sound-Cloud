@@ -28,9 +28,9 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
 
         String sql = "SELECT count(*) AS numberOfSoundtracks FROM Soundtrack INNER JOIN Playlist ON Soundtrack.playlistId = Playlist.id WHERE Playlist.id = ?";
 
-        for (Playlist plst : playlists) {
-            List<Integer> d = jdbcTemplate.query(sql, new Integer[] {plst.getId()}, this::mapRowToInteger);
-            plst.setCount(d.get(0));
+        for (Playlist playlist : playlists) {
+            List<Integer> d = jdbcTemplate.query(sql, new Integer[] {playlist.getId()}, this::mapRowToInteger);
+            playlist.setCount(d.get(0));
         }
         return playlists;
     }
@@ -42,6 +42,12 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
                 this::mapRowToPlaylist);
     }
 
+    public Playlist savePlaylist (Playlist playlist) {
+        jdbcTemplate.update("INSERT INTO playlist(name, imgHref, userOwnerId) VALUE (?,?,?)",
+                playlist.getName(), playlist.getImgHref(), playlist.getUser().getId());
+        return playlist;
+    }
+
     @Override
     public List<Soundtrack> findAll() {
         return jdbcTemplate.query(
@@ -50,13 +56,10 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
     }
 
     @Override
-    public Optional<Soundtrack> findByPlaylistId(String id) {
-        List<Soundtrack> soundtrackList = jdbcTemplate.query(
-                "SELECT name, artist, trackHref, duration, playlistId, imgHref FROM Soundtrack WHERE playlistId=?",
+    public List<Soundtrack> findByPlaylistId(int id) {
+       return jdbcTemplate.query(
+                "SELECT id, name, artist, trackHref, duration, playlistId, imgHref FROM Soundtrack WHERE playlistId=?",
                 this::mapRowToSoundtrack, id);
-        if (soundtrackList.isEmpty())
-            return Optional.empty();
-        return Optional.of(soundtrackList.get(0));
     }
 
     @Override

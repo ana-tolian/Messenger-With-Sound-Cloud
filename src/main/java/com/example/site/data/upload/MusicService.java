@@ -6,6 +6,7 @@ import com.example.site.data.JdbcSoundtrackRepository;
 import com.example.site.entity.User;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.MultimediaInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class MusicService {
     public static String uploadDirectory = "/uploads";
     private final JdbcSoundtrackRepository soundtrackRepository;
 
-
+    @Autowired
     public MusicService (JdbcSoundtrackRepository soundtrackRepository) {
         this.soundtrackRepository = soundtrackRepository;
     }
@@ -59,7 +60,11 @@ public class MusicService {
         }
     }
 
-    public List<Soundtrack> loadAllSoundtracks() {
+    public List<Soundtrack> loadSoundtrack (int id) {
+        return soundtrackRepository.findByPlaylistId(id);
+    }
+
+    public List<Soundtrack> loadAllSoundtracks () {
         return soundtrackRepository.findAll();
     }
 

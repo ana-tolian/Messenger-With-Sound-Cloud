@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface SoundtrackRepository extends Repository<Soundtrack> {
 
     List<Soundtrack> findAll();
-    Optional<Soundtrack> findByPlaylistId(String id);
+    List<Soundtrack> findByPlaylistId(int id);
 }
