@@ -203,10 +203,10 @@ let initialisation = window.setInterval(init, 1000);
         soundtrack.switchMute();
     }
 
-    function move (tempId) {
+    function move (event, tempId) {
         let id = getId(tempId);
         let rect = document.getElementById('seek_' + id).getBoundingClientRect();
-        let seek = (document.getElementById("tempId").clientX - rect.x) / rect.width;
+        let seek = (event.clientX - rect.x) / rect.width;
 
         playlist.list[id - 1].currentTime = playlist.list[id - 1].duration * seek;
         console.log("change " + playlist.list[id - 1].duration * seek);

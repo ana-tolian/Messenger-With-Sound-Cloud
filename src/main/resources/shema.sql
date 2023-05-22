@@ -1,5 +1,14 @@
 USE `root`.`music`;
 
+CREATE TABLE IF NOT EXISTS User (
+    id INT AUTO_INCREMENT NOT NULL,
+    username VARCHAR(20) NOT NULL,
+    password VARCHAR(2048) NOT NULL,
+    description VARCHAR(100),
+    imgHref VARCHAR(100) DEFAULT "/images/usernoimage.jpeg",
+    PRIMARY KEY(id)
+);
+
 CREATE TABLE IF NOT EXISTS Playlist (
     id INT AUTO_INCREMENT NOT NULL,
     name VARCHAR(50) NOT NULL,
@@ -27,15 +36,6 @@ CREATE TABLE IF NOT EXISTS SoundList (
      PRIMARY KEY(id),
      FOREIGN KEY(playlistId) REFERENCES Playlist(id),
      FOREIGN KEY(soundtrackId) REFERENCES Soundtrack(id)
-);
-
-CREATE TABLE IF NOT EXISTS User (
-    id INT AUTO_INCREMENT NOT NULL,
-    username VARCHAR(20) NOT NULL,
-    password VARCHAR(2048) NOT NULL,
-    description VARCHAR(100),
-    imgHref VARCHAR(100) DEFAULT "/images/usernoimage.jpeg",
-    PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS Dialog (

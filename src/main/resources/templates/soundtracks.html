@@ -82,12 +82,12 @@
                             <source th:src="@{|~${soundtrack.trackHref}|}" type="audio/mpeg">
                         </audio>
 
-                        <div class="controls" ondragover="move(this.id)">
+                        <div class="controls" ondragover="move(event, this.id)">
                             <button class="buttonp" th:id="'play_' + ${soundtrack.getId()}" style="background-position: 6px 5px" onclick="play(this.id)" type="button"> </button>
                             <button class="buttonp" th:id="'mute_' + ${soundtrack.getId()}" style="background-position: -58px 5px" onclick="mute(this.id)" type="button"> </button>
 
-                            <div class="wrap" ondragover="move(this.id)">
-                                <div class="seekbar" th:id="'seek_' + ${soundtrack.getId()}" onclick="move(this.id)">
+                            <div class="wrap" ondragover="move(event, this.id)">
+                                <div class="seekbar" th:id="'seek_' + ${soundtrack.getId()}" onclick="move(event, this.id)">
                                     <div class="progress" th:id="'progress_' + ${soundtrack.getId()}"> </div>
                                 </div>
 
