@@ -1,5 +1,7 @@
 package com.example.site.data.upload;
 
+import com.example.site.data.PlaylistRepository;
+import com.example.site.data.SoundtrackRepository;
 import com.example.site.entity.Playlist;
 import com.example.site.entity.Soundtrack;
 import com.example.site.data.JdbcSoundtrackRepository;
@@ -25,11 +27,13 @@ import java.util.List;
 public class MusicService {
 
     public static String uploadDirectory = "/uploads";
-    private final JdbcSoundtrackRepository soundtrackRepository;
+    private final SoundtrackRepository soundtrackRepository;
+    private final PlaylistRepository playlistRepository;
 
     @Autowired
-    public MusicService (JdbcSoundtrackRepository soundtrackRepository) {
+    public MusicService (SoundtrackRepository soundtrackRepository, PlaylistRepository playlistRepository) {
         this.soundtrackRepository = soundtrackRepository;
+        this.playlistRepository = playlistRepository;
     }
 
     public void store(MultipartFile [] files, List<String> list, User user) {
@@ -46,13 +50,16 @@ public class MusicService {
                 String soundtrackName = prepareToSave(fileNameAndPath.getFileName().toString());
                 int duration = getAudioDuration(new File(fileNameAndPath.toUri()));
 
-                soundtrackRepository.save(new Soundtrack(
+                Soundtrack soundtrack = soundtrackRepository.save(new Soundtrack(
                         getName(soundtrackName),
                         getArtist(soundtrackName),
                         uploadDirectory + "/" + fileNameAndPath.getFileName().toString(),
                         duration,
-                        null,
                         null));
+                Playlist playlist = playlistRepository.getMainPlaylist(user);
+
+                playlistRepository.addToPlaylist(playlist, soundtrack);
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -60,13 +67,6 @@ public class MusicService {
         }
     }
 
-    public List<Soundtrack> loadSoundtrack (int id) {
-        return soundtrackRepository.findByPlaylistId(id);
-    }
-
-    public List<Soundtrack> loadAllSoundtracks () {
-        return soundtrackRepository.findAll();
-    }
 
     private String prepareToSave (String filename) {
         filename = filename.substring(0, filename.lastIndexOf('.'));
@@ -119,18 +119,11 @@ public class MusicService {
         return fileName.substring(0, fileName.lastIndexOf('–'));
     }
 
-    public List<Playlist> getAllPlaylists () {
-        return soundtrackRepository.findAllPlaylists();
-    }
-
-    public Path load(String filename) {
-        return null;
-    }
-
     public long getFileLength (String filename) {
         File file = new File("/uploads/" + filename);
         return file.length();
     }
+
     public Resource loadAsResource(String filename) {
         File file = new File("/uploads/" + filename);
 
@@ -143,9 +136,5 @@ public class MusicService {
         }
 
         return resource;
-    }
-
-    public void deleteAll() {
-
     }
 }

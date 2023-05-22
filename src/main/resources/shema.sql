@@ -15,10 +15,18 @@ CREATE TABLE IF NOT EXISTS Soundtrack (
     artist VARCHAR(50) NOT NULL,
     trackHref VARCHAR(100) NOT NULL,
     duration INT NOT NULL,
-    playlistId INT,
     imgHref VARCHAR(100) DEFAULT "/images/noimage.png",
     PRIMARY KEY(id),
     FOREIGN KEY(playlistId) REFERENCES Playlist(id)
+);
+
+CREATE TABLE IF NOT EXISTS SoundList (
+     id INT AUTO_INCREMENT NOT NULL,
+     playlistId INT NOT NULL,
+     soundtrackId INT NOT NULL,
+     PRIMARY KEY(id),
+     FOREIGN KEY(playlistId) REFERENCES Playlist(id),
+     FOREIGN KEY(soundtrackId) REFERENCES Soundtrack(id)
 );
 
 CREATE TABLE IF NOT EXISTS User (

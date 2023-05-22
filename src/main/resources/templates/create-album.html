@@ -3,6 +3,8 @@
                 xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
+        <meta id="csrf" name="_csrf" th:content="${_csrf.token}"/>
+        <meta id="csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
         <link rel="icon" th:href="@{/images/favicon.png}">
         <link rel="stylesheet" th:href="@{/css/const.css}">
         <link rel="stylesheet" th:href="@{/css/messenger_main.css}">
@@ -10,6 +12,7 @@
         <link rel="stylesheet" th:href="@{/css/music_main.css}">
         <link rel="stylesheet" th:href="@{/css/soundtrack.css}">
         <link rel="stylesheet" th:href="@{/css/messenger_additional.css}">
+        <link rel="stylesheet" th:href="@{/css/albums.css}">
         <script type="text/javascript" th:src="@{/js/menuHandler.js}"></script>
         <script type="text/javascript" th:src="@{/js/buttonHandler.js}"></script>
         <script type="text/javascript" th:src="@{/js/album.js}"></script>
@@ -55,12 +58,16 @@
 
                 <hr class="hr_margin_bottom">
 
-                <div class="albumPanel">
-                    <div class="albumImg"> <img th:src="@{|~${playlistDefaultHref}|}"/> </div>
+                <div class="albumPanel album_main">
+                    <div class="container">
+                        <div class="albumImg"> <img th:src="@{|~${playlistDefaultHref}|}"/> </div>
 
-                    <div class="albumTextContainer">
-                        <div id="alb_name" class="albumName"> </div>
-                        <div  id="alb_info" class="albumInfo"> </div>
+                        <div class="albumTextContainer">
+                            <div id="alb_name" class="albumName">
+                                <input id="album_name" class="album_name_input" type="text" placeholder="Название альбома" required>
+                            </div>
+                            <div  id="alb_info" class="albumInfo"> 0 треков </div>
+                        </div>
                     </div>
 
                     <div class="button_pane_z">

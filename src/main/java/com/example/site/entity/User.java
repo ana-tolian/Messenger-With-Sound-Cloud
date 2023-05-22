@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class User implements UserDetails {
 
-    private final int id;
+    private int id;
     private final String username;
     private final String password;
     private final String description;
@@ -30,6 +30,10 @@ public class User implements UserDetails {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {

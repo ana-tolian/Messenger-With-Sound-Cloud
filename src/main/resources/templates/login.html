@@ -7,27 +7,33 @@
 		<link rel="icon" th:href="@{/images/favicon.png}">
 		<link rel="stylesheet" th:href="@{/css/const.css}">
 		<link rel="stylesheet" th:href="@{/css/messenger_main.css}">
+		<link rel="stylesheet" th:href="@{/css/messenger_profile.css}">
 	</head>
 
 	<body>
-		<header> <...> </header>
+		<div class="all">
+
+			<header> <...> </header>
+
+			<div class="main">
+				<div class="login">
+					<h3 class="head3log"> Авторизация </h3>
+
+					<form class="input_form" th:action="@{/login}"  method="post">
+						<span th:if="${param.error}"> <h5>Неправильное имя пользователя или пароль</h5> </span>
+
+						<input class="input_field" type="text" required name="username" placeholder="Логин" />
+						<input class="input_field" type="password" required name="password" placeholder="Пароль" />
+						<button>Вход</button>
+					</form>
+
+					<a class="a_red" th:href="@{/register}">Регистрация</a>
+
+				</div>
+			</div>
 		
-		<div class="login">
-			<h3 class="head3log"> Авторизация </h3>
-
-			<form class="input_form" th:action="@{/login}"  method="post">
-				<span th:if="${param.error}"> <h5>Неправильное имя пользователя или пароль</h5> </span>
-
-				<input class="input_field" type="text" required name="username" placeholder="Логин" />
-				<input class="input_field" type="password" required name="password" placeholder="Пароль" />
-				<button>Вход</button>
-			</form>
-			
-			<a class="a_red" th:href="@{/register}">Регистрация</a>
-			
+			<footer> <span> <a class="a_white" href="">  </a> | <a class="a_white"  href=""> </a> | <a class="a_white"  href="">  </a> </span> </footer>
 		</div>
-		
-		<footer> <span> <a class="a_white" href="">  </a> | <a class="a_white"  href=""> </a> | <a class="a_white"  href="">  </a> </span> </footer>
 
 	</body>
 

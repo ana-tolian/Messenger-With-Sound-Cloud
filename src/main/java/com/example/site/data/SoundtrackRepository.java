@@ -1,12 +1,13 @@
 package com.example.site.data;
 
+import com.example.site.entity.Playlist;
 import com.example.site.entity.Soundtrack;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface SoundtrackRepository extends Repository<Soundtrack> {
 
-    List<Soundtrack> findAll();
+    List<Soundtrack> findSoundtracksFromPlaylist(Playlist playlist);
     List<Soundtrack> findByPlaylistId(int id);
+
 }

@@ -62,7 +62,8 @@ hr {
 .login {
 	background-color:var(--content-bg-color-me);
 	width:35rem;
-	height:auto;
+	height:fit-content;
+	min-height: -moz-fit-content;
 	border-radius:1.5rem;
 	border-color:var(--border-color-2-me);
 	border-style:solid;
@@ -74,13 +75,13 @@ hr {
 
 .register {
 	background-color: var(--content-bg-color-me);
-	width:60rem;
-	height:auto;
+	height:fit-content;
+	min-height: -moz-fit-content;
 	border-radius:1.5rem;
 	border-color: var(--border-color-2-me);
 	border-style:solid;
 	border-width:0.1rem;
-	margin: 5% 5% 16%;
+	margin: 1% 8% 16%;
 	padding:1rem;
 	
 }

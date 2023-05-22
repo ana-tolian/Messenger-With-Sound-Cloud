@@ -61,11 +61,11 @@
 
                 <h4 class="bolder"> Основной плейлист </h4>
 
-                <div th:if="${soundtracks.isEmpty()} and !${playlist}">
-                    <c> Вы не загрузили ни одного трека</c>
+                <div th:if="${soundtracks.isEmpty()} and ${playlist}">
+                    <h3> Вы не загрузили ни одного трека</h3>
                 </div>
 
-                <div th:if="${playlist.isEmpty()}">
+                <div th:if="${!playlist}">
                     <h3> Вы не добавили ни одного трека</h3>
                 </div>
 

@@ -7,48 +7,52 @@
 		<link rel="icon" th:href="@{images}">
 		<link rel="stylesheet" th:href="@{/css/const.css}">
 		<link rel="stylesheet" th:href="@{/css/messenger_main.css}">
+		<link rel="stylesheet" th:href="@{/css/messenger_profile.css}">
 	</head>
 
 	<body>
-		<header> <...> </header>
-		
-		<div class="register">
-			<h3 class="head3log"> Регистрация </h3>
-			
-			<form class="input_form" th:action="@{/register}"  method="post">
-				<h4> </h4> <br>
+		<div class="all">
 
-				<input class="input_field" type="text" required name="username" placeholder="Имя" />
-				<input class="input_field description" type="text" name="description" placeholder="Расскажи о себе" />
-				
-				<p> </p>
-				<hr>
-				<p> </p>
+			<header> <...> </header>
 
-				<h4>Введите логин и пароль</h4> <br>
+			<div class="main">
+				<div class="register">
+					<h3 class="head3log"> Регистрация </h3>
 
-				<input class="input_field" type="password" required name="password" placeholder="Пароль" />
-							
-				<br>
+					<form class="input_form" th:action="@{/register}"  method="post">
+						<h4><span th:if="${error}"> <h5 th:text="${error_mes}"> </h5> </span> </h4> <br>
+						<h4><span th:if="${error2}"> <h5 th:text="${error_mes2}"> </h5> </span> </h4> <br>
 
-				<input class="input_field" type="password" required name="passwordAgain" placeholder="Пароль ещё раз" />
+						<input class="input_field" type="text" required name="username" placeholder="Имя" />
+						<input class="input_field description" type="text" name="description" placeholder="Расскажи о себе" />
 
-				<br>
+						<p> </p>
+						<hr>
+						<p> </p>
 
-				
-				<button>Регистрация</button>
-				
-				<a  class="a_red" th:href="@{/login}">Уже есть аккаунт</a>
-			
-			</form>
+						<h4>Введите логин и пароль</h4> <br>
 
-			
-		</div>
+						<input class="input_field" type="password" required name="password" placeholder="Пароль" />
+
+						<br>
+
+						<input class="input_field" type="password" required name="passwordAgain" placeholder="Пароль ещё раз" />
+
+						<br>
+
+
+						<button>Регистрация</button>
+
+						<a  class="a_red" th:href="@{/login}">Уже есть аккаунт</a>
+
+					</form>
+
+
+				</div>
+			</div>
 		
 		<footer> <span> <a class="a_white" href="">  </a> | <a class="a_white"  href="">  </a> | <a class="a_white"  href="">  </a> </span> </footer>
 
+		</div>
 	</body>
-
-
-
 </html>

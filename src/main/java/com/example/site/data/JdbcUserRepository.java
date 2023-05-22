@@ -3,11 +3,11 @@ package com.example.site.data;
 import com.example.site.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLOutput;
+import java.sql.*;
 import java.util.List;
 
 @Repository
@@ -60,8 +60,22 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-        jdbcTemplate.update("INSERT INTO User(username, password, description) VALUES(?,?,?);",
-                user.getUsername(), user.getPassword(), user.getDescription());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection
+                    .prepareStatement(
+                            "INSERT INTO User(username, password, description) VALUES(?,?,?)",
+                            Statement.RETURN_GENERATED_KEYS);
+
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getDescription());
+
+            return ps;
+        }, keyHolder);
+
+        user.setId(keyHolder.getKey().intValue());
         return user;
     }
 

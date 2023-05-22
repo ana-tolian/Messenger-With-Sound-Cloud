@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public class Playlist {
-    private final int id;
+    private int id;
     private final String name;
     private final String imgHref;
     private final User user;
@@ -30,6 +30,10 @@ public class Playlist {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
