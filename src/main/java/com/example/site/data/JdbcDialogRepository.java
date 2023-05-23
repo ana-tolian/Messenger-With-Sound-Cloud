@@ -7,6 +7,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,26 +32,42 @@ public class JdbcDialogRepository implements DialogRepository {
     @Override
     public List<Message> loadMessages(Dialog dialog) {
         return jdbcTemplate.query(
-                "SELECT id, content, imgHref, dialogId, userId, date FROM Message WHERE dialogId=" + dialog.getId() + ";",
+                "SELECT id, content, dialogId, userId, date FROM Message WHERE dialogId=" + dialog.getId() + ";",
                 this::mapRowToMessage);
     }
 
     public Message saveMessage (Message message) {
         jdbcTemplate.update(
-                "INSERT INTO Message(content, imgHref, dialogId, userId, date) VALUES(?, ?, ?, ?, ?)",
-                    message.getContent(), message.getImgHref(), message.getDialog().getId(),
+                "INSERT INTO Message(content, dialogId, userId, date) VALUES(?, ?, ?, ?)",
+                    message.getContent(), message.getDialog().getId(),
                         message.getUser().getId(), message.getDate());
+
+        for (FileRow row : message.getFileHref())
+            jdbcTemplate.update(
+                    "INSERT INTO FileList(messageId, fileHref, type) VALUES(?, ?, ?)",
+                        message.getId(), row.getFileHref(), row.getType());
+
         return message;
     }
 
     @Override
     public Message loadLastMessage(Dialog dialog) {
         List<Message> resultSet =  jdbcTemplate.query(
-                "SELECT id, content, imgHref, dialogId, userId, date " +
+                "SELECT id, content, dialogId, userId, date " +
                         "FROM Message " +
                         "WHERE dialogId=" + dialog.getId() + " ORDER BY id DESC LIMIT 1;",
                 this::mapRowToMessage);
         return (resultSet.isEmpty() ? new Message(dialog) : resultSet.remove(0));
+    }
+
+    @Override
+    public List<FileRow> getFiles(int id) {
+        return jdbcTemplate.query(
+                    "SELECT Filelist.id, messageId, fileHref, type " +
+                        "FROM FileList " +
+                        "INNER JOIN Message ON Message.id=FileList.messageId " +
+                        "WHERE Message.id=" + id,
+                this::mapRowToFileRow);
     }
 
     @Override
@@ -105,10 +122,16 @@ public class JdbcDialogRepository implements DialogRepository {
     public Message mapRowToMessage (ResultSet row, int rowNum) throws SQLException {
         return new Message(row.getInt("id"),
                            row.getString("content"),
-                           row.getString("imgHref"),
+                           getFiles(row.getInt("id")),
                            getDialogById(row.getInt("dialogId")),
                            userRepository.findById(row.getInt("userId")),
                            LocalDateTime.parse(row.getString("date"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+    }
+
+    public FileRow mapRowToFileRow (ResultSet row, int rowNum) throws SQLException {
+        return new FileRow(row.getInt("id"),
+                            row.getString("fileHref"),
+                            row.getString("type"));
     }
 
     public Dialog mapRowToDialog (ResultSet row, int rowNum) throws SQLException {
@@ -151,4 +174,6 @@ public class JdbcDialogRepository implements DialogRepository {
 
         return messages;
     }
+
+
 }

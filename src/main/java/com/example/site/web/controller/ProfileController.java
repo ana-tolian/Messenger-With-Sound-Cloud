@@ -43,6 +43,14 @@ public class ProfileController {
         return "" + id;
     }
 
+    @GetMapping("/show")
+    public String getUserProfile (@RequestParam(value = "user", required = true) Integer id, Model model) {
+        User user = userRepository.findById(id);
+        model.addAttribute("user", user);
+
+        return "profile-pane";
+    }
+
     @GetMapping
     public String get (Model model, Authentication authentication) {
         if (authentication != null && authentication.isAuthenticated()) {
@@ -60,8 +68,7 @@ public class ProfileController {
 
     private void getUserPage (Model model, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("imgHref", user.getImgHref());
+        model.addAttribute("user", user);
 
         model.addAttribute("lastMessages", dialogRepository.getDialogsForModel(dialogRepository.getDialogs(user)));
         model.addAttribute("Contacts", contactRepository.getUserContacts(user));

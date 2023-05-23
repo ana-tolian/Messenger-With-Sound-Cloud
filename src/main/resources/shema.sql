@@ -51,13 +51,21 @@ CREATE TABLE IF NOT EXISTS Dialog (
 CREATE TABLE IF NOT EXISTS Message (
     id INT AUTO_INCREMENT NOT NULL,
     content VARCHAR(1000) NOT NULL,
-    imgHref VARCHAR(200) DEFAULT "",
     dialogId INT NOT NULL,
     userId INT NOT NULL,
     date DATETIME NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(dialogId) REFERENCES Dialog(id),
     FOREIGN KEY(userId) REFERENCES User(id)
+);
+
+CREATE TABLE IF NOT EXISTS FileList (
+    id INT AUTO_INCREMENT NOT NULL,
+    messageId INT NOT NULL,
+    fileHref VARCHAR(200) NOT NULL,
+    type VARCHAR(10) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(messageId) REFERENCES Message(id)
 );
 
 CREATE TABLE IF NOT EXISTS Contact (

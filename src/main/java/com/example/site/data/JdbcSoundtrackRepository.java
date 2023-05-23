@@ -70,6 +70,11 @@ public class JdbcSoundtrackRepository implements SoundtrackRepository {
         return soundtrack;
     }
 
+    @Override
+    public Soundtrack update(Soundtrack soundtrack) {
+        return null;
+    }
+
     private Soundtrack mapRowToSoundtrack(ResultSet row, int rowNum) throws SQLException {
         return new Soundtrack(
                 Integer.parseInt(row.getString("id")),

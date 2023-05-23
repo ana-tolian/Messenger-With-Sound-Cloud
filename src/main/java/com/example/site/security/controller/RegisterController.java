@@ -51,7 +51,7 @@ public class RegisterController {
         }
 
         user = userRepository.save(registrationForm.toUser(passwordEncoder));
-        playlistRepository.save(new Playlist("Основной", "", user));
+        playlistRepository.save(new Playlist("Основной", "/images/noimage.png", user));
         return "redirect:/login";
     }
 }

@@ -38,7 +38,6 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public List<User> findByUsernameStartsWith(String username) {
-        System.out.println("ANOTHER");
         return jdbcTemplate.query(
                 "SELECT User.id, username, password, description, imgHref " +
                         "FROM User " +
@@ -76,6 +75,12 @@ public class JdbcUserRepository implements UserRepository {
         }, keyHolder);
 
         user.setId(keyHolder.getKey().intValue());
+        return user;
+    }
+
+    @Override
+    public User update(User user) {
+        jdbcTemplate.update("UPDATE User SET imgHref=" + user.getImgHref());
         return user;
     }
 

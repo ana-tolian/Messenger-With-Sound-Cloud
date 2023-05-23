@@ -32,8 +32,7 @@ public class ContactController {
         User user = (User) authentication.getPrincipal();
 
         model.addAttribute("Contacts", contactRepository.getUserContacts(user));
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("imgHref", user.getImgHref());
+        model.addAttribute("user", user);
 
         return "contacts";
     }

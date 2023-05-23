@@ -4,19 +4,14 @@ import com.example.site.data.PlaylistRepository;
 import com.example.site.data.SoundtrackRepository;
 import com.example.site.entity.Playlist;
 import com.example.site.entity.Soundtrack;
-import com.example.site.data.JdbcSoundtrackRepository;
 import com.example.site.entity.User;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.MultimediaInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,18 +19,20 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Component
-public class MusicService {
+public class MusicService extends BasicService {
 
-    public static String uploadDirectory = "/uploads";
+    private final String uploadDirectory = "/uploads/";
     private final SoundtrackRepository soundtrackRepository;
     private final PlaylistRepository playlistRepository;
 
     @Autowired
-    public MusicService (SoundtrackRepository soundtrackRepository, PlaylistRepository playlistRepository) {
+    public MusicService(SoundtrackRepository soundtrackRepository, PlaylistRepository playlistRepository) {
         this.soundtrackRepository = soundtrackRepository;
         this.playlistRepository = playlistRepository;
     }
 
+
+    @Override
     public void store(MultipartFile [] files, List<String> list, User user) {
         for (MultipartFile file : files) {
             Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
@@ -53,7 +50,7 @@ public class MusicService {
                 Soundtrack soundtrack = soundtrackRepository.save(new Soundtrack(
                         getName(soundtrackName),
                         getArtist(soundtrackName),
-                        uploadDirectory + "/" + fileNameAndPath.getFileName().toString(),
+                        uploadDirectory + fileNameAndPath.getFileName().toString(),
                         duration,
                         null));
                 Playlist playlist = playlistRepository.getMainPlaylist(user);
@@ -66,7 +63,6 @@ public class MusicService {
             }
         }
     }
-
 
     private String prepareToSave (String filename) {
         filename = filename.substring(0, filename.lastIndexOf('.'));
@@ -117,24 +113,5 @@ public class MusicService {
 
     private String getArtist (String fileName) {
         return fileName.substring(0, fileName.lastIndexOf('–'));
-    }
-
-    public long getFileLength (String filename) {
-        File file = new File("/uploads/" + filename);
-        return file.length();
-    }
-
-    public Resource loadAsResource(String filename) {
-        File file = new File("/uploads/" + filename);
-
-        InputStreamResource resource = null;
-
-        try {
-            resource = new InputStreamResource(new FileInputStream(file));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        return resource;
     }
 }

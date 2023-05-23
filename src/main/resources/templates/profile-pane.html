@@ -1,0 +1,25 @@
+<div class="profile-zpane">
+        <div class="flex_center">
+            <img id="prof-img" th:src="@{|~${user.imgHref}|}" onclick="openFileChooser(this.id)">
+
+                <form id="load-image-on-server" action="/load/another" method="post" enctype="multipart/form-data" style="display: none;">
+                    <input id="choose-image-file" type="file" name="file" multiple accept="image/*" onchange="uploadImage()">
+                    <input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden>
+                    <input id="submit-image" type="submit" value="Загрузить">
+                </form>
+        </div>
+
+        <div class="user_description">
+            <div class="description">
+                <div class="label"> Имя пользователя </div>
+                <div class="short" th:text="'@' + ${user.username}"> </div>
+            </div>
+
+            <hr id="hr_prof">
+
+            <div class="description">
+                <div class="label"> О себе </div>
+                <div class="short" th:text="${user.description}"> </div>
+            </div>
+      </div>
+</div>

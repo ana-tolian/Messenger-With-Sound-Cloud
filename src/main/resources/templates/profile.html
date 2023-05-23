@@ -27,8 +27,8 @@
 				<div class="sidebar"> 
 					
 					<div id="profilePhoto" class="profile_photo_panel">
-						<!--	Stored on server somewhere on disk (not in project directory):	-->
-						<img class="profile_photo" th:src="@{|~${imgHref}|}">
+						<img th:id="'usr_' + ${user.id}" class="profile_photo" th:src="@{|~${user.imgHref}|}" onclick="profileImageClick(this.id)">
+						<div class="username" th:text="'Вы вошли как @' + ${user.username}"> </div>
 					</div>
 					
 					<ul>
@@ -42,6 +42,15 @@
 						<li> <a class="sidebar_link" onclick="logout()" th:href="@{/login}"> Выход </a> </li>
 						<hr class="hr_main">
 					</ul>
+				</div>
+
+
+				<div id="shad" class="shadow" onclick="hideProfile()" style="display: none;">
+
+				</div>
+
+				<div id="prof-z-pane" style="display: none;">
+
 				</div>
 
 				<div class="content">
@@ -99,15 +108,22 @@
 
 					<div id="dialog" style="display:none;">
 						<div id="mes" class="dialogWindow">
+
 						</div>
 
 						<div class="user_input">
+							<input class="user_button_send bhover attach" type="button" value="+" onclick="openFileChooser(this.id)">
 							<input id="text" class="user_text_input" type="text" placeholder="Введите сообщение">
 							<input class="user_button_send bhover" type="button" value="Отправить" onclick="send()">
+
+							<form id="load-file-on-server" action="/load/another" method="post" enctype="multipart/form-data" style="display: none;">
+								<input id="choose-file" type="file" name="file" multiple accept="*/*" onchange="uploadFile()">
+								<input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden>
+								<input id="submit-file" type="submit" value="Загрузить">
+							</form>
 						</div>
 					</div>
-						
-					
+
 				</div>
 				
 			</div>
@@ -117,7 +133,5 @@
 		</div>
 		
 	</body>
-
-
 
 </html>

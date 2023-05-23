@@ -89,6 +89,11 @@ public class JdbcPlaylistRepository implements PlaylistRepository {
 
     }
 
+    @Override
+    public Playlist update(Playlist playlist) {
+        return null;
+    }
+
     private Playlist mapRowToPlaylist(ResultSet row, int rowNum) throws SQLException {
         return new Playlist(
                 Integer.parseInt(row.getString("id")),

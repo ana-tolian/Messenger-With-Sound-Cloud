@@ -7,6 +7,80 @@ function closeZpane () {
     document.getElementById("zpane").style.display = "none";
 }
 
+function profileImageClick (tempId) {
+    let xhr = new XMLHttpRequest();
+    let userId = getId(tempId);
+    let url = "http://localhost:8080/profile/show?user=" + userId;
+
+    console.log("profileImageClick");
+
+    xhr.open("GET", url);
+    xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
+
+    xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            document.getElementById("prof-z-pane").innerHTML = this.responseText;
+            document.getElementById("prof-z-pane").style.display = "flex";
+            document.getElementById("shad").style.display = "flex";
+
+        }
+    });
+
+    xhr.send();
+}
+
+function hideProfile () {
+    document.getElementById("shad").style.display = "none";
+    document.getElementById("prof-z-pane").style.display = "none";
+}
+
+function openFileChooser (tempId) {
+    console.log("openFileChooser");
+
+    if (tempId === "prof-img")
+        document.getElementById("choose-image-file").click();
+    else
+        document.getElementById("choose-file").click();
+}
+
+function uploadFile () {
+    console.log("uploadFile");
+
+    let files = document.getElementById("choose-file").files;
+
+    console.log("len: " + files.length);
+
+    if (files.length) {
+        for (let i = 0; i < files.length; i++) {
+
+            console.log("name " + files[i].name);
+
+            console.log("submit");
+            document.getElementById("submit-file").click();
+        }
+    }
+}
+
+function uploadImage () {
+    console.log("uploadImage");
+
+    let file = document.getElementById("choose-image-file").files[0];
+
+    if (file) {
+        let image = new Image();
+
+        image.onload = function() {
+            if (this.width) {
+                document.getElementById("submit-image").click();
+
+            }
+        };
+
+        image.src = URL.createObjectURL(file);
+        console.log(image.src);
+    }
+}
+
 function searchDialog () {
     let xhr = new XMLHttpRequest();
     let dialogName = document.getElementById("search").value;

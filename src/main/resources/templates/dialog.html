@@ -1,7 +1,7 @@
 <div th:each="lastMessage : ${lastMessages}">
   <hr class="hr_chat">
   <li th:id="'dialog_' + ${lastMessage.getDialog().getId()}" class="chat" onclick="setChat(this.id)">
-    <div> <img class="chat_photo" th:src="@{|~${lastMessage.getDialog().getUser2().getImgHref()}|}"> </div>
+    <div> <img th:id="'referer_' + ${lastMessage.getDialog().getUser2().getId()}" class="chat_photo" th:src="@{|~${lastMessage.getDialog().getUser2().getImgHref()}|}" onclick="profileImageClick(this.id)"> </div>
     <div class="text">
       <span class="chat_name" th:text="${lastMessage.getDialog().getTitle()}"> </span>
       <span class="chat_preview" th:text="${lastMessage.getContent()}"> </span>

@@ -9,10 +9,6 @@ function chats () {
     clearInterval(messageUpdate);
 }
 
-function profileImageClick () {
-    let photo = document.getElementById("profilePhoto"); //TODO
-}
-
 function logout () {
     let xhr = new XMLHttpRequest();
     xhr.withCredentials = true;

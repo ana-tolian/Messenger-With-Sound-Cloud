@@ -1,4 +1,9 @@
 
+text::-moz-focus-outer, text::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
 body {
 	background-color: var(--body-bg-color-me);
 	font-family:"Verdana";

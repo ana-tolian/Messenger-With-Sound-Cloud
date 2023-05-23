@@ -20,16 +20,30 @@
 }
 
 .profile_photo_panel {
-	width:100%;
-	text-align:center;
+	width: 100%;
+	display: flex;
+	text-align: center;
+	align-content: center;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 
 .profile_photo, .chat_photo {
 	width:8rem;
 	height:8rem;
 	border-radius:3rem;
-	margin-left:2.5rem;
 	border: solid 1px var(--border-color-2-me);
+}
+
+.profile_photo {
+	display: flex;
+	text-align: center;
+	flex-wrap: wrap;
+	align-content: center;
+	flex-direction: column;
+	align-items: center;
 }
 
 .profile_photo:hover, .chat_photo:hover {
@@ -85,14 +99,28 @@
 	height:fit-content;
 	margin-bottom:2%;
 	margin-left:2%;
-	padding: 1rem 3rem 2rem 1rem;
+	padding: 2rem;
 	background-color:var(--content-bg-color-me);
 	border-radius:1.6rem;
 	border: solid 1px var(--border-color-2-me);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.username {
+	margin-top: 6%;
+	max-width: 100%;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	-ms-word-break: break-word;
+	word-break: break-word;
 }
 
 .sidebar ul {
 	list-style-type:none;
+	padding:0;
 }
 
 .sidebar_link {

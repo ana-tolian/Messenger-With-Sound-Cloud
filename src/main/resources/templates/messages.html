@@ -1,9 +1,30 @@
 <div class="messages">
     <div th:class="(${message.getUser().getId()} == ${thisUser.getId()}) ? 'bubble_right' : 'bubble'" th:each="message : ${allMessages}">
         <div class="current_user" th:if="${message.getUser().getId()} == ${thisUser.getId()}" th:text="${message.getContent()}">
+            <div th:each="imghref : ${message.getFileHref()}" th:if="${imghref.getType().equals('image')}">
+                <div> <img th:src="${imghref.getFileHref()}"> </div>
+            </div>
+
+            <div th:each="filehref : ${message.getFileHref()}" th:if="${imghref.getType().equals('file')}">
+                <div>
+                    <div> <img th:src="@{|'/images/file.png'|}"> </div>
+                    <div th:src="${filehref.getFileHref()}"> </div>
+                </div>
+            </div>
             <svg viewBox="0 0 11 20" width="11" height="20" class="bubble-tail"></svg>
         </div>
+
         <div class="another_user" th:if="${message.getUser().getId()} != ${thisUser.getId()}" th:text="${message.getContent()}">
+            <div th:each="imghref : ${message.getFileHref()}" th:if="${imghref.getType().equals('image')}">
+                <div> <img th:src="${imghref.getFileHref()}"> </div>
+            </div>
+
+            <div th:each="filehref : ${message.getFileHref()}" th:if="${imghref.getType().equals('file')}">
+                <div>
+                    <div> <img th:src="@{|'/images/file.png'|}"> </div>
+                    <div th:src="${filehref.getFileHref()}"> </div>
+                </div>
+            </div>
             <svg viewBox="0 0 11 20" width="11" height="20" class="bubble-tail"></svg>
         </div>
     </div>
