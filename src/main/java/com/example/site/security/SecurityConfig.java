@@ -52,7 +52,7 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests()
-                    .requestMatchers("/debug").hasRole("ADMIN")
+                    .requestMatchers("/debug").hasRole("USER")
                     .requestMatchers("/", "/soundtracks", "/albums", "/load", "/load/*/*", "/uploads/*", "/profile/*",
                             "/creation", "/messages", "/messages/*", "/contacts/*", "/search/*").authenticated()
                     .requestMatchers("/register", "/login", "/**", "resources/**").permitAll()

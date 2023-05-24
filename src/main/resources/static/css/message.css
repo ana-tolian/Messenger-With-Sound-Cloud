@@ -76,7 +76,7 @@
     margin:0.5rem;
     padding: 10px;
     width: fit-content;
-    max-width: 40%;
+    max-width: 55%;
     height: fit-content;
     display: flex;
     border-radius: 1rem;
@@ -92,7 +92,7 @@
     margin:0.5rem;
     padding: 10px;
     width: fit-content;
-    max-width: 40%;
+    max-width: 55%;
     height: fit-content;
     display: flex;
     border-radius: 1rem;
@@ -128,3 +128,57 @@
     background-color: var(--an-user-bubble-bg-color-me);
     justify-content: flex-start;
 }
+
+.file-icon {
+    width: 3rem;
+    height: 3rem;
+}
+
+.file-message-panel {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: white;
+
+}
+
+.file-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    border: solid 1px black;
+    border-radius: 5px;
+}
+
+.file-content:hover {
+    background-color: var(--button-hover-color-me);
+}
+
+.file-info {
+    font-size: 0.8rem;
+    overflow: hidden;
+    width: 12rem;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 5px;
+}
+
+.message-images {
+    margin-top: 8%;
+}
+
+.message-image {
+    background-color: var(--hr-color-me);
+    width: 16rem;
+}
+
+.hr_mess {
+    margin: 3% 0;
+}
+
+.date {
+    font-size: 0.9rem;
+    font-family: "Calibri Light";
+}
+

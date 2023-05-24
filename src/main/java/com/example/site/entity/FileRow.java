@@ -24,6 +24,10 @@ public class FileRow {
         return fileHref;
     }
 
+    public String getFileName() {
+        return fileHref.substring(fileHref.lastIndexOf('/') + 1);
+    }
+
     public String getType() {
         return type;
     }

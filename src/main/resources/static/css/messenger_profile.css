@@ -46,7 +46,7 @@
 	align-items: center;
 }
 
-.profile_photo:hover, .chat_photo:hover {
+img:hover {
 	opacity:0.85;
 }
 

@@ -19,9 +19,9 @@ function getName (id) {
 }
 
 function scrollDownMessages () {
-    scrollDown(document.getElementById("dialog"));
+   document.getElementById("mes").scrollTo(0, document.getElementById("mes").scrollHeight)
 }
 
-function scrollDown (element) {
-    element.scrollTo(0, element.scrollHeight);
-}
+// function scrollDown (element) {
+//     element.scrollTo(0, element.scrollHeight);
+// }

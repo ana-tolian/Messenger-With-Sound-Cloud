@@ -26,7 +26,7 @@ function send () {
             document.getElementById("mes").insertAdjacentHTML('beforeend', this.responseText);
             document.getElementById("text").value = "";
             document.getElementById("input-info").innerHTML = "";
-            scrollDown(document.getElementById("mes"));
+            scrollDownMessages();
             fileNames = [];
         }
     });
@@ -36,7 +36,7 @@ function send () {
 
 function setChat(tempId) {
     document.getElementById("allChats").style.display = "none";
-    document.getElementById("dialog").style.display = "block";
+    document.getElementById("dialog").style.display = "flex";
     document.getElementById("dialog_controls").style.display = "none";
     scrollDownMessages();
 

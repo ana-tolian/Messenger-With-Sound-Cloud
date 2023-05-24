@@ -1,31 +1,85 @@
+<!--<div class="messages">-->
+<!--    <div class="bubble_right" th:each="message : ${allMessages}">-->
+<!--        <div class="current_user flex_column">-->
+<!--            <div th:text="${message.getContent()}"> </div>-->
+<!--            <div>-->
+<!--                <div th:each="filehref : ${message.getFileHref()}" th:if="${filehref.getType().equals('image')}">-->
+<!--                    <img class="message-image" th:src="${filehref.getFileHref()}">-->
+<!--                </div>-->
+
+<!--                <div class="file-message-panel" th:each="filehref : ${message.getFileHref()}" th:if="not ${filehref.getType().equals('image')}">-->
+<!--                    <div class="file-content">-->
+<!--                        <div class="flex_center">-->
+<!--                            <div> <img class="file-icon" src="/images/file.png"> </div>-->
+<!--                            <div class="file-info" th:text="${filehref.getFileHref()}"> </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
 <div class="messages">
-    <div th:class="(${message.getUser().getId()} == ${thisUser.getId()}) ? 'bubble_right' : 'bubble'" th:each="message : ${allMessages}">
-        <div class="current_user" th:if="${message.getUser().getId()} == ${thisUser.getId()}" th:text="${message.getContent()}">
-            <div th:each="filehref : ${message.getFileHref()}" th:if="${filehref.getType().equals('image')}">
-                <div class="bubble_image"> <img th:src="${filehref.getFileHref()}"> </div>
-            </div>
+    <div th:each="message : ${allMessages}" th:class="(${message.getUser().getId()} == ${thisUser.getId()}) ? 'bubble_right' : 'bubble'">
 
-            <div th:each="filehref : ${message.getFileHref()}" th:if="not ${filehref.getType().equals('image')}">
-                <div>
-                    <div class="bubble_image"> <img src="/images/file.png"> </div>
-                    <div th:src="${filehref.getFileHref()}"> </div>
+        <div class="current_user flex_column" th:if="${message.getUser().getId()} == ${thisUser.getId()}">
+            <div class="date"
+                 th:text="${(message.getDate().getDayOfMonth() < 10 ? ('0' + message.getDate().getDayOfMonth()) : message.getDate().getDayOfMonth()) + '.'
+             + (message.getDate().getMonthValue() < 10 ? ('0' + message.getDate().getMonthValue()) : message.getDate().getMonthValue()) + '.'
+             + message.getDate().getYear() + ' '
+             + (message.getDate().getHour() < 10 ? ('0' + message.getDate().getHour()) : message.getDate().getHour()) + ':'
+             + (message.getDate().getMinute() < 10 ? ('0' + message.getDate().getMinute()) : message.getDate().getMinute()) + ':'
+             + (message.getDate().getSecond() < 10 ? ('0' + message.getDate().getSecond()) : message.getDate().getSecond())}"></div>
+            <hr class="hr_mess">
+            <div th:text="${message.getContent()}"> </div>
+
+            <div class="message-images">
+                <div th:each="filehref : ${message.getFileHref()}" th:if="${filehref.getType().equals('image')}">
+                    <img class="message-image" th:src="${filehref.getFileHref()}" onclick="openImage(this.src)">
                 </div>
             </div>
-            <svg viewBox="0 0 11 20" width="11" height="20" class="bubble-tail"></svg>
-        </div>
 
-        <div class="another_user" th:if="${message.getUser().getId()} != ${thisUser.getId()}" th:text="${message.getContent()}">
-            <div th:each="filehref : ${message.getFileHref()}" th:if="${filehref.getType().equals('image')}">
-                <div class="bubble_image"> <img th:src="${filehref.getFileHref()}"> </div>
-            </div>
-
-            <div th:each="filehref : ${message.getFileHref()}" th:if="not ${!filehref.getType().equals('image')}">
-                <div>
-                    <div class="bubble_image"> <img src="/images/file.png"> </div>
-                    <div th:src="${filehref.getFileHref()}"> </div>
+            <div class="file-message-panel" th:each="filehref : ${message.getFileHref()}"
+                 th:if="not ${filehref.getType().equals('image')}" th:name="${filehref}" onclick="download(this.name)">
+                <div class="file-content">
+                    <div class="flex_center">
+                        <div> <img class="file-icon" src="/images/file.png"> </div>
+                        <div class="file-info" th:text="${filehref.getFileName()}"> </div>
+                    </div>
                 </div>
             </div>
-            <svg viewBox="0 0 11 20" width="11" height="20" class="bubble-tail"></svg>
         </div>
+
+        <div class="another_user flex_column" th:if="${message.getUser().getId()} != ${thisUser.getId()}" th:text="${message.getContent()}">
+            <div class="date"
+                 th:text="${(message.getDate().getDayOfMonth() < 10 ? ('0' + message.getDate().getDayOfMonth()) : message.getDate().getDayOfMonth()) + '.'
+             + (message.getDate().getMonthValue() < 10 ? ('0' + message.getDate().getMonthValue()) : message.getDate().getMonthValue()) + '.'
+             + message.getDate().getYear() + ' '
+             + (message.getDate().getHour() < 10 ? ('0' + message.getDate().getHour()) : message.getDate().getHour()) + ':'
+             + (message.getDate().getMinute() < 10 ? ('0' + message.getDate().getMinute()) : message.getDate().getMinute()) + ':'
+             + (message.getDate().getSecond() < 10 ? ('0' + message.getDate().getSecond()) : message.getDate().getSecond())}"></div>
+            <hr class="hr_mess">
+            <div th:text="${message.getContent()}"> </div>
+
+            <div class="message-images">
+                <div th:each="filehref : ${message.getFileHref()}" th:if="${filehref.getType().equals('image')}">
+                    <img class="message-image" th:src="${filehref.getFileHref()}" onclick="openImage(this.src)">
+                </div>
+            </div>
+
+            <div class="file-message-panel" th:each="filehref : ${message.getFileHref()}"
+                 th:if="not ${filehref.getType().equals('image')}" th:name="${filehref}" onclick="download(this.name)">
+                <div class="file-content">
+                    <div class="flex_center">
+                        <div> <img class="file-icon" src="/images/file.png"> </div>
+                        <div class="file-info" th:text="${filehref.getFileName()}"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

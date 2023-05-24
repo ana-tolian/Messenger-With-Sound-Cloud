@@ -142,9 +142,6 @@ public class JdbcDialogRepository implements DialogRepository {
     }
 
     public FileRow mapRowToFileRow (ResultSet row, int rowNum) throws SQLException {
-        System.out.println("==========================================================");
-        System.out.println(row.getInt("id") + " "  + row.getInt("messageId") + " " + row.getString("fileHref"));
-
         return new FileRow(row.getInt("id"),
                             row.getString("fileHref"),
                             row.getString("type"));
