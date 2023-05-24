@@ -31,4 +31,8 @@ public class FileRow {
     public String getType() {
         return type;
     }
+
+    public String getExtension () {
+        return fileHref.substring(fileHref.lastIndexOf('.') + 1);
+    }
 }

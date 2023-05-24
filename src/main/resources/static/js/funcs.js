@@ -14,14 +14,15 @@ function getId (id) {
 
 function getName (id) {
     if (id.toString().includes("_"))
-        return id.substring(0, id.lastIndexOf('_'))
+        return id.substring(0, id.lastIndexOf('_'));
     return id;
 }
 
 function scrollDownMessages () {
-   document.getElementById("mes").scrollTo(0, document.getElementById("mes").scrollHeight)
+    document.getElementById("mes").scrollTo(0, document.getElementById("mes").scrollHeight);
 }
 
-// function scrollDown (element) {
-//     element.scrollTo(0, element.scrollHeight);
-// }
+function scrollToCurrent () {
+    let position = document.getElementById("mes").scrollTop;
+    document.getElementById("mes").scrollTo(0, position);
+}

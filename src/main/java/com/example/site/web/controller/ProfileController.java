@@ -38,7 +38,7 @@ public class ProfileController {
     @ResponseBody
     public String createDialog (@RequestParam(value = "user", required = true) String username,
                                     Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
         int id = dialogRepository.saveDialog(new Dialog(username, user, userRepository.findByUsername(username)));
         return "" + id;
     }
@@ -67,7 +67,7 @@ public class ProfileController {
     }
 
     private void getUserPage (Model model, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
         model.addAttribute("user", user);
 
         model.addAttribute("lastMessages", dialogRepository.getDialogsForModel(dialogRepository.getDialogs(user)));

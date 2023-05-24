@@ -1,6 +1,8 @@
 package com.example.site.web.controller;
 
+import com.example.site.data.DialogRepository;
 import com.example.site.data.JdbcDialogRepository;
+import com.example.site.data.UserRepository;
 import com.example.site.entity.Dialog;
 import com.example.site.entity.FileRow;
 import com.example.site.entity.Message;
@@ -24,17 +26,19 @@ import java.util.List;
 @RequestMapping("/messages")
 public class MessageLoadController {
 
-    private final JdbcDialogRepository dialogRepository;
+    private final DialogRepository dialogRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public MessageLoadController (JdbcDialogRepository dialogRepository) {
+    public MessageLoadController (DialogRepository dialogRepository, UserRepository userRepository) {
         this.dialogRepository = dialogRepository;
+        this.userRepository = userRepository;
     }
 
     @PostMapping
     public String loadMessages (@RequestParam(value = "dl", required = true) Integer id,
                                 Authentication authentication, Model model) {
-        User user = (User) authentication.getPrincipal();
+        User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
         Dialog dialog = dialogRepository.getDialogById(id);
 
         if (isBelongsTo(user, dialog)) {
@@ -50,7 +54,7 @@ public class MessageLoadController {
                                 @RequestParam(value = "dl", required = true) Integer id,
                                 @RequestParam(value = "file", required = false) String[] fileHref,
                                 Authentication authentication, Model model) {
-        User user = (User) authentication.getPrincipal();
+        User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
         Dialog dialog = dialogRepository.getDialogById(id);
 
         if (fileHref == null && content == null)

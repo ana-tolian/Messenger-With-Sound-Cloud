@@ -45,23 +45,23 @@ public class FileDownloadController {
         HttpHeaders header = new HttpHeaders();
         header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getFilename());
 
-        String type = filename.substring(filename.lastIndexOf('.') + 1);
+        String ext = getExtension(filename);
 
-        if (type.equalsIgnoreCase("jpeg") || type.equalsIgnoreCase("jpg"))
+        if (ext.equalsIgnoreCase("jpeg") || ext.equalsIgnoreCase("jpg"))
             return ResponseEntity.ok().headers(header)
                     .contentType(MediaType.IMAGE_JPEG).body(file);
 
-        else if (type.equalsIgnoreCase("png"))
+        else if (ext.equalsIgnoreCase("png"))
             return ResponseEntity.ok().headers(header)
                     .contentType(MediaType.IMAGE_PNG).body(file);
 
-        else if (type.equalsIgnoreCase("gif"))
+        else if (ext.equalsIgnoreCase("gif"))
             return ResponseEntity.ok().headers(header)
                     .contentType(MediaType.IMAGE_GIF).body(file);
 
         else
             return ResponseEntity.ok().headers(header)
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM).body(file);
+                    .contentType(MediaType.MULTIPART_FORM_DATA).body(file);
 
     }
 
@@ -73,8 +73,27 @@ public class FileDownloadController {
         HttpHeaders header = new HttpHeaders();
         header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getFilename());
 
-        return ResponseEntity.ok().headers(header)
-                .contentType(MediaType.APPLICATION_OCTET_STREAM).body(file);
+        String ext = getExtension(filename);
+
+        if (ext.equalsIgnoreCase("pdf"))
+            return ResponseEntity.ok().headers(header)
+                    .contentType(MediaType.APPLICATION_PDF).body(file);
+
+        else if (ext.equalsIgnoreCase("txt"))
+            return ResponseEntity.ok().headers(header)
+                    .contentType(MediaType.TEXT_PLAIN).body(file);
+
+        else if (ext.equalsIgnoreCase("html"))
+            return ResponseEntity.ok().headers(header)
+                    .contentType(MediaType.TEXT_HTML).body(file);
+
+        else
+            return ResponseEntity.ok().headers(header)
+                    .contentType(MediaType.MULTIPART_FORM_DATA).body(file);
+    }
+
+    private String getExtension (String filename) {
+        return filename.substring(filename.lastIndexOf('.') + 1);
     }
 
 }

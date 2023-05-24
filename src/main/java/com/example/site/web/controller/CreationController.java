@@ -2,6 +2,7 @@ package com.example.site.web.controller;
 
 import com.example.site.data.PlaylistRepository;
 import com.example.site.data.SoundtrackRepository;
+import com.example.site.data.UserRepository;
 import com.example.site.entity.Playlist;
 import com.example.site.entity.Soundtrack;
 import com.example.site.entity.User;
@@ -20,16 +21,20 @@ public class CreationController {
 
     private final SoundtrackRepository soundtrackRepository;
     private final PlaylistRepository playlistRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public CreationController (SoundtrackRepository soundtrackRepository, PlaylistRepository playlistRepository) {
+    public CreationController (SoundtrackRepository soundtrackRepository,
+                               PlaylistRepository playlistRepository,
+                               UserRepository userRepository) {
         this.soundtrackRepository = soundtrackRepository;
         this.playlistRepository = playlistRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
     public String sendCreationPage (Authentication authentication, Model model) {
-        User user = (User) authentication.getPrincipal();
+        User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
         model.addAttribute("user", user);
         model.addAttribute("playlistDefaultHref", "/images/noimage.png");
         model.addAttribute("soundtracks", soundtrackRepository.findSoundtracksFromPlaylist(playlistRepository.getMainPlaylist(user)));
@@ -40,7 +45,7 @@ public class CreationController {
     public String createPlaylist (@RequestParam(value="playlist", required = true) String name,
                                   @RequestParam(value="id") int[] soundtracks,
                                   Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
         Playlist playlist = new Playlist(name, "/images/noimage.png", user);
 
         playlist = playlistRepository.save(playlist);

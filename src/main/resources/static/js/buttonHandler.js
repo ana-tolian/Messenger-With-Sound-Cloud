@@ -30,12 +30,19 @@ function getProfile (tempId) {
 
 function showProfile () {
     document.getElementById("prof-z-pane").style.display = "flex";
-    document.getElementById("shad").style.display = "flex";
+    setShade(true);
 }
 
 function hideProfile () {
     document.getElementById("shad").style.display = "none";
-    document.getElementById("prof-z-pane").style.display = "none";
+    setShade(false);
+}
+
+function setShade (bool) {
+    if (bool)
+        document.getElementById("shad").style.display = "flex";
+    else
+        document.getElementById("prof-z-pane").style.display = "none";
 }
 
 function openFileChooser (tempId) {
@@ -43,6 +50,15 @@ function openFileChooser (tempId) {
         document.getElementById("choose-image-file").click();
     else
         document.getElementById("choose-file").click();
+}
+
+function openImage (src) {
+    document.getElementById("prof-z-pane").innerHTML =
+        "<div class='profile-zpane' style='width: fit-content; height: fit-content'> <img class='big_image' src=" + src + "> </div>";
+    showProfile();
+}
+
+function download (uri) {
 }
 
 function uploadFile () {

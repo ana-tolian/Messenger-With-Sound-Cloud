@@ -43,11 +43,11 @@
             </div>
 
             <div class="file-message-panel" th:each="filehref : ${message.getFileHref()}"
-                 th:if="not ${filehref.getType().equals('image')}" th:name="${filehref}" onclick="download(this.name)">
+                 th:if="not ${filehref.getType().equals('image')}" th:name="${filehref.getFileHref()}" onclick="download(this.name)">
                 <div class="file-content">
                     <div class="flex_center">
                         <div> <img class="file-icon" src="/images/file.png"> </div>
-                        <div class="file-info" th:text="${filehref.getFileName()}"> </div>
+                        <a class="a_red file-info" th:href="${filehref.getFileHref()}" download th:text="${filehref.getFileName()}"> </a>
                     </div>
                 </div>
             </div>
@@ -71,11 +71,11 @@
             </div>
 
             <div class="file-message-panel" th:each="filehref : ${message.getFileHref()}"
-                 th:if="not ${filehref.getType().equals('image')}" th:name="${filehref}" onclick="download(this.name)">
+                 th:if="not ${filehref.getType().equals('image')}" th:name="${filehref.getFileHref()}" onclick="download(this.name)">
                 <div class="file-content">
                     <div class="flex_center">
                         <div> <img class="file-icon" src="/images/file.png"> </div>
-                        <div class="file-info" th:text="${filehref.getFileName()}"> </div>
+                        <a class="a_red file-info" th:href="${filehref.getFileHref()}" download th:text="${filehref.getFileName()}"> </a>
                     </div>
                 </div>
             </div>

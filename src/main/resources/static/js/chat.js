@@ -1,6 +1,7 @@
 let dialogId;
 let messageUpdate;
 let dialogUpdate;
+let justSet;
 
 
 function send () {
@@ -38,10 +39,9 @@ function setChat(tempId) {
     document.getElementById("allChats").style.display = "none";
     document.getElementById("dialog").style.display = "flex";
     document.getElementById("dialog_controls").style.display = "none";
-    scrollDownMessages();
 
+    justSet = true;
     dialogId = getId(tempId);
-
     messageUpdate = setInterval(upload, messageRefreshFrequence);
     clearInterval(dialogUpdate)
 

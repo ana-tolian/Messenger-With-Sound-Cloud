@@ -29,7 +29,7 @@ public class ContactController {
         if (authentication == null || !authentication.isAuthenticated())
             return "redirect:login";
 
-        User user = (User) authentication.getPrincipal();
+        User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
 
         model.addAttribute("Contacts", contactRepository.getUserContacts(user));
         model.addAttribute("user", user);

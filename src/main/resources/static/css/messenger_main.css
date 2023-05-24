@@ -141,4 +141,9 @@ hr {
 	text-decoration:none;
 }
 
+.big_image {
+	max-width: 70vw;
+	max-height: 70vh;
+}
+
 

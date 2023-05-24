@@ -33,7 +33,7 @@ public class SearchEngineController {
     @GetMapping("/dialog")
     public String findDialog (@RequestParam(value = "dl", required = true) String dialogName,
                               Authentication authentication, Model model) {
-        User user = (User) authentication.getPrincipal();
+        User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
         model.addAttribute("lastMessages", dialogRepository.
                 getDialogsForModel(dialogRepository.getDialogsByTitle(user, dialogName)));
         return "dialog";
@@ -44,8 +44,6 @@ public class SearchEngineController {
                                Authentication authentication, Model model) {
         if (contactName.equals(""))
             return "redirect:/contacts";
-
-        User user = (User) authentication.getPrincipal();
 
         model.addAttribute("users", userRepository.findByUsernameStartsWith(contactName));
         model.addAttribute("addedContacts", userRepository.findByUsernameStartsWithFromContacts(contactName));

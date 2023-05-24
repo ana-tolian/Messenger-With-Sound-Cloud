@@ -25,10 +25,9 @@
 
         <div class="main">
             <div class="sidebar">
-
                 <div id="profilePhoto" class="profile_photo_panel">
                     <img th:id="'usr_' + ${user.id}" class="profile_photo" th:src="@{|~${user.imgHref}|}" onclick="getProfile(this.id)">
-                    <div class="username" th:text="'Вы вошли как ' + ${user.username}"> </div>
+                    <div class="username" th:text="'Вы вошли как @' + ${user.username}"> </div>
                 </div>
 
                 <ul>
@@ -42,6 +41,14 @@
                     <li> <a class="sidebar_link" onclick="logout()" th:href="@{/login}"> Выход </a> </li>
                     <hr class="hr_main">
                 </ul>
+            </div>
+
+            <div id="shad" class="shadow" onclick="hideProfile()" style="display: none;">
+
+            </div>
+
+            <div id="prof-z-pane" style="display: none;">
+
             </div>
 
             <div class="content soundtrack_main" id="main">

@@ -11,6 +11,7 @@ public interface DialogRepository {
 
     List<Message> loadMessages(Dialog dialog);
     Message loadLastMessage(Dialog dialog);
+    Message saveMessage(Message message);
     List<Message> getDialogsForModel(List<Dialog> dialogs);
     List<FileRow> getFiles(int fileListId);
 

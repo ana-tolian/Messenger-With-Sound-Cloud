@@ -45,7 +45,7 @@ public class FileUploadController  {
     @PostMapping
     public String handleSoundtrackUpload (@RequestParam("soundtrack") MultipartFile[] files,
                                    Authentication authentication, Model model) {
-        User user = (User) authentication.getPrincipal();
+        User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
         ArrayList<String> fileList = new ArrayList<>();
 
         musicService.store(files, fileList, user);
@@ -60,7 +60,7 @@ public class FileUploadController  {
     @PostMapping("/another/image")
     public String handleProfileImageUpload (MultipartHttpServletRequest request,
                                    Authentication authentication, Model model) {
-        User user = (User) authentication.getPrincipal();
+        User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
         ArrayList<String> fileList = new ArrayList<>();
 
         basicService.store(request, fileList, user);
@@ -79,7 +79,7 @@ public class FileUploadController  {
     @ResponseBody
     public String handleMessengerFileUpload (MultipartHttpServletRequest request,
                                              Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
         ArrayList<String> fileList = new ArrayList<>();
 
         basicService.store(request, fileList, user);
