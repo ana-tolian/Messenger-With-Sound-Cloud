@@ -24,7 +24,7 @@ function send () {
 
     xhr.addEventListener("readystatechange", function() {
         if(this.readyState === 4) {
-            document.getElementById("mes").insertAdjacentHTML('beforeend', this.responseText);
+            document.getElementById("bubbles").insertAdjacentHTML('beforeend', this.responseText);
             document.getElementById("text").value = "";
             document.getElementById("input-info").innerHTML = "";
             scrollDownMessages();

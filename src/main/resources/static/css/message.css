@@ -73,7 +73,7 @@
 }
 
 .bubble {
-    margin:0.5rem;
+    margin: 0;
     padding: 10px;
     width: fit-content;
     max-width: 55%;
@@ -89,7 +89,7 @@
 .bubble_right {
     float: right;
     justify-content: flex-end;
-    margin:0.5rem;
+    margin: 0;
     padding: 10px;
     width: fit-content;
     max-width: 55%;

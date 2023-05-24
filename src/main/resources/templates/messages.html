@@ -1,28 +1,4 @@
-<!--<div class="messages">-->
-<!--    <div class="bubble_right" th:each="message : ${allMessages}">-->
-<!--        <div class="current_user flex_column">-->
-<!--            <div th:text="${message.getContent()}"> </div>-->
-<!--            <div>-->
-<!--                <div th:each="filehref : ${message.getFileHref()}" th:if="${filehref.getType().equals('image')}">-->
-<!--                    <img class="message-image" th:src="${filehref.getFileHref()}">-->
-<!--                </div>-->
-
-<!--                <div class="file-message-panel" th:each="filehref : ${message.getFileHref()}" th:if="not ${filehref.getType().equals('image')}">-->
-<!--                    <div class="file-content">-->
-<!--                        <div class="flex_center">-->
-<!--                            <div> <img class="file-icon" src="/images/file.png"> </div>-->
-<!--                            <div class="file-info" th:text="${filehref.getFileHref()}"> </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-
-<div class="messages">
+<div id="bubbles" class="messages">
     <div th:each="message : ${allMessages}" th:class="(${message.getUser().getId()} == ${thisUser.getId()}) ? 'bubble_right' : 'bubble'">
 
         <div class="current_user flex_column" th:if="${message.getUser().getId()} == ${thisUser.getId()}">
@@ -53,7 +29,7 @@
             </div>
         </div>
 
-        <div class="another_user flex_column" th:if="${message.getUser().getId()} != ${thisUser.getId()}" th:text="${message.getContent()}">
+        <div class="another_user flex_column" th:if="${message.getUser().getId()} != ${thisUser.getId()}">
             <div class="date"
                  th:text="${(message.getDate().getDayOfMonth() < 10 ? ('0' + message.getDate().getDayOfMonth()) : message.getDate().getDayOfMonth()) + '.'
              + (message.getDate().getMonthValue() < 10 ? ('0' + message.getDate().getMonthValue()) : message.getDate().getMonthValue()) + '.'
