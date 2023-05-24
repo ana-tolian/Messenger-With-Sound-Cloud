@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Message {
 
-    private final int id;
+    private int id;
     private final String content;
     private final List<FileRow> fileHref;
     private final Dialog dialog;
@@ -31,6 +31,10 @@ public class Message {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getContent() {

@@ -27,7 +27,7 @@
 				<div class="sidebar"> 
 					
 					<div id="profilePhoto" class="profile_photo_panel">
-						<img th:id="'usr_' + ${user.id}" class="profile_photo" th:src="@{|~${user.imgHref}|}" onclick="profileImageClick(this.id)">
+						<img th:id="'usr_' + ${user.id}" class="profile_photo" th:src="@{|~${user.imgHref}|}" onclick="getProfile(this.id)">
 						<div class="username" th:text="'Вы вошли как @' + ${user.username}"> </div>
 					</div>
 					
@@ -111,16 +111,20 @@
 
 						</div>
 
-						<div class="user_input">
-							<input class="user_button_send bhover attach" type="button" value="+" onclick="openFileChooser(this.id)">
-							<input id="text" class="user_text_input" type="text" placeholder="Введите сообщение">
-							<input class="user_button_send bhover" type="button" value="Отправить" onclick="send()">
+						<div class="user-input-box">
+							<div id="input-info" class="file-input-info" style="display: none"> </div>
 
-							<form id="load-file-on-server" action="/load/another" method="post" enctype="multipart/form-data" style="display: none;">
-								<input id="choose-file" type="file" name="file" multiple accept="*/*" onchange="uploadFile()">
-								<input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden>
-								<input id="submit-file" type="submit" value="Загрузить">
-							</form>
+							<div class="user_input">
+								<input class="user_button_send bhover attach" type="button" value="+" onclick="openFileChooser(this.id)">
+								<input id="text" class="user_text_input" type="text" placeholder="Введите сообщение">
+								<input class="user_button_send bhover" type="button" value="Отправить" onclick="send()">
+
+								<form id="load-file-on-server" action="/load/another" method="post" enctype="multipart/form-data" style="display: none;">
+									<input id="choose-file" type="file" name="file" multiple accept="*/*" onchange="uploadFile()">
+									<input type="text" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden>
+									<input id="submit-file" type="submit" value="Загрузить">
+								</form>
+							</div>
 						</div>
 					</div>
 

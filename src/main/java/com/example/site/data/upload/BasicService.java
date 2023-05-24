@@ -5,6 +5,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,16 +14,29 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class BasicService implements FileStorageService {
+
+    public void store(MultipartHttpServletRequest request, List<String> list, User user) {
+        Iterator<String> fileNames = request.getFileNames();
+        List<MultipartFile> files = new ArrayList<>();
+
+        while(fileNames.hasNext()) {
+            files.add(request.getFile(fileNames.next()));
+        }
+
+        MultipartFile[] filesArray = new MultipartFile[files.size()];
+
+        store(files.toArray(filesArray), list, user);
+    }
 
     @Override
     public void store(MultipartFile[] files, List<String> list, User user) {
         for (MultipartFile file : files) {
             Path fileNameAndPath = Paths.get(getDirectory(file.getOriginalFilename()), file.getOriginalFilename());
-            list.add(fileNameAndPath.getFileName().toString());
+            list.add(getDirectory(file.getOriginalFilename()) + fileNameAndPath.getFileName().toString());
 
             try {
                 if (!Files.exists(fileNameAndPath.getParent()))

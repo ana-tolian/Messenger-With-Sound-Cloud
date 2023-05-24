@@ -2,14 +2,21 @@ let dialogId;
 let messageUpdate;
 let dialogUpdate;
 
+
 function send () {
     let xhr = new XMLHttpRequest();
     let body = document.getElementById("text").value;
     let url = "http://localhost:8080/messages/post?dl=" + dialogId;
-    xhr.withCredentials = true;
+    let fileParam = "";
 
-    if (body === "")
+    if (body === "" && fileNames.length < 1)
         return;
+
+    for (const filename of fileNames)
+        fileParam += "&file=" + filename;
+    url += fileParam;
+
+    console.log(url);
 
     xhr.open("POST", url);
     xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
@@ -18,7 +25,9 @@ function send () {
         if(this.readyState === 4) {
             document.getElementById("mes").insertAdjacentHTML('beforeend', this.responseText);
             document.getElementById("text").value = "";
-            document.getElementById("mes").scrollTo(0, document.getElementById("mes").scrollHeight);
+            document.getElementById("input-info").innerHTML = "";
+            scrollDown(document.getElementById("mes"));
+            fileNames = [];
         }
     });
 
@@ -29,7 +38,7 @@ function setChat(tempId) {
     document.getElementById("allChats").style.display = "none";
     document.getElementById("dialog").style.display = "block";
     document.getElementById("dialog_controls").style.display = "none";
-    document.getElementById("dialog").scrollTo(0, document.getElementById("dialog").scrollHeight);
+    scrollDownMessages();
 
     dialogId = getId(tempId);
 

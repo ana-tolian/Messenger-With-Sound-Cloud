@@ -53,9 +53,9 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
         return http
                 .authorizeHttpRequests()
                     .requestMatchers("/debug").hasRole("ADMIN")
-                    .requestMatchers("/", "/soundtracks", "/albums", "/load", "/uploads/*", "/profile/*",
-                            "/creation", "/messages/*", "/contacts/*", "/search/*").authenticated()
-                    .requestMatchers("/register", "/login", "/**", "resources/**", "resources/images/**").permitAll()
+                    .requestMatchers("/", "/soundtracks", "/albums", "/load", "/load/*/*", "/uploads/*", "/profile/*",
+                            "/creation", "/messages", "/messages/*", "/contacts/*", "/search/*").authenticated()
+                    .requestMatchers("/register", "/login", "/**", "resources/**").permitAll()
                     .anyRequest().authenticated()
 
                 .and()

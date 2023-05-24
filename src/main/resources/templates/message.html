@@ -3,11 +3,11 @@
         <svg viewBox="0 0 11 20" width="11" height="20" class="bubble-tail"></svg>
     </div>
 
-    <div th:each="imghref : ${message.getFileHref()}" th:if="${imghref.getType().equals('image')}">
-        <div> <img th:src="${imghref.getFileHref()}"> </div>
+    <div th:each="filehref : ${message.getFileHref()}" th:if="${filehref.getType().equals('image')}">
+        <div> <img th:src="${filehref.getFileHref()}"> </div>
     </div>
 
-    <div th:each="filehref : ${message.getFileHref()}" th:if="${imghref.getType().equals('file')}">
+    <div th:each="filehref : ${message.getFileHref()}" th:if="not ${filehref.getType().equals('image')}">
         <div>
             <div> <img th:src="@{|'/images/file.png'|}"> </div>
             <div th:src="${filehref.getFileHref()}"> </div>

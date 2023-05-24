@@ -17,3 +17,11 @@ function getName (id) {
         return id.substring(0, id.lastIndexOf('_'))
     return id;
 }
+
+function scrollDownMessages () {
+    scrollDown(document.getElementById("dialog"));
+}
+
+function scrollDown (element) {
+    element.scrollTo(0, element.scrollHeight);
+}

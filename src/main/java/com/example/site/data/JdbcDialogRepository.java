@@ -37,10 +37,23 @@ public class JdbcDialogRepository implements DialogRepository {
     }
 
     public Message saveMessage (Message message) {
-        jdbcTemplate.update(
-                "INSERT INTO Message(content, dialogId, userId, date) VALUES(?, ?, ?, ?)",
-                    message.getContent(), message.getDialog().getId(),
-                        message.getUser().getId(), message.getDate());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection
+                    .prepareStatement(
+                            "INSERT INTO Message(content, dialogId, userId, date) VALUES(?, ?, ?, ?)",
+                            Statement.RETURN_GENERATED_KEYS);
+
+            ps.setString(1, message.getContent());
+            ps.setInt(2, message.getDialog().getId());
+            ps.setInt(3, message.getUser().getId());
+            ps.setString(4, message.getDate().toString());
+
+            return ps;
+        }, keyHolder);
+
+        message.setId(keyHolder.getKey().intValue());
 
         for (FileRow row : message.getFileHref())
             jdbcTemplate.update(
@@ -129,6 +142,9 @@ public class JdbcDialogRepository implements DialogRepository {
     }
 
     public FileRow mapRowToFileRow (ResultSet row, int rowNum) throws SQLException {
+        System.out.println("==========================================================");
+        System.out.println(row.getInt("id") + " "  + row.getInt("messageId") + " " + row.getString("fileHref"));
+
         return new FileRow(row.getInt("id"),
                             row.getString("fileHref"),
                             row.getString("type"));
@@ -155,22 +171,22 @@ public class JdbcDialogRepository implements DialogRepository {
             messages.add(loadLastMessage(d));
         }
 
-//        Comparator<Message> comparator = (o1, o2) -> {
-//            if (o1 == null || o2 == null )
-//                return -1;
-//
-//            Message m1 = (Message) o1;
-//            Message m2 = (Message) o2;
-//
-//            if (m1.getDate().compareTo(m2.getDate()) < 0)
-//                return -1;
-//            else if (m1.getDate().compareTo(m2.getDate()) > 0)
-//                return 1;
-//            else
-//                return 0;
-//        };
-//
-//        messages.sort(comparator);
+        Comparator<Message> comparator = (o1, o2) -> {
+            if (o1 == null || o2 == null )
+                return -1;
+
+            Message m1 = (Message) o1;
+            Message m2 = (Message) o2;
+
+            if (m1.getDate().compareTo(m2.getDate()) < 0)
+                return -1;
+            else if (m1.getDate().compareTo(m2.getDate()) > 0)
+                return 1;
+            else
+                return 0;
+        };
+
+        messages.sort(comparator);
 
         return messages;
     }

@@ -80,7 +80,7 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public User update(User user) {
-        jdbcTemplate.update("UPDATE User SET imgHref=" + user.getImgHref());
+        jdbcTemplate.update("UPDATE User SET imgHref='" + user.getImgHref() + "' WHERE id=" + user.getId());
         return user;
     }
 

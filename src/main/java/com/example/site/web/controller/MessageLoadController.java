@@ -46,12 +46,18 @@ public class MessageLoadController {
     }
 
     @PostMapping("/post")
-    public String postMessages (@RequestBody String content,
+    public String postMessages (@RequestBody(required = false) String content,
                                 @RequestParam(value = "dl", required = true) Integer id,
                                 @RequestParam(value = "file", required = false) String[] fileHref,
                                 Authentication authentication, Model model) {
         User user = (User) authentication.getPrincipal();
         Dialog dialog = dialogRepository.getDialogById(id);
+
+        if (fileHref == null && content == null)
+            return "error";
+
+        if (content == null)
+            content = "";
 
         if (isBelongsTo(user, dialog)) {
             Message message = new Message(content, getRows(fileHref), dialog, user, java.time.LocalDateTime.now());

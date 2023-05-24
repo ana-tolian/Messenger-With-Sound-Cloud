@@ -27,7 +27,7 @@
             <div class="sidebar">
 
                 <div id="profilePhoto" class="profile_photo_panel">
-                    <img th:id="'usr_' + ${user.id}" class="profile_photo" th:src="@{|~${user.imgHref}|}" onclick="profileImageClick(this.id)">
+                    <img th:id="'usr_' + ${user.id}" class="profile_photo" th:src="@{|~${user.imgHref}|}" onclick="getProfile(this.id)">
                     <div class="username" th:text="'Вы вошли как ' + ${user.username}"> </div>
                 </div>
 

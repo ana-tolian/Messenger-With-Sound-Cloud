@@ -1,3 +1,4 @@
+let fileNames = [];
 
 function openZpane () {
     document.getElementById("zpane").style.display = "flex";
@@ -7,12 +8,12 @@ function closeZpane () {
     document.getElementById("zpane").style.display = "none";
 }
 
-function profileImageClick (tempId) {
+function getProfile (tempId) {
     let xhr = new XMLHttpRequest();
     let userId = getId(tempId);
     let url = "http://localhost:8080/profile/show?user=" + userId;
 
-    console.log("profileImageClick");
+    console.log("getProfile");
 
     xhr.open("GET", url);
     xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
@@ -20,13 +21,16 @@ function profileImageClick (tempId) {
     xhr.addEventListener("readystatechange", function() {
         if(this.readyState === 4) {
             document.getElementById("prof-z-pane").innerHTML = this.responseText;
-            document.getElementById("prof-z-pane").style.display = "flex";
-            document.getElementById("shad").style.display = "flex";
-
+            showProfile();
         }
     });
 
     xhr.send();
+}
+
+function showProfile () {
+    document.getElementById("prof-z-pane").style.display = "flex";
+    document.getElementById("shad").style.display = "flex";
 }
 
 function hideProfile () {
@@ -35,8 +39,6 @@ function hideProfile () {
 }
 
 function openFileChooser (tempId) {
-    console.log("openFileChooser");
-
     if (tempId === "prof-img")
         document.getElementById("choose-image-file").click();
     else
@@ -44,41 +46,54 @@ function openFileChooser (tempId) {
 }
 
 function uploadFile () {
-    console.log("uploadFile");
-
+    let xhr = new XMLHttpRequest();
     let files = document.getElementById("choose-file").files;
 
-    console.log("len: " + files.length);
+    if (files.length < 1)
+        return;
 
-    if (files.length) {
-        for (let i = 0; i < files.length; i++) {
+    let formData = new FormData();
+    let url = "http://localhost:8080/load/another/file";
 
-            console.log("name " + files[i].name);
-
-            console.log("submit");
-            document.getElementById("submit-file").click();
-        }
+    for (let i = 0; i < files.length; i++) {
+        formData.append(files[i].name, files[i]);
     }
+
+    xhr.open("POST", url);
+    xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
+
+    xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            fileNames = this.responseText.split(" ");
+
+            document.getElementById("input-info").innerHTML = "Загружено файлов: " + fileNames.length;
+            document.getElementById("input-info").style.display = "block";
+            scrollDownMessages();
+        }
+    });
+
+    xhr.send(formData);
 }
 
 function uploadImage () {
-    console.log("uploadImage");
-
+    let xhr = new XMLHttpRequest();
     let file = document.getElementById("choose-image-file").files[0];
+    let formData = new FormData();
+    let url = "http://localhost:8080/load/another/image";
 
-    if (file) {
-        let image = new Image();
+    formData.append(file.name, file);
 
-        image.onload = function() {
-            if (this.width) {
-                document.getElementById("submit-image").click();
+    xhr.open("POST", url);
+    xhr.setRequestHeader(getCsrfHeader(), getCsrfToken());
 
-            }
-        };
+    xhr.addEventListener("readystatechange", function() {
+        if (this.readyState === 4) {
+            window.location.assign("http://localhost:8080/profile");
+            showProfile();
+        }
+    });
 
-        image.src = URL.createObjectURL(file);
-        console.log(image.src);
-    }
+    xhr.send(formData);
 }
 
 function searchDialog () {
