@@ -22,7 +22,7 @@ public class Soundtrack {
         this.trackHref = trackHref;
         this.duration = duration;
         this.imgHref = imgHref;
-        this.time = (duration / 60) + ":" + ((duration % 60 >= 10) ? duration % 60 : "0" + duration % 60);
+        this.time = convertDurationIntoString(duration);
     }
 
 
@@ -42,7 +42,6 @@ public class Soundtrack {
         return artist;
     }
 
-
     public String getTrackHref() {
         return trackHref;
     }
@@ -57,5 +56,9 @@ public class Soundtrack {
 
     public String getTime() {
         return time;
+    }
+
+    public static String convertDurationIntoString (int duration) {
+        return (duration / 60) + ":" + ((duration % 60 >= 10) ? duration % 60 : "0" + duration % 60);
     }
 }

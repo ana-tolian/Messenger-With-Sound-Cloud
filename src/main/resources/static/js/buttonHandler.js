@@ -84,7 +84,7 @@ function uploadFile () {
 
             document.getElementById("input-info").innerHTML = "Загружено файлов: " + fileNames.length;
             document.getElementById("input-info").style.display = "flex";
-            scrollDownMessages();
+            // scrollDownMessages();
         }
     });
 

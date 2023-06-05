@@ -20,8 +20,7 @@ function upload () {
             if (justSet) {
                 scrollDownMessages();
                 justSet = false;
-            } else
-                scrollToCurrent();
+            }
         }
     });
 
@@ -41,7 +40,6 @@ function refreshDialogPreview () {
     xhr.addEventListener("readystatechange", function() {
         if(this.readyState === 4) {
             document.getElementById("allChats").innerHTML = this.responseText;
-            // scrollDownMessages();
         }
     });
 

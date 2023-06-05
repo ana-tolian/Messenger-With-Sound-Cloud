@@ -21,8 +21,3 @@ function getName (id) {
 function scrollDownMessages () {
     document.getElementById("mes").scrollTo(0, document.getElementById("mes").scrollHeight);
 }
-
-function scrollToCurrent () {
-    let position = document.getElementById("mes").scrollTop;
-    document.getElementById("mes").scrollTo(0, position);
-}

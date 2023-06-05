@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS FileList (
     id INT AUTO_INCREMENT NOT NULL,
     messageId INT NOT NULL,
     fileHref VARCHAR(200) NOT NULL,
+    originalName VARCHAR(200) NOT NULL,
     type VARCHAR(10) NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(messageId) REFERENCES Message(id)

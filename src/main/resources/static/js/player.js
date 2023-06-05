@@ -217,7 +217,3 @@ let initialisation = window.setInterval(init, 1000);
     function refresh() {
         playlist.getCurrent().setTime();
     }
-
-    function getId(id) {
-        return Number(id.substring(id.lastIndexOf('_') + 1));
-    }

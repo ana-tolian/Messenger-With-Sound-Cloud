@@ -182,3 +182,52 @@
     font-family: "Calibri Light";
 }
 
+.soundtrack_panel {
+    min-width: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    padding: 4px;
+    width: fit-content;
+}
+
+.snd_text_container {
+    min-width: fit-content;
+    font-size: 1rem;
+}
+
+.sndImg img {
+    width: 90%;
+    border-radius: 20%;
+}
+
+.snd_name {
+    font-family: "Calibri";
+}
+
+.snd_artist {
+    font-family: "Calibri Light";
+    font-size: 80%;
+}
+
+.time {
+    font-size: smaller;
+    font-size: 60%;
+}
+
+.seekbar {
+    min-width: 60%;
+}
+
+.controls {
+    min-width: 10rem;
+    width: fit-content;
+    display: flex;
+}
+
+.wrap {
+    width: 100%;
+}
+

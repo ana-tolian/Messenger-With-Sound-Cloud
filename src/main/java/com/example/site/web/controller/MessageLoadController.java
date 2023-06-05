@@ -41,7 +41,7 @@ public class MessageLoadController {
         User user = userRepository.findByUsername(((User) authentication.getPrincipal()).getUsername());
         Dialog dialog = dialogRepository.getDialogById(id);
 
-        if (isBelongsTo(user, dialog)) {
+        if (dialog.isBelongsTo(user)) {
             model.addAttribute("thisUser", user);
             model.addAttribute("allMessages", dialogRepository.loadMessages(dialog));
             return "messages";
@@ -63,40 +63,14 @@ public class MessageLoadController {
         if (content == null)
             content = "";
 
-        if (isBelongsTo(user, dialog)) {
-            Message message = new Message(content, getRows(fileHref), dialog, user, java.time.LocalDateTime.now());
+        if (dialog.isBelongsTo(user)) {
+            Message message = new Message(content, FileRow.getRows(fileHref), dialog, user, java.time.LocalDateTime.now());
             dialogRepository.saveMessage(message);
+
             model.addAttribute("message", message);
+
             return "message";
         }
         return "error";
-    }
-
-    private boolean isBelongsTo (User user, Dialog dialog) {
-        if (user.equals(dialog.getUser1()) || user.equals((dialog.getUser2())))
-            return true;
-        return false;
-    }
-
-    private List<FileRow> getRows (String[] fileHref) {
-        List<FileRow> rows = new ArrayList<>();
-
-        if (fileHref == null)
-            return rows;
-
-        for (String href : fileHref) {
-            String type = href.substring(href.lastIndexOf('.') + 1);
-
-            if (type.equalsIgnoreCase("jpeg")
-                    || type.equalsIgnoreCase("jpg")
-                    || type.equalsIgnoreCase("png"))
-                type = "image";
-            else
-                type = "file";
-
-            rows.add(new FileRow(href, type));
-        }
-
-        return rows;
     }
 }

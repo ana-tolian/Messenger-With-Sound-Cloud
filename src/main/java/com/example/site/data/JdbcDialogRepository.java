@@ -57,8 +57,8 @@ public class JdbcDialogRepository implements DialogRepository {
 
         for (FileRow row : message.getFileHref())
             jdbcTemplate.update(
-                    "INSERT INTO FileList(messageId, fileHref, type) VALUES(?, ?, ?)",
-                        message.getId(), row.getFileHref(), row.getType());
+                    "INSERT INTO FileList(messageId, fileHref, originalName, type) VALUES(?, ?, ?, ?)",
+                        message.getId(), row.getFileHref(), row.getOriginalName(), row.getType());
 
         return message;
     }
@@ -76,7 +76,7 @@ public class JdbcDialogRepository implements DialogRepository {
     @Override
     public List<FileRow> getFiles(int id) {
         return jdbcTemplate.query(
-                    "SELECT Filelist.id, messageId, fileHref, type " +
+                    "SELECT Filelist.id, messageId, fileHref, originalName, type " +
                         "FROM FileList " +
                         "INNER JOIN Message ON Message.id=FileList.messageId " +
                         "WHERE Message.id=" + id,
@@ -144,6 +144,7 @@ public class JdbcDialogRepository implements DialogRepository {
     public FileRow mapRowToFileRow (ResultSet row, int rowNum) throws SQLException {
         return new FileRow(row.getInt("id"),
                             row.getString("fileHref"),
+                            row.getString("originalName"),
                             row.getString("type"));
     }
 

@@ -35,11 +35,9 @@ public class BasicService implements FileStorageService {
     @Override
     public void store(MultipartFile[] files, List<String> list, User user) {
         for (MultipartFile file : files) {
-            String filename = filenameToMD5(file.getOriginalFilename());
+            String filename = FilenameParser.filenameToMD5(file.getOriginalFilename());
             Path fileNameAndPath = Paths.get(getDirectory(file.getOriginalFilename()), filename);
-            list.add(getDirectory(file.getOriginalFilename()) + filename);
-
-            System.out.println(getDirectory(file.getOriginalFilename()) + filename);
+            list.add(getDirectory(file.getOriginalFilename()) + filename + "_" + file.getOriginalFilename());
 
             try {
                 if (!Files.exists(fileNameAndPath.getParent()))
@@ -73,45 +71,18 @@ public class BasicService implements FileStorageService {
         return file.length();
     }
 
-    public String filenameToMD5 (String filename) {
-        return MD5(filename) + "." + getExtension(filename);
-    }
-
-    public String MD5(String md5) {
-        try {
-            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-            byte[] array = md.digest(md5.getBytes());
-            StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < array.length; ++i) {
-                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
-            }
-            return sb.toString();
-        } catch (java.security.NoSuchAlgorithmException e) {
-        }
-        return null;
-    }
-
     private String getDirectory (String filename) {
         if (filename == null)
             return "/files/";
 
-        String ext = getExtension(filename);
+        String ext = FilenameParser.getExtension(filename);
 
-        if (ext != null
-                && (ext.equalsIgnoreCase("jpg")
-                || ext.equalsIgnoreCase("jpeg")
-                || ext.equalsIgnoreCase("png")
-                || ext.equalsIgnoreCase("gif")))
+        if (FilenameParser.getFileType(ext).equals("image"))
             return  "/images/";
-        else if (ext.equalsIgnoreCase("mp3")
-                || ext.equalsIgnoreCase("ogg"))
-            return "/uploads/";
+        else if (FilenameParser.getFileType(ext).equals("audio"))
+            return  "/uploads/";
         else
             return "/files/";
-    }
-
-    private String getExtension (String filename) {
-        return filename.substring(filename.lastIndexOf('.') + 1);
     }
 
 }

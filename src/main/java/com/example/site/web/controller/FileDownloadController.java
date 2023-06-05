@@ -1,6 +1,7 @@
 package com.example.site.web.controller;
 
 import com.example.site.data.upload.BasicService;
+import com.example.site.data.upload.FilenameParser;
 import com.example.site.data.upload.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -45,7 +46,7 @@ public class FileDownloadController {
         HttpHeaders header = new HttpHeaders();
         header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getFilename());
 
-        String ext = getExtension(filename);
+        String ext = FilenameParser.getExtension(filename);
 
         if (ext.equalsIgnoreCase("jpeg") || ext.equalsIgnoreCase("jpg"))
             return ResponseEntity.ok().headers(header)
@@ -71,9 +72,9 @@ public class FileDownloadController {
         Resource file = basicService.loadAsResource(filename);
 
         HttpHeaders header = new HttpHeaders();
-        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getFilename());
+        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename);
 
-        String ext = getExtension(filename);
+        String ext = FilenameParser.getExtension(filename);
 
         if (ext.equalsIgnoreCase("pdf"))
             return ResponseEntity.ok().headers(header)
@@ -90,10 +91,6 @@ public class FileDownloadController {
         else
             return ResponseEntity.ok().headers(header)
                     .contentType(MediaType.MULTIPART_FORM_DATA).body(file);
-    }
-
-    private String getExtension (String filename) {
-        return filename.substring(filename.lastIndexOf('.') + 1);
     }
 
 }

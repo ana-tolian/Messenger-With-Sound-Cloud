@@ -44,12 +44,12 @@ public class MusicService extends BasicService {
 
                 Files.write(fileNameAndPath, file.getBytes());
 
-                String soundtrackName = prepareToSave(fileNameAndPath.getFileName().toString());
+                String soundtrackName = fileNameAndPath.getFileName().toString();
                 int duration = getAudioDuration(new File(fileNameAndPath.toUri()));
 
                 Soundtrack soundtrack = soundtrackRepository.save(new Soundtrack(
-                        getName(soundtrackName),
-                        getArtist(soundtrackName),
+                        FilenameParser.getSoundtrackName(soundtrackName),
+                        FilenameParser.getSoundtrackArtist(soundtrackName),
                         uploadDirectory + fileNameAndPath.getFileName().toString(),
                         duration,
                         null));
@@ -64,36 +64,7 @@ public class MusicService extends BasicService {
         }
     }
 
-    private String prepareToSave (String filename) {
-        filename = filename.substring(0, filename.lastIndexOf('.'));
-        filename = filename.replace('_', ' ');
-        filename = filename.replace('-', '–');
-        filename = filename.replace('—', '–');
-
-        int count = countDashes(filename);
-        if (count == 1)
-            return filename;
-
-        else if (count >= 2) {
-            int index = filename.substring(filename.indexOf('–') + 1).indexOf('–');
-            filename = filename.substring(0, index) + filename.substring(index + 1); // substr(0, index of second '–') + substr(index of second '–');
-        }
-
-        return filename;
-    }
-
-    private int countDashes (String str) {
-        char [] ch = str.toCharArray();
-        int count = 0;
-
-        for (int i = 0; i < ch.length; i++)
-            if (ch[i] == '–')
-                count++;
-
-        return count;
-    }
-
-    private int getAudioDuration (File file) {
+    public static int getAudioDuration (File file) {
         Encoder encoder = new Encoder();
         double durationInSeconds = 0.0;
 
@@ -107,11 +78,4 @@ public class MusicService extends BasicService {
         return (int) (Math.floor(durationInSeconds));
     }
 
-    private String getName (String fileName) {
-        return fileName.substring(fileName.lastIndexOf('–') + 1);
-    }
-
-    private String getArtist (String fileName) {
-        return fileName.substring(0, fileName.lastIndexOf('–'));
-    }
 }

@@ -34,5 +34,10 @@ public class Dialog {
         return user2;
     }
 
+    public boolean isBelongsTo (User user) {
+        if (user.equals(this.getUser1()) || user.equals((this.getUser2())))
+            return true;
+        return false;
+    }
 
 }
