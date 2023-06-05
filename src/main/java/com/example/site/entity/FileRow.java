@@ -38,7 +38,6 @@ public class FileRow {
     }
 
     public String getOriginalName() {
-        System.out.println(originalName + " origin");
         return originalName;
     }
 
@@ -72,10 +71,6 @@ public class FileRow {
         for (String row : fileHref) {
             String href = row.substring(0, row.indexOf('_'));
             String filename = row.substring(row.indexOf('_') + 1);
-
-            System.out.println("===============================> " + href + " " + filename);
-            System.out.println("===============================> " + href + " " + filename);
-            System.out.println("===============================> " + href + " " + filename);
 
             String type = FilenameParser.getFileType(FilenameParser.getExtension(href));
 

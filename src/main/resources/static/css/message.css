@@ -170,7 +170,8 @@
 
 .message-image {
     background-color: var(--hr-color-me);
-    width: 16rem;
+    min-width: 16rem;
+    width: 100%;
 }
 
 .hr_mess {
@@ -184,13 +185,14 @@
 
 .soundtrack_panel {
     min-width: 20rem;
+    width: 99%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: white;
     border-radius: 8px;
     padding: 4px;
-    width: fit-content;
+    margin-bottom: 3px;
 }
 
 .snd_text_container {
@@ -198,8 +200,13 @@
     font-size: 1rem;
 }
 
+.sndImg {
+    width: 4rem;
+    margin-right: 0.5rem;
+}
+
 .sndImg img {
-    width: 90%;
+    width: 100%;
     border-radius: 20%;
 }
 
@@ -212,13 +219,18 @@
     font-size: 80%;
 }
 
+.player {
+    width: auto;
+}
+
 .time {
     font-size: smaller;
     font-size: 60%;
 }
 
 .seekbar {
-    min-width: 60%;
+    min-width: 100%;
+    width: 10rem;
 }
 
 .controls {

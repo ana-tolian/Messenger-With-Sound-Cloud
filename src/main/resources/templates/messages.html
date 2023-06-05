@@ -29,20 +29,21 @@
             </div>
 
             <div class="soundtrack_panel" th:each="filehref : ${message.getFileHref()}" th:if="${filehref.getType().equals('audio')}">
-                <div class="sndImg"> <img src="/images/noimage.png"> </div>
+                <div class="flex_center">
+                    <div class="sndImg"> <img src="/images/noimage.png"> </div>
 
-                <div class="snd_text_container">
-                    <div class="snd_name" th:id="'name_' + ${filehref.getId()}"
-                         > </div>
-<!--                         th:text="${T(com.example.site.data.upload.FilenameParser).getSoundtrackName(fileHref.getOriginalName())}"> </div>-->
-                    <div class="snd_artist" th:id="'artist_' + ${filehref.getId()}"
-                         > </div>
-<!--                         th:text="${T(com.example.site.data.upload.FilenameParser).getSoundtrackArtist(fileHref.getOriginalName())}"> </div>-->
+                    <div class="snd_text_container">
+                        <div class="snd_name" th:id="'name_' + ${filehref.getId()}"
+                             th:text="${T(com.example.site.data.upload.FilenameParser).getSoundtrackName(filehref.getOriginalName())}"> </div>
+                        <div class="snd_artist" th:id="'artist_' + ${filehref.getId()}"
+                             th:text="${T(com.example.site.data.upload.FilenameParser).getSoundtrackArtist(filehref.getOriginalName())}"> </div>
+                    </div>
                 </div>
+
 
                 <div class="player">
                     <audio  th:id="${filehref.getId()}" preload="auto">
-                        <source th:src="${filehref.getFileHref()}" type="audio/mpeg">
+                        <source th:id="'src_' + ${filehref.getId()}" th:src="${filehref.getFileHref()}" type="audio/mpeg">
                     </audio>
 
                     <div class="controls" ondragover="move(event, this.id)">
@@ -92,20 +93,20 @@
             </div>
 
             <div class="soundtrack_panel" th:each="filehref : ${message.getFileHref()}" th:if="${filehref.getType().equals('audio')}">
-                <div class="sndImg"> <img src="/images/noimage.png"> </div>
+                <div class="flex_center">
+                    <div class="sndImg"> <img src="/images/noimage.png"> </div>
 
-                <div class="snd_text_container">
-                    <div class="snd_name" th:id="'name_' + ${filehref.getId()}"
-                         > </div>
-                    <!--                         th:text="${T(com.example.site.data.upload.FilenameParser).getSoundtrackName(fileHref.getOriginalName())}"> </div>-->
-                    <div class="snd_artist" th:id="'artist_' + ${filehref.getId()}"
-                         > </div>
-<!--                         th:text="${T(com.example.site.data.upload.FilenameParser).getSoundtrackArtist(fileHref.getOriginalName())}"> </div>-->
+                    <div class="snd_text_container">
+                        <div class="snd_name" th:id="'name_' + ${filehref.getId()}"
+                             th:text="${T(com.example.site.data.upload.FilenameParser).getSoundtrackName(filehref.getOriginalName())}"> </div>
+                        <div class="snd_artist" th:id="'artist_' + ${filehref.getId()}"
+                             th:text="${T(com.example.site.data.upload.FilenameParser).getSoundtrackArtist(filehref.getOriginalName())}"> </div>
+                    </div>
                 </div>
 
                 <div class="player">
                     <audio  th:id="${filehref.getId()}" preload="auto">
-                        <source th:src="${filehref.getFileHref()}" type="audio/mpeg">
+                        <source th:id="'src_' + ${filehref.getId()}" th:src="${filehref.getFileHref()}" type="audio/mpeg">
                     </audio>
 
                     <div class="controls" ondragover="move(event, this.id)">

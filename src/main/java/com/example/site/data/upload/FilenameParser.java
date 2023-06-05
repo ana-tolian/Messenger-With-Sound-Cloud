@@ -75,16 +75,10 @@ public class FilenameParser {
     }
 
     public static String getSoundtrackName(String fileName) {
-        System.out.println(fileName + " name");
         return cleanSoundtrackFilename(fileName).substring(cleanSoundtrackFilename(fileName).lastIndexOf('–') + 1);
     }
 
     public static String getSoundtrackArtist(String fileName) {
-        System.out.println(fileName + " artist");
-//        if (fileName.lastIndexOf('–') == -1)
-//            return
-        String result = cleanSoundtrackFilename(fileName).substring(0, cleanSoundtrackFilename(fileName).lastIndexOf('–'));
-
-        return result;
+        return cleanSoundtrackFilename(fileName).substring(0, cleanSoundtrackFilename(fileName).lastIndexOf('–'));
     }
 }
