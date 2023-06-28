@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS Playlist (
 
 CREATE TABLE IF NOT EXISTS Soundtrack (
     id INT AUTO_INCREMENT NOT NULL,
-    name VARCHAR(50) NOT NULL,
-    artist VARCHAR(50) NOT NULL,
+    name VARCHAR(70) NOT NULL,
+    artist VARCHAR(70) NOT NULL,
     trackHref VARCHAR(100) NOT NULL,
     duration INT NOT NULL,
     imgHref VARCHAR(100) DEFAULT "/images/noimage.png",

@@ -139,9 +139,9 @@ function init() {
             let id, name, artist, src;
 
             id = getId(track.id);
-            name = document.getElementById("name_" + id);
-            artist = document.getElementById("artist_" + id);
-            src = document.getElementById("src_" + id);
+            name = document.getElementById("name_" + id).innerHTML;
+            artist = document.getElementById("artist_" + id).innerHTML;
+            src = document.getElementById("src_" + id).src;
 
             if (id != null) {
                 let soundtrack = new Soundtrack(id, artist, name, src);

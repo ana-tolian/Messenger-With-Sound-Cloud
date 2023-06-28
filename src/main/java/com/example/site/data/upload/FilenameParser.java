@@ -75,10 +75,32 @@ public class FilenameParser {
     }
 
     public static String getSoundtrackName(String fileName) {
-        return cleanSoundtrackFilename(fileName).substring(cleanSoundtrackFilename(fileName).lastIndexOf('–') + 1);
+        fileName = cleanSoundtrackFilename(fileName);
+
+        if (fileName.lastIndexOf('–') == -1) {
+            int index = fileName.indexOf(' ', fileName.indexOf(' ') + 1);
+
+            if (index != -1) {
+                return fileName.substring(index + 1);
+            }
+            return fileName;
+        }
+
+        return fileName.substring(fileName.lastIndexOf('–') + 1);
     }
 
     public static String getSoundtrackArtist(String fileName) {
-        return cleanSoundtrackFilename(fileName).substring(0, cleanSoundtrackFilename(fileName).lastIndexOf('–'));
+        fileName = cleanSoundtrackFilename(fileName);
+
+        if (fileName.lastIndexOf('–') == -1) {
+            int index = fileName.indexOf(' ', fileName.indexOf(' ') + 1);
+
+            if (index != -1) {
+                return fileName.substring(0, index + 1);
+            }
+            return fileName;
+        }
+
+        return fileName.substring(0, fileName.lastIndexOf('–'));
     }
 }
